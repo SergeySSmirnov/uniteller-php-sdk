@@ -1,4 +1,7 @@
 .idea/
+.settings/
+.buildpath
+.project
 vendor/
 /index.php
 example/credentials.php

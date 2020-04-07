@@ -1,38 +1,41 @@
 {
-  "name": "tmconsulting/uniteller-php-sdk",
-  "description": "PHP Library for integration with Uniteller payment processing.",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "roquie",
-      "email": "roquie0@gmail.com"
-    }
-  ],
-  "require": {
-    "php": ">=5.6",
-    "php-http/httplug": "^1.1",
-    "php-http/guzzle6-adapter": "^1.1",
-    "guzzlehttp/guzzle": "^6.3"
-  },
-  "require-dev": {
-    "symfony/var-dumper": "^3.2",
-    "phpunit/phpunit": "~5.7"
-  },
-  "autoload": {
-    "psr-4": {
-      "Tmconsulting\\Uniteller\\": "src"
-    },
-    "files": [
-      "src/helpers.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tmconsulting\\Uniteller\\Tests\\": "tests"
-    }
-  },
-  "scripts": {
-    "test": "phpunit --coverage-text"
-  }
+	"name" : "sergeyssmirnov/uniteller-php-sdk",
+	"description" : "PHP Library for integration with Uniteller payment processing.",
+	"type" : "library",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "roquie",
+			"email" : "roquie0@gmail.com"
+		}, {
+			"name" : "Sergey S. Smirnov",
+			"email" : "sergeyssmirnov@mail.ru",
+			"homepage" : "https://rusproj.space"
+		}
+	],
+	"require" : {
+		"php" : ">=5.5",
+		"php-http/httplug" : "^1.1",
+		"php-http/guzzle6-adapter" : "^1.1",
+		"guzzlehttp/guzzle" : "^6.3"
+	},
+	"require-dev" : {
+		"symfony/var-dumper" : "^3.2",
+		"phpunit/phpunit" : "~5.7"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Tmconsulting\\Uniteller\\" : "src"
+		},
+		"files" : [
+			"src/helpers.php"
+		]
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Tmconsulting\\Uniteller\\Tests\\" : "tests"
+		}
+	},
+	"scripts" : {
+		"test" : "phpunit --coverage-text"
+	}
 }
