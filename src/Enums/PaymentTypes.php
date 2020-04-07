@@ -9,23 +9,25 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Tmconsulting\Uniteller\Enums;
 
 /**
- * Тип оплаты.
+ * Виды типов оплат.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Tmconsulting\Client\Enums
  */
-final class Type
+final class PaymentTypes
 {
     /**
      * Оплата кредитной картой.
+     *
      * @var integer
      */
     const CREDIT_CARD = 1;
 
     /**
      * Оплата с помощью электронной валюты.
+     *
      * @var integer
      */
     const EMONEY = 3;

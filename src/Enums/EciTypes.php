@@ -5,29 +5,32 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Tmconsulting\Uniteller\Enums;
 
 /**
- * Информация о 3DS.
+ * Виды 3DS.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Tmconsulting\Uniteller\Enums
  */
-class ECI
+class EciTypes
 {
     /**
      * 3DS Full.
+     *
      * @var integer
      */
     const FULL = 5;
 
     /**
      * 3DS-Acquirer only.
+     *
      * @var integer
      */
     const ACQUIRER_ONLY = 6;
 
     /**
      * E-commerce без 3DS.
+     *
      * @var integer
      */
     const E_COMMERCE = 7;

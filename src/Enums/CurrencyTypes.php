@@ -9,53 +9,60 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Tmconsulting\Uniteller\Enums;
 
 /**
- * Валюта платежа.
+ * Виды валют платежей.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Tmconsulting\Client\Enums
  */
-final class Currency
+final class CurrencyTypes
 {
     /**
      * Российский рубль.
+     *
      * @var string
      */
     const RUB = 'RUB';
 
     /**
      * Украинская гривна.
+     *
      * @var string
      */
     const UAH = 'UAH';
 
     /**
      * Азербайджанский манат.
+     *
      * @var string
      */
     const AZN = 'AZN';
 
     /**
      * Казахский тенге.
+     *
      * @var string
      */
     const KZT = 'KZT';
 
     /**
      * Евро.
+     *
      * @var string
      */
     const EUR = 'EUR';
 
     /**
      * Киргизский сом.
+     *
      * @var string
      */
     const KGS = 'KGS';
 
     /**
      * Доллар США.
+     *
      * @var string
      */
     const USD = 'USD';
