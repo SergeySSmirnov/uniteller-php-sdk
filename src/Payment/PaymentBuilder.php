@@ -19,7 +19,7 @@ use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
  *
  * @package Tmconsulting\Client\Payment
  */
-final class PaymentBuilder implements ArraybleInterface
+class PaymentBuilder implements ArraybleInterface
 {
     /**
      * Идентификатор точки продажи в системе Uniteller.
@@ -91,7 +91,9 @@ final class PaymentBuilder implements ArraybleInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * @var \Tmconsulting\Uniteller\Payment\Currency
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\CurrencyTypes}.
+     *
+     * @var string
      */
     protected $currency;
 
@@ -107,7 +109,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $IsRecurrentStart;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Адрес электронной почты.
      *
      * Параметры Email, Phone, переданные в запросе на оплату от сайта Мерчанта, автоматически
@@ -128,7 +130,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $email;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Время жизни формы оплаты в секундах, начиная с момента её показа.
      * Должно быть целым положительным числом. Если Покупатель
      * использует форму дольше указанного времени, то форма оплаты будет
@@ -143,7 +145,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $lifetime;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Время жизни (в секундах) заказа на оплату банковской картой, начиная с
      * момента первого вывода формы оплаты.
      *
@@ -158,7 +160,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $orderLifetime;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Идентификатор Покупателя, используемый некоторыми интернет-магазинами.
      *
      * @var string
@@ -166,7 +168,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $customerIdp;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Идентификатор зарегистрированной карты.
      *
      * @var string
@@ -174,7 +176,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $cardIdp;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Тип платежа. Произвольная строка длиной до десяти символов включительно.
      * В подавляющем большинстве схем подключения интернет-магазинов этот параметр не используется.
      *
@@ -183,34 +185,38 @@ final class PaymentBuilder implements ArraybleInterface
     protected $ptCode;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * @var \Tmconsulting\Uniteller\Payment\MeanType
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\MeanTypes}.
+     *
+     * @var integer
      */
     protected $meanType;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Тип электронной валюты.
      *
-     * @var \Tmconsulting\Uniteller\Payment\EMoneyType
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\EMoneyTypes}.
+     *
+     * @var integer
      */
     protected $eMoneyType;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Срок жизни заказа оплаты в электронной платёжной системе в часах (от 1 до 1080 часов).
      * Значение параметра BillLifetime учитывается только для QIWI-платежей.
      * Если BillLifetime не передаётся, то для QIWI-платежа срок жизни заказа на
      * оплату устанавливается по умолчанию — 72 часа.
      *
-     * @var int
+     * @var integer
      */
     protected $billLifetime;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Признак преавторизации платежа.
      * При использовании в запросе должен принимать значение “1”.
      *
@@ -219,7 +225,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $preAuth;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Список дополнительных полей, передаваемых в уведомлении об изменении статуса заказа.
      * Строка, не более 29 символов. Поля должны быть разделены пробелами.
      *
@@ -230,7 +236,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $callbackFields;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Запрашиваемый формат уведомления о статусе оплаты.
      * Eсли параметр имеет значение "json", то уведомление направляется
      * в json-формате. Во всех остальных случаях уведомление направляется в виде POST-запроса.
@@ -240,7 +246,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $callbackFormat;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Код языка интерфейса платёжной страницы. Может быть en или ru.
      *
      * @var string
@@ -248,7 +254,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $language;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Комментарий к платежу (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @var string
@@ -256,7 +262,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $comment;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Имя Покупателя, переданное с сайта Мерчанта (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @var string
@@ -264,7 +270,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $firstName;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Фамилия Покупателя, переданная с сайта Мерчанта (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @vars string
@@ -272,7 +278,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $lastName;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Отчество (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @var string
@@ -280,7 +286,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $middleName;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Телефон (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @var string
@@ -288,7 +294,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $phone;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Верифицированный мерчантом номер телефона.
      * Если передаётся, то значение Phone устанавливается равным PhoneVerified.
      * (при использовании кириллицы использовать кодировку UTF-8)
@@ -298,7 +304,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $phoneVerified;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Адрес (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @var string
@@ -306,7 +312,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $address;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Название страны Покупателя (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @var string
@@ -314,7 +320,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $country;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Код штата/региона.
      *
      * @var string
@@ -322,7 +328,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $state;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Город (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @var string
@@ -330,7 +336,7 @@ final class PaymentBuilder implements ArraybleInterface
     protected $city;
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Почтовый индекс.
      *
      * @var
@@ -449,7 +455,9 @@ final class PaymentBuilder implements ArraybleInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * @param \Tmconsulting\Uniteller\Payment\Currency $currency Валюта платежа.
+     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enums\CurrencyTypes}.
+     *
+     * @param integer $currency Валюта платежа.
      * @return $this
      */
     public function setCurrency($currency)
@@ -460,7 +468,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Адрес электронной почты.
      *
      * Параметры Email, Phone, переданные в запросе на оплату от сайта Мерчанта, автоматически
@@ -493,7 +501,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Время жизни формы оплаты в секундах, начиная с момента её показа.
      * Должно быть целым положительным числом. Если Покупатель
      * использует форму дольше указанного времени, то форма оплаты будет
@@ -503,7 +511,7 @@ final class PaymentBuilder implements ArraybleInterface
      *
      * Значение параметра рекомендуется устанавливать не более 300 сек.
      *
-     * @param int $lifetime
+     * @param integer $lifetime
      * @return $this
      */
     public function setLifetime($lifetime)
@@ -514,7 +522,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Время жизни (в секундах) заказа на оплату банковской картой, начиная с
      * момента первого вывода формы оплаты.
      *
@@ -524,7 +532,7 @@ final class PaymentBuilder implements ArraybleInterface
      * сообщение: «Данный заказ не может быть оплачен. Заказ устарел.
      * Обратитесь к мерчанту».
      *
-     * @param int $orderLifetime
+     * @param integer $orderLifetime
      * @return $this
      * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра < 0 символов.
      */
@@ -541,7 +549,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Идентификатор Покупателя, используемый некоторыми интернет-магазинами.
      *
      * @param string $customerIdp
@@ -561,7 +569,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Идентификатор зарегистрированной карты.
      *
      * @param string $cardIdp
@@ -581,7 +589,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Тип платежа. Произвольная строка длиной до десяти символов включительно.
      * В подавляющем большинстве схем подключения интернет-магазинов этот параметр не используется.
      *
@@ -596,10 +604,12 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * @param \Tmconsulting\Uniteller\Payment\MeanType $meanType
+     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enums\MeanTypes}.
+     *
+     * @param integer $meanType
      * @return $this
      */
     public function setMeanType($meanType)
@@ -610,10 +620,12 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Тип электронной валюты.
      *
-     * @param \Tmconsulting\Uniteller\Payment\EMoneyType $eMoneyType
+     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enums\EMoneyTypes}.
+     *
+     * @param integer $eMoneyType
      * @return $this
      */
     public function setEMoneyType($eMoneyType)
@@ -624,13 +636,13 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Срок жизни заказа оплаты в электронной платёжной системе в часах (от 1 до 1080 часов).
      * Значение параметра BillLifetime учитывается только для QIWI-платежей.
      * Если BillLifetime не передаётся, то для QIWI-платежа срок жизни заказа на
      * оплату устанавливается по умолчанию — 72 часа.
      *
-     * @param int $billLifetime
+     * @param integer $billLifetime
      * @return $this
      * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1080 символов.
      */
@@ -647,7 +659,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Признак преавторизации платежа.
      * При использовании в запросе должен принимать значение “1”.
      *
@@ -677,7 +689,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Список дополнительных полей, передаваемых в уведомлении об изменении статуса заказа.
      * Строка, не более 29 символов. Поля должны быть разделены пробелами.
      *
@@ -694,7 +706,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Запрашиваемый формат уведомления о статусе оплаты.
      * Eсли параметр имеет значение "json", то уведомление направляется
      * в json-формате. Во всех остальных случаях уведомление направляется в виде POST-запроса.
@@ -710,7 +722,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Код языка интерфейса платёжной страницы. Может быть en или ru.
      *
      * @param string $language
@@ -730,7 +742,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Комментарий к платежу (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @param string $comment
@@ -750,7 +762,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Имя Покупателя, переданное с сайта Мерчанта (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @param string $firstName
@@ -770,7 +782,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Фамилия Покупателя, переданная с сайта Мерчанта (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @param string $lastName
@@ -790,7 +802,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Отчество (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @param string $middleName
@@ -810,7 +822,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Телефон (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @param string $phone
@@ -830,7 +842,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-    * [* Не обязательно]
+    * [* Опционально]
     * Верифицированный мерчантом номер телефона.
     * Если передаётся, то значение Phone устанавливается равным PhoneVerified.
     * (при использовании кириллицы использовать кодировку UTF-8)
@@ -854,7 +866,7 @@ final class PaymentBuilder implements ArraybleInterface
 
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Адрес (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @param string $address
@@ -874,7 +886,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Название страны Покупателя (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @param string $country
@@ -894,7 +906,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Код штата/региона.
      *
      * @param string $state
@@ -914,7 +926,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Город (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @param string $city
@@ -934,7 +946,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Почтовый индекс.
      *
      * @param string $zip
@@ -966,6 +978,7 @@ final class PaymentBuilder implements ArraybleInterface
      * от 1 до 64, либо две группы латинских букв и цифр, разделенных «-»
      * (первая группа от 1 до 15 символов, вторая группа от 1 до 11 символов),
      * к регистру нечувствителен.
+     *
      * @return string
      */
     public function getShopIdp()
@@ -1048,7 +1061,9 @@ final class PaymentBuilder implements ArraybleInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * @return \Tmconsulting\Uniteller\Payment\Currency
+     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enums\CurrencyTypes}.
+     *
+     * @return integer
      */
     public function getCurrency()
     {
@@ -1056,7 +1071,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Адрес электронной почты.
      *
      * Параметры Email, Phone, переданные в запросе на оплату от сайта Мерчанта, автоматически
@@ -1080,7 +1095,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Время жизни формы оплаты в секундах, начиная с момента её показа.
      * Должно быть целым положительным числом. Если Покупатель
      * использует форму дольше указанного времени, то форма оплаты будет
@@ -1090,7 +1105,7 @@ final class PaymentBuilder implements ArraybleInterface
      *
      * Значение параметра рекомендуется устанавливать не более 300 сек.
      *
-     * @return int
+     * @return integer
      */
     public function getLifetime()
     {
@@ -1098,7 +1113,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Время жизни (в секундах) заказа на оплату банковской картой, начиная с
      * момента первого вывода формы оплаты.
      *
@@ -1108,7 +1123,7 @@ final class PaymentBuilder implements ArraybleInterface
      * сообщение: «Данный заказ не может быть оплачен. Заказ устарел.
      * Обратитесь к мерчанту».
      *
-     * @return int
+     * @return integer
      */
     public function getOrderLifetime()
     {
@@ -1117,7 +1132,7 @@ final class PaymentBuilder implements ArraybleInterface
 
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Идентификатор Покупателя, используемый некоторыми интернет-магазинами.
      *
      * @return string
@@ -1128,7 +1143,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Идентификатор зарегистрированной карты.
      *
      * @return string
@@ -1139,7 +1154,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Тип платежа. Произвольная строка длиной до десяти символов включительно.
      * В подавляющем большинстве схем подключения интернет-магазинов этот параметр не используется.
      *
@@ -1151,10 +1166,12 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * @return \Tmconsulting\Uniteller\Payment\MeanType
+     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enums\MeanTypes}.
+     *
+     * @return integer
      */
     public function getMeanType()
     {
@@ -1162,10 +1179,12 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Тип электронной валюты.
      *
-     * @return \Tmconsulting\Uniteller\Payment\EMoneyType
+     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enums\EMoneyTypes}.
+     *
+     * @return integer
      */
     public function getEMoneyType()
     {
@@ -1173,13 +1192,13 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Срок жизни заказа оплаты в электронной платёжной системе в часах (от 1 до 1080 часов).
      * Значение параметра BillLifetime учитывается только для QIWI-платежей.
      * Если BillLifetime не передаётся, то для QIWI-платежа срок жизни заказа на
      * оплату устанавливается по умолчанию — 72 часа.
      *
-     * @return int
+     * @return integer
      */
     public function getBillLifetime()
     {
@@ -1187,7 +1206,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Признак преавторизации платежа.
      * При использовании в запросе должен принимать значение “1”.
      *
@@ -1213,7 +1232,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Список дополнительных полей, передаваемых в уведомлении об изменении статуса заказа.
      * Строка, не более 29 символов. Поля должны быть разделены пробелами.
      *
@@ -1227,7 +1246,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Запрашиваемый формат уведомления о статусе оплаты.
      * Eсли параметр имеет значение "json", то уведомление направляется
      * в json-формате. Во всех остальных случаях уведомление направляется в виде POST-запроса.
@@ -1240,7 +1259,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Код языка интерфейса платёжной страницы. Может быть en или ru.
      *
      * @return string
@@ -1251,7 +1270,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Комментарий к платежу (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @return string
@@ -1262,7 +1281,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Имя Покупателя, переданное с сайта Мерчанта (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @return string
@@ -1273,7 +1292,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Фамилия Покупателя, переданная с сайта Мерчанта (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @return string
@@ -1284,7 +1303,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Отчество (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @return string
@@ -1295,7 +1314,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Телефон (при использовании кириллицы использовать кодировку UTF-8).
      *
      * @return string
@@ -1306,7 +1325,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-    * [* Не обязательно]
+    * [* Опционально]
     * Верифицированный мерчантом номер телефона.
     * Если передаётся, то значение Phone устанавливается равным PhoneVerified.
     * (при использовании кириллицы использовать кодировку UTF-8)
@@ -1319,7 +1338,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Адрес (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @return string
@@ -1330,7 +1349,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Название страны Покупателя (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @return string
@@ -1341,7 +1360,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Код штата/региона.
      *
      * @return string
@@ -1352,7 +1371,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Город (при использовании кириллицы использовать кодировку UTF-8) (в стандартном шаблоне в настоящее время не используется).
      *
      * @return string
@@ -1363,7 +1382,7 @@ final class PaymentBuilder implements ArraybleInterface
     }
 
     /**
-     * [* Не обязательно]
+     * [* Опционально]
      * Почтовый индекс.
      *
      * @return string
