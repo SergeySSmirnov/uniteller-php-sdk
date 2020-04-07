@@ -236,7 +236,7 @@ class Order implements ArraybleInterface
     /**
      * «1» — оплата кредитной картой;
      * «3» — оплата с помощью электронной валюты.
-     * Payment\Type::CREDIT_CARD
+     * Enums\PaymentTypes::CREDIT_CARD
      *
      * @var int
      */
@@ -635,7 +635,7 @@ class Order implements ArraybleInterface
     public function setNeedConfirm($needConfirm)
     {
         $this->needConfirm = (bool) $needConfirm;
-        
+
         return $this;
     }
 

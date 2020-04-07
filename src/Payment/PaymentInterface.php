@@ -18,6 +18,7 @@ interface PaymentInterface
 {
     /**
      * Генерирует и возвращает ссылку для перехода к странице оплаты.
+     *
      * @param array $parameters Параметры для генерации ссылки.
      * @param \Tmconsulting\Uniteller\ClientGatewayConfigInterface $gatewayConfig Настройки доступа к платёжному шлюзу.
      * @return \Tmconsulting\Uniteller\Payment\UriInterface
