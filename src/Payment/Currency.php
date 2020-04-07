@@ -3,34 +3,60 @@
  * Created by Roquie.
  * E-mail: roquie0@gmail.com
  * GitHub: Roquie
+ *
+ * Modified by Sergey S. Smirnov
+ * E-mail: sergeyssmirnov@mail.ru
+ * Github: SergeySSmirnov
  */
 
 namespace Tmconsulting\Uniteller\Payment;
 
 /**
- * Class Currency
+ * Валюта платежа.
  *
  * @package Tmconsulting\Client\Payment
  */
 final class Currency
 {
     /**
-     * российский рубль
+     * Российский рубль.
+     * @var string
      */
     const RUB = 'RUB';
 
     /**
-     * украинская гривна
+     * Украинская гривна.
+     * @var string
      */
     const UAH = 'UAH';
 
     /**
-     * азербайджанский манат
+     * Азербайджанский манат.
+     * @var string
      */
     const AZN = 'AZN';
 
     /**
-     * казахский тенге
+     * Казахский тенге.
+     * @var string
      */
     const KZT = 'KZT';
+
+    /**
+     * Евро.
+     * @var string
+     */
+    const EUR = 'EUR';
+
+    /**
+     * Киргизский сом.
+     * @var string
+     */
+    const KGS = 'KGS';
+
+    /**
+     * Доллар США.
+     * @var string
+     */
+    const USD = 'USD';
 }

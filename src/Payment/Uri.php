@@ -3,24 +3,29 @@
  * Created by Roquie.
  * E-mail: roquie0@gmail.com
  * GitHub: Roquie
+ *
+ * Modified by Sergey S. Smirnov
+ * E-mail: sergeyssmirnov@mail.ru
+ * Github: SergeySSmirnov
  */
 
 namespace Tmconsulting\Uniteller\Payment;
 
 /**
- * Class Uri
+ * Uri для перехода на страницу оплаты.
  *
  * @package Tmconsulting\Client\Payment
  */
 final class Uri implements UriInterface
 {
     /**
+     * Uri на страницу оплаты.
      * @var string
      */
     private $uri;
 
     /**
-     * Uri constructor.
+     * Инициализирует новый экземпляр класса @see \Tmconsulting\Uniteller\Payment\Uri.
      *
      * @param $uri
      */
@@ -30,6 +35,7 @@ final class Uri implements UriInterface
     }
 
     /**
+     * Возвращает строку с ссылкой на страницу оплаты.
      * @return string
      */
     public function getUri()
@@ -38,6 +44,7 @@ final class Uri implements UriInterface
     }
 
     /**
+     * Устанавливает заголовок ответа "Location" в значение @see \Tmconsulting\Uniteller\Payment\Uri::getUri().
      * @return void
      */
     public function go()

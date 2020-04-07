@@ -26,7 +26,12 @@
 
 <br />
 
-PHP (5.6+) SDK for integration internet-acquiring of the Uniteller (unofficial).
+## Compliance with technical procedures
+* TP Internet Equation v. 1.41 rev. 2
+* Payments with fiscalization v. 2.1.10 rev. 1-1
+
+## Description
+PHP (5.5+) SDK for integration internet-acquiring of the Uniteller (unofficial).
 [This documentation is available in Russian language](README_RU.md).
 Also, this SDK integrated with [Payum](https://github.com/Payum/Payum) library and you can use [gateway](https://github.com/tmconsulting/payum-uniteller-gateway).
 

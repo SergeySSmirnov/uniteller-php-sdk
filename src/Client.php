@@ -3,6 +3,10 @@
  * Created by Roquie.
  * E-mail: roquie0@gmail.com
  * GitHub: Roquie
+ *
+ * Modified by Sergey S. Smirnov
+ * E-mail: sergeyssmirnov@mail.ru
+ * Github: SergeySSmirnov
  */
 
 namespace Tmconsulting\Uniteller;
@@ -29,7 +33,7 @@ use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
  *
  * @package Tmconsulting\Uniteller
  */
-class Client implements ClientInterface
+class Client implements ClientInterface, ClientGatewayConfigInterface
 {
     /**
      * @var array
@@ -91,7 +95,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param $uri
+     * Устанавливает значение базового Uri платёжного шлюза.
+     * @param string $uri Uri платёжного шлюза.
      * @return $this
      */
     public function setBaseUri($uri)
@@ -256,6 +261,7 @@ class Client implements ClientInterface
     }
 
     /**
+     * Возвращает Uri платёжного шлюза.
      * @return string
      */
     public function getBaseUri()
