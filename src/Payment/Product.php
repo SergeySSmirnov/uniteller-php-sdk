@@ -31,21 +31,21 @@ class Product implements ObjectableInterface
     /**
      * Цена за единицу измерения.
      *
-     * @var float
+     * @var float|string
      */
     private $price;
 
     /**
      * Количество.
      *
-     * @var string
+     * @var integer|string
      */
     private $qty;
 
     /**
      * Сумма.
      *
-     * @var string
+     * @var float|string
      */
     private $sum;
 
@@ -115,7 +115,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает цена за единицу измерения.
      *
-     * @return string
+     * @return float|string
      */
     public function getPrice()
     {
@@ -125,18 +125,19 @@ class Product implements ObjectableInterface
     /**
      * Задаёт цена за единицу измерения.
      *
-     * @param string $price
+     * @param float|string $price
      * @return $this
      */
     public function setPrice($price)
     {
         $this->price = $price;
+        return $this;
     }
 
     /**
      * Возвращает количество.
      *
-     * @return string
+     * @return integer|string
      */
     public function getQty()
     {
@@ -146,7 +147,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт количество.
      *
-     * @param string $qty
+     * @param integer|string $qty
      * @return $this
      */
     public function setQty($qty)
@@ -156,9 +157,9 @@ class Product implements ObjectableInterface
     }
 
     /**
-     * Возвращает количество.
+     * Возвращает сумму.
      *
-     * @return string
+     * @return float|string
      */
     public function getSum()
     {
@@ -166,9 +167,9 @@ class Product implements ObjectableInterface
     }
 
     /**
-     * Задаёт количество.
+     * Задаёт сумму.
      *
-     * @param string $sum
+     * @param float|string $sum
      * @return $this
      */
     public function setSum($sum)

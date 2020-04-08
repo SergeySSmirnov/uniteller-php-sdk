@@ -227,15 +227,24 @@ class Receipt implements ReceiptInterface
         $_result = [];
 
         foreach ($this as $_key => $_val) {
-            if (is_object($_val) && (_val instanceof ObjectableInterface)) {
-                $_result[] = $_val->toObject();
+            if (is_object($_val) && ($_val instanceof ObjectableInterface)) {
+                $_result[$_key] = $_val->toObject();
             }
-            else
-            {
+            elseif (is_array($_val)) {
+                foreach ($_val as $_rec) {
+                    if (is_object($_rec) && ($_rec instanceof ObjectableInterface)) {
+                        $_result[$_key][] = $_rec->toObject();
+                    }
+                    else {
+                        $_result[$_key][] = $_val;
+                    }
+                }
+            }
+            else {
                 $_result[$_key] = $_val;
             }
         }
-        return json_encode((object)$_result);
+        return json_encode((object)$_result, JSON_UNESCAPED_UNICODE);
     }
 
 }
