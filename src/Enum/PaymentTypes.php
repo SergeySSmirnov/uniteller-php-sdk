@@ -9,12 +9,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enums;
+namespace Tmconsulting\Uniteller\Enum;
 
 /**
  * Виды типов оплат.
  *
- * @package Tmconsulting\Client\Enums
+ * @package Tmconsulting\Uniteller\Enum
  */
 final class PaymentTypes
 {

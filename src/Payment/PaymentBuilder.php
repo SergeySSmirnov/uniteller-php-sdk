@@ -92,7 +92,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\CurrencyTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CurrencyTypes}.
      *
      * @var string
      */
@@ -189,7 +189,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\MeanTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\MeanTypes}.
      *
      * @var integer
      */
@@ -199,7 +199,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Тип электронной валюты.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\EMoneyTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\EMoneyTypes}.
      *
      * @var integer
      */
@@ -456,7 +456,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enums\CurrencyTypes}.
+     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enum\CurrencyTypes}.
      *
      * @param integer $currency Валюта платежа.
      * @return $this
@@ -608,7 +608,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enums\MeanTypes}.
+     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enum\MeanTypes}.
      *
      * @param integer $meanType
      * @return $this
@@ -624,7 +624,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Тип электронной валюты.
      *
-     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enums\EMoneyTypes}.
+     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enum\EMoneyTypes}.
      *
      * @param integer $eMoneyType
      * @return $this
@@ -1062,7 +1062,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enums\CurrencyTypes}.
+     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enum\CurrencyTypes}.
      *
      * @return integer
      */
@@ -1170,7 +1170,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enums\MeanTypes}.
+     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enum\MeanTypes}.
      *
      * @return integer
      */
@@ -1183,7 +1183,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Тип электронной валюты.
      *
-     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enums\EMoneyTypes}.
+     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enum\EMoneyTypes}.
      *
      * @return integer
      */

@@ -5,12 +5,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enums;
+namespace Tmconsulting\Uniteller\Enum;
 
 /**
  * Виды 3DS.
  *
- * @package Tmconsulting\Uniteller\Enums
+ * @package Tmconsulting\Uniteller\Enum
  */
 class EciTypes
 {

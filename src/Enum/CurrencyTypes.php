@@ -9,12 +9,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enums;
+namespace Tmconsulting\Uniteller\Enum;
 
 /**
  * Виды валют платежей.
  *
- * @package Tmconsulting\Client\Enums
+ * @package Tmconsulting\Uniteller\Enum
  */
 final class CurrencyTypes
 {

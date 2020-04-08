@@ -52,7 +52,7 @@ class Product implements ObjectableInterface
     /**
      * Код системы налогообложения.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\TaxModeTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\TaxModeTypes}.
      *
      * @var integer
      */
@@ -60,7 +60,7 @@ class Product implements ObjectableInterface
 
     /**
      * Код ставки налогообложения.
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\VatRateTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\VatRateTypes}.
      *
      * @var integer
      */
@@ -69,7 +69,7 @@ class Product implements ObjectableInterface
     /**
      * Признак способа расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\CalculationMethodTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationMethodTypes}.
      *
      * @var int
      */
@@ -78,7 +78,7 @@ class Product implements ObjectableInterface
     /**
      * Признак предмета расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\CalculationSubjectTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationSubjectTypes}.
      *
      * @var int
      */
@@ -181,7 +181,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает код системы налогообложения.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enums\TaxModeTypes}.
+     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\TaxModeTypes}.
      *
      * @return number
      */
@@ -193,7 +193,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт код системы налогообложения.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\TaxModeTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\TaxModeTypes}.
      *
      * @param number $taxmode
      * @return $this
@@ -207,7 +207,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает код ставки налогообложения.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enums\VatRateTypes}.
+     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\VatRateTypes}.
      *
      * @return number
      */
@@ -219,7 +219,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт код ставки налогообложения.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\VatRateTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\VatRateTypes}.
      *
      * @param number $vat
      * @return $this
@@ -233,7 +233,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает признак способа расчета.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enums\CalculationMethodTypes}.
+     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationMethodTypes}.
      *
      * @return number
      */
@@ -245,7 +245,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт признак способа расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\CalculationMethodTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationMethodTypes}.
      *
      * @param number $payattr
      * @return $this
@@ -259,7 +259,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает признак предмета расчета.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enums\CalculationSubjectTypes}.
+     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationSubjectTypes}.
      *
      * @return number
      */
@@ -271,7 +271,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт признак предмета расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enums\CalculationSubjectTypes}.
+     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationSubjectTypes}.
      *
      * @param number $lineattr
      * @return $this

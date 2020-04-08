@@ -9,12 +9,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enums;
+namespace Tmconsulting\Uniteller\Enum;
 
 /**
  * Виды типов электронных валют.
  *
- * @package Tmconsulting\Uniteller\Enums
+ * @package Tmconsulting\Uniteller\Enum
  */
 final class EMoneyTypes
 {
