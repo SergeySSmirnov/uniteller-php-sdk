@@ -16,7 +16,7 @@ namespace Tmconsulting\Uniteller\Signature;
  *
  * @package Tmconsulting\Client
  */
-interface SignatureInterface
+interface SignatureHandlerInterface
 {
 
     /**

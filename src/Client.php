@@ -22,12 +22,11 @@ use Tmconsulting\Uniteller\Recurrent\RecurrentRequest;
 use Tmconsulting\Uniteller\Request\RequestInterface;
 use Tmconsulting\Uniteller\Results\ResultsRequest;
 use Tmconsulting\Uniteller\Signature\SignatureCallback;
-use Tmconsulting\Uniteller\Signature\SignatureInterface;
-use Tmconsulting\Uniteller\Signature\SignaturePayment;
+use Tmconsulting\Uniteller\Signature\SignatureHandlerInterface;
 use Tmconsulting\Uniteller\Signature\SignatureRecurrent;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
-use Tmconsulting\Uniteller\Signature\Signature;
+use Tmconsulting\Uniteller\Signature\SignatureHandler;
 
 /**
  * Class Client
@@ -47,9 +46,9 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     protected $payment;
 
     /**
-     * @var SignatureInterface
+     * @var SignatureHandlerInterface
      */
-    protected $signature;
+    protected $signatureHandler;
 
     /**
      * @var RequestInterface
@@ -76,15 +75,13 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
      */
     public function __construct()
     {
+        $this->registerSignatureHandler(new SignatureHandler());
         $this->registerPayment(new Payment());
 
         $this->registerCancelRequest(new CancelRequest());
         $this->registerResultsRequest(new ResultsRequest());
         $this->registerRecurrentRequest(new RecurrentRequest());
 
-
-
-        $this->registerSignature(new Signature());
     }
 
     /**
@@ -203,12 +200,12 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * Осуществляет регистрацию объекта, отвечающего за вычисление сигнатуры параметров запроса.
      *
-     * @param \Tmconsulting\Uniteller\Signature\SignatureInterface $signature
+     * @param \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface $signature
      * @return $this
      */
-    public function registerSignature(SignatureInterface $signature)
+    public function registerSignatureHandler(SignatureHandlerInterface $signature)
     {
-        $this->signature = $signature;
+        $this->signatureHandler = $signature;
 
         return $this;
     }
@@ -305,11 +302,11 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * Возвращает объект, отвечающий за генерацию сигнатуры параметров запроса.
      *
-     * @return \Tmconsulting\Uniteller\Signature\SignatureInterface
+     * @return \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface
      */
-    public function getSignature()
+    public function getSignatureHandler()
     {
-        return $this->signature;
+        return $this->signatureHandler;
     }
 
     /**
@@ -327,7 +324,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     public function payment($parameters)
     {
         $_fields = $this
-            ->getSignature()
+            ->getSignatureHandler()
             ->sign($parameters, $this->getPassword());
 
         return $this
