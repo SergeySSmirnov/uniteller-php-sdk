@@ -76,4 +76,3 @@ class CustomerTest extends TestCase
     }
 
 }
-

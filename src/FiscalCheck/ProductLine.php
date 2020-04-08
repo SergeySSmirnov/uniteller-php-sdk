@@ -85,7 +85,7 @@ class ProductLine implements ObjectableInterface
      * [* Опционально]
      * Дополнительные сведения о продукте.
      *
-     * @var \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
+     * @var null|\Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
      */
     private $product = null;
 
@@ -93,7 +93,7 @@ class ProductLine implements ObjectableInterface
      * [* Опционально]
      * Данные агента.
      *
-     * @var \Rusproj\Uniteller\FiscalCheck\Agent
+     * @var null|\Rusproj\Uniteller\FiscalCheck\Agent
      */
     private $agent = null;
 

@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 use Rusproj\Uniteller\FiscalCheck\ProductLine;
 use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 use Rusproj\Uniteller\Enum\CalculationSubjectTypes;
-use Rusproj\Uniteller\FiscalCheck\Agent;
 use Rusproj\Uniteller\Enum\CalculationMethodTypes;
 use Rusproj\Uniteller\Enum\VatRateTypes;
 
@@ -52,7 +51,7 @@ class ProductLineTest extends TestCase
         $_productLine->setName($_name);
     }
 
-    public function testCashierObjectable()
+    public function testProductLineTestObjectable()
     {
         $_productLine = self::getProductLineTestInstance();
 

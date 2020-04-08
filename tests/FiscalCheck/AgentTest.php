@@ -9,7 +9,6 @@ namespace Rusproj\Uniteller\Tests\FiscalCheck;
 
 use PHPUnit\Framework\TestCase;
 use Rusproj\Uniteller\FiscalCheck\Agent;
-use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 
 /**
  * Agent test case.
@@ -38,7 +37,7 @@ class AgentTest extends TestCase
         return $_agent;
     }
 
-    public function testCashierObjectable()
+    public function testAgentObjectable()
     {
         $_agent = self::getTestAgentInstance();
 
@@ -68,12 +67,6 @@ class AgentTest extends TestCase
         $this->assertTrue($_objectableResult->suppliername === 'SUP_NAME');
         $this->assertObjectHasAttribute('supplierphone', $_objectableResult);
         $this->assertTrue($_objectableResult->supplierphone === '+6789043165');
-
-
-
-
-
-
     }
 
 }

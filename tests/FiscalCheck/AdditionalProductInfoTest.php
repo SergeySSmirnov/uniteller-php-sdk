@@ -9,7 +9,6 @@ namespace Rusproj\Uniteller\Tests\FiscalCheck;
 
 use PHPUnit\Framework\TestCase;
 use Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo;
-use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 
 /**
  * AdditionalProductInfo test case.

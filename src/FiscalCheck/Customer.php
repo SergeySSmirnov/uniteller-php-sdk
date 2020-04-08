@@ -49,7 +49,7 @@ class Customer implements ObjectableInterface
      * [* Опционально]
      * Название покупателя.
      *
-     * @var string
+     * @var null|string
      */
     private $name = null;
 
@@ -57,7 +57,7 @@ class Customer implements ObjectableInterface
      * [* Опционально]
      * ИНН покупателя.
      *
-     * @var string
+     * @var null|string
      */
     private $inn = null;
 
