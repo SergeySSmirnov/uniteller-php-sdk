@@ -19,7 +19,7 @@ use Rusproj\Uniteller\Exception\BuilderIncorrectValueException;
  *
  * @package Rusproj\Uniteller\Payment
  */
-class Product implements ObjectableInterface
+class ProductLine implements ObjectableInterface
 {
 
     /*

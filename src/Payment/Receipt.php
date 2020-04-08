@@ -8,6 +8,7 @@
 namespace Rusproj\Uniteller\Payment;
 
 use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
+use Rusproj\Uniteller\FiscalCheck\Customer;
 
 /**
  * Чек для фискализации.
@@ -18,7 +19,7 @@ class Receipt implements ReceiptInterface
     /**
      * Информация о плательщике.
      *
-     * @var \Rusproj\Uniteller\Payment\Customer
+     * @var \Rusproj\Uniteller\FiscalCheck\Customer
      */
     private $customer;
 
@@ -27,7 +28,7 @@ class Receipt implements ReceiptInterface
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека.
      *
-     * @var \Rusproj\Uniteller\Payment\Product[]
+     * @var \Rusproj\Uniteller\Payment\ProductLine[]
      */
     private $lines;
 
@@ -70,7 +71,7 @@ class Receipt implements ReceiptInterface
     /**
      * Возвращает информацию о плательщике.
      *
-     * @return \Rusproj\Uniteller\Payment\Customer
+     * @return \Rusproj\Uniteller\FiscalCheck\Customer
      */
     public function getCustomer()
     {
@@ -80,7 +81,7 @@ class Receipt implements ReceiptInterface
     /**
      * Задаёт информацию о плательщике.
      *
-     * @param \Rusproj\Uniteller\Payment\Customer $customer
+     * @param \Rusproj\Uniteller\FiscalCheck\Customer $customer
      * @return $this
      */
     public function setCustomer($customer)
@@ -93,7 +94,7 @@ class Receipt implements ReceiptInterface
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека..
      *
-     * @return \Rusproj\Uniteller\Payment\Product[]
+     * @return \Rusproj\Uniteller\Payment\ProductLine[]
      */
     public function getLines()
     {
@@ -105,7 +106,7 @@ class Receipt implements ReceiptInterface
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека..
      *
-     * @param \Rusproj\Uniteller\Payment\Product[] $lines
+     * @param \Rusproj\Uniteller\Payment\ProductLine[] $lines
      * @return $this
      */
     public function setLines($lines)
