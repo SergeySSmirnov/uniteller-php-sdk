@@ -42,10 +42,11 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
      * Задаёт описание чека для фискализации.
      *
      * @param \Tmconsulting\Uniteller\Payment\ReceiptInterface $receipt
-     * @return void
+     * @return $this
      */
     public function setReceipt($receipt) {
         $this->Receipt = $receipt;
+        return $this;
     }
 
     /**
@@ -72,17 +73,41 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
 
     /**
      * {@inheritDoc}
+     * @see \Tmconsulting\Uniteller\ArraybleInterface::toArray()
+     */
+    public function toArray()
+    {
+        $_result = [];
+        foreach ($this as $_key => $_val)
+        {
+            $_result[$_key] = $_val;
+        }
+        return $_result;
+    }
+
+    /**
+     * {@inheritDoc}
      * @see \Tmconsulting\Uniteller\Payment\PaymentBuilder::getSignatureFields()
      */
     public function getSignatureFields() {
+        $this->setReceipt(base64_encode($this->getReceipt()->generate()));
+
         $_result = parent::getSignatureFields();
         $_result['ReceiptSignature'] = ['HashFcn' => 'sha256', 'Keys' => [
             $this->getShopIdp(),
             $this->getOrderIdp(),
             $this->getSubtotalP(),
-            base64_encode($this->getReceipt()->generate())
+            $this->getReceipt()
         ]];
         return $_result;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface::updateField()
+     */
+    public function updateField($name, $val) {
+        $this->$name = $val;
     }
 
 }

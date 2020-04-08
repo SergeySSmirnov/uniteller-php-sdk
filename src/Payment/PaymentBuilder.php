@@ -1434,4 +1434,12 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
         return ['Signature' => ['HashFcn' => 'md5', 'Keys' => $_result]];
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface::updateField()
+     */
+    public function updateField($name, $val) {
+        $this->$name = $val;
+    }
+
 }

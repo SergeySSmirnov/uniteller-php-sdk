@@ -34,5 +34,11 @@ interface SignatureFieldsInterface extends ArraybleInterface
      */
     public function getSignatureFields();
 
+    /**
+     * Обновляет значение указанного поля.
+     * @param string $name Название поля.
+     * @param string $val Значение.
+     */
+    public function updateField($name, $val);
 }
 

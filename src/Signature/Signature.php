@@ -33,15 +33,15 @@ class Signature implements SignatureInterface
         foreach ($_items as $_key => $_params) {
             $_hashType = $_params['HashFcn'];
             $_keys = $_params['Keys'];
-            $_keys[] = $this->getPassword();
+            $_keys[] = $passwd;
 
-            $_signature = join('&', array_map(function ($item) {
-                return hash($_hashType, $item);
+            $_signature = join('&', array_map(function ($item) use($_hashType) {
+                    return hash($_hashType, $item);
             }, $_keys));
 
             $_signature = strtoupper(hash($_hashType, $_signature));
 
-            $fields[$_key] = $_signature;
+            $fields->updateField($_key, $_signature);
         }
 
         return $fields;
