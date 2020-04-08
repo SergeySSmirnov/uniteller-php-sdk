@@ -3,36 +3,38 @@
  * Created by Roquie.
  * E-mail: roquie0@gmail.com
  * GitHub: Roquie
+ *
+ * Modified by Sergey S. Smirnov
+ * E-mail: sergeyssmirnov@mail.ru
+ * Github: SergeySSmirnov
  */
 
 namespace Tmconsulting\Uniteller\Signature;
 
 /**
- * Interface SignatureInterface
+ * Интерфейс вычисления сигнатуры запроса.
  *
  * @package Tmconsulting\Client
  */
 interface SignatureInterface
 {
-    /**
-     * Create signature
-     *
-     * @return string
-     */
-    public function create();
 
     /**
-     * Array params signature
+     * Возвращает массив полей для формирования запроса.
      *
+     * @param \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
+     * @param string $passwd Пароль для расчёта сигнатуры.
      * @return array
      */
-    public function toArray();
+    public function sign($fields, $passwd);
 
     /**
-     * Verify signature
+     * Возвращает признак корректности сигнатуры запроса.
      *
-     * @param string $signature
+     * @param \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
+     * @param string $passwd Пароль для расчёта сигнатуры.
+     * @param string $signature Строка сигнатуры запроса.
      * @return bool
      */
-    public function verify($signature);
+    public function verify($fields, $passwd, $signature);
 }

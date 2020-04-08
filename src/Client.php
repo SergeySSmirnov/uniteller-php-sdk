@@ -27,6 +27,7 @@ use Tmconsulting\Uniteller\Signature\SignaturePayment;
 use Tmconsulting\Uniteller\Signature\SignatureRecurrent;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
+use Tmconsulting\Uniteller\Signature\Signature;
 
 /**
  * Class Client
@@ -48,17 +49,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * @var SignatureInterface
      */
-    protected $signaturePayment;
-
-    /**
-     * @var SignatureInterface
-     */
-    protected $signatureRecurrent;
-
-    /**
-     * @var SignatureInterface
-     */
-    protected $signatureCallback;
+    protected $signature;
 
     /**
      * @var RequestInterface
@@ -86,12 +77,14 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     public function __construct()
     {
         $this->registerPayment(new Payment());
+
         $this->registerCancelRequest(new CancelRequest());
         $this->registerResultsRequest(new ResultsRequest());
         $this->registerRecurrentRequest(new RecurrentRequest());
-        $this->registerSignaturePayment(new SignaturePayment());
-        $this->registerSignatureRecurrent(new SignatureRecurrent());
-        $this->registerSignatureCallback(new SignatureCallback());
+
+
+
+        $this->registerSignature(new Signature());
     }
 
     /**
@@ -162,6 +155,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Регистрирует объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     *
      * @param PaymentInterface $payment
      * @return $this
      */
@@ -206,34 +201,14 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Осуществляет регистрацию объекта, отвечающего за вычисление сигнатуры параметров запроса.
+     *
      * @param \Tmconsulting\Uniteller\Signature\SignatureInterface $signature
      * @return $this
      */
-    public function registerSignaturePayment(SignatureInterface $signature)
+    public function registerSignature(SignatureInterface $signature)
     {
-        $this->signaturePayment = $signature;
-
-        return $this;
-    }
-
-    /**
-     * @param \Tmconsulting\Uniteller\Signature\SignatureInterface $signature
-     * @return $this
-     */
-    public function registerSignatureRecurrent(SignatureInterface $signature)
-    {
-        $this->signatureRecurrent = $signature;
-
-        return $this;
-    }
-
-    /**
-     * @param \Tmconsulting\Uniteller\Signature\SignatureInterface $signature
-     * @return $this
-     */
-    public function registerSignatureCallback(SignatureInterface $signature)
-    {
-        $this->signatureCallback = $signature;
+        $this->signature = $signature;
 
         return $this;
     }
@@ -294,6 +269,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Возвращает объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     *
      * @return \Tmconsulting\Uniteller\Payment\PaymentInterface
      */
     public function getPayment()
@@ -326,27 +303,13 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Возвращает объект, отвечающий за генерацию сигнатуры параметров запроса.
+     *
      * @return \Tmconsulting\Uniteller\Signature\SignatureInterface
      */
-    public function getSignaturePayment()
+    public function getSignature()
     {
-        return $this->signaturePayment;
-    }
-
-    /**
-     * @return \Tmconsulting\Uniteller\Signature\SignatureInterface
-     */
-    public function getSignatureRecurrent()
-    {
-        return $this->signatureRecurrent;
-    }
-
-    /**
-     * @return \Tmconsulting\Uniteller\Signature\SignatureInterface
-     */
-    public function getSignatureCallback()
-    {
-        return $this->signatureCallback;
+        return $this->signature;
     }
 
     /**
@@ -358,30 +321,18 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * Получение платежной ссылки или сразу переход к оплате.
-     *
-     * @param array $parameters|\Tmconsulting\Client\Payment\PaymentBuilder $builder
-     * @return \Tmconsulting\Uniteller\Payment\UriInterface
+     * {@inheritDoc}
+     * @see \Tmconsulting\Uniteller\ClientInterface::payment()
      */
     public function payment($parameters)
     {
-        $array = $this->getParameters($parameters);
-        $array['Shop_IDP'] = $this->getShopId();
-        $array['Signature'] = $this->signaturePayment
-            ->setShopIdp(array_get($array, 'Shop_IDP'))
-            ->setOrderIdp(array_get($array, 'Order_IDP'))
-            ->setSubtotalP(array_get($array, 'Subtotal_P'))
-            ->setMeanType(array_get($array, 'MeanType'))
-            ->setEMoneyType(array_get($array, 'EMoneyType'))
-            ->setLifeTime(array_get($array, 'Lifetime'))
-            ->setCustomerIdp(array_get($array, 'Customer_IDP'))
-            ->setCardIdp(array_get($array, 'Card_IDP'))
-            ->setIData(array_get($array, 'IData'))
-            ->setPtCode(array_get($array, 'PT_Code'))
-            ->setPassword($this->getPassword())
-            ->create();
+        $_fields = $this
+            ->getSignature()
+            ->sign($parameters, $this->getPassword());
 
-        return $this->getPayment()->execute($array, $this->getOptions());
+        return $this
+            ->getPayment()
+            ->execute($_fields, $this);
     }
 
     /**

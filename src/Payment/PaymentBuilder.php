@@ -12,6 +12,7 @@
 namespace Tmconsulting\Uniteller\Payment;
 
 use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\Signature\SignatureFieldsInterface;
 use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
 
 /**
@@ -19,7 +20,7 @@ use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
  *
  * @package Tmconsulting\Client\Payment
  */
-class PaymentBuilder implements ArraybleInterface
+class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
 {
     /**
      * Идентификатор точки продажи в системе Uniteller.
@@ -35,7 +36,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $shopIdp;
+    protected $Shop_IDP;
 
     /**
      * Номер заказа в системе расчётов интернет-магазина, соответствующий
@@ -52,7 +53,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $orderIdp;
+    protected $Order_IDP;
 
     /**
      * Сумма покупки в валюте, оговоренной в договоре с банком-эквайером.
@@ -61,14 +62,14 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var float|string
      */
-    protected $subtotalP;
+    protected $Subtotal_P;
 
     /**
      * Подпись, гарантирующая неизменность критичных данных оплаты (суммы, Order_IDP).
      *
      * @var string
      */
-    protected $signature;
+    protected $Signature;
 
     /**
      * URL страницы, на которую должен вернуться Покупатель
@@ -76,7 +77,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $urlReturnOk;
+    protected $URL_RETURN_OK;
 
     /**
      * URL страницы, на которую должен вернуться Покупатель
@@ -84,7 +85,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $urlReturnNo;
+    protected $URL_RETURN_NO;
 
     /**
      * Валюта платежа. Параметр обязателен для точек продажи, работающих c
@@ -95,7 +96,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $currency;
+    protected $Currency;
 
     /**
      * Признак того, что платёж является «родительским» для последующих
@@ -104,7 +105,7 @@ class PaymentBuilder implements ArraybleInterface
      * Примечание: обязателен для рекуррентных платежей при работе с
      * банком-эквайером ВТБ.
      *
-     * @var bool
+     * @var int
      */
     protected $IsRecurrentStart;
 
@@ -127,7 +128,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $email;
+    protected $Email;
 
     /**
      * [* Опционально]
@@ -142,7 +143,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var int
      */
-    protected $lifetime;
+    protected $Lifetime;
 
     /**
      * [* Опционально]
@@ -157,7 +158,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var int
      */
-    protected $orderLifetime;
+    protected $OrderLifetime = 0;
 
     /**
      * [* Опционально]
@@ -165,7 +166,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $customerIdp;
+    protected $Customer_IDP;
 
     /**
      * [* Опционально]
@@ -173,7 +174,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $cardIdp;
+    protected $Card_IDP;
 
     /**
      * [* Опционально]
@@ -182,7 +183,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $ptCode;
+    protected $PT_Code;
 
     /**
      * [* Опционально]
@@ -192,7 +193,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var integer
      */
-    protected $meanType;
+    protected $MeanType;
 
     /**
      * [* Опционально]
@@ -202,7 +203,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var integer
      */
-    protected $eMoneyType;
+    protected $EMoneyType;
 
     /**
      * [* Опционально]
@@ -213,16 +214,16 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var integer
      */
-    protected $billLifetime;
+    protected $BillLifetime;
 
     /**
      * [* Опционально]
      * Признак преавторизации платежа.
      * При использовании в запросе должен принимать значение “1”.
      *
-     * @var bool
+     * @var int
      */
-    protected $preAuth;
+    protected $Preauth;
 
     /**
      * [* Опционально]
@@ -233,7 +234,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var array
      */
-    protected $callbackFields;
+    protected $CallbackFields;
 
     /**
      * [* Опционально]
@@ -243,7 +244,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $callbackFormat;
+    protected $CallbackFormat;
 
     /**
      * [* Опционально]
@@ -251,7 +252,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $language;
+    protected $Language;
 
     /**
      * [* Опционально]
@@ -259,7 +260,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $comment;
+    protected $Comment;
 
     /**
      * [* Опционально]
@@ -267,7 +268,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $firstName;
+    protected $FirstName;
 
     /**
      * [* Опционально]
@@ -275,7 +276,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @vars string
      */
-    protected $lastName;
+    protected $LastName;
 
     /**
      * [* Опционально]
@@ -283,7 +284,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $middleName;
+    protected $MiddleName;
 
     /**
      * [* Опционально]
@@ -291,7 +292,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $phone;
+    protected $Phone;
 
     /**
      * [* Опционально]
@@ -301,7 +302,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $phoneVerified;
+    protected $PhoneVerified;
 
     /**
      * [* Опционально]
@@ -309,7 +310,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $address;
+    protected $Address;
 
     /**
      * [* Опционально]
@@ -317,7 +318,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $country;
+    protected $Country;
 
     /**
      * [* Опционально]
@@ -325,7 +326,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $state;
+    protected $State;
 
     /**
      * [* Опционально]
@@ -333,7 +334,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var string
      */
-    protected $city;
+    protected $City;
 
     /**
      * [* Опционально]
@@ -341,7 +342,7 @@ class PaymentBuilder implements ArraybleInterface
      *
      * @var
      */
-    protected $zip;
+    protected $Zip;
 
     /**
      * Задаёт идентификатор точки продажи в системе Uniteller.
@@ -360,7 +361,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setShopIdp($shopIdp)
     {
-        $this->shopIdp = $shopIdp;
+        $this->Shop_IDP = $shopIdp;
 
         return $this;
     }
@@ -389,13 +390,13 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: OrderIdp = '{$orderIdp}'. Expected length of the OrderIdp <= 127.");
         }
 
-        $this->orderIdp = $orderIdp;
+        $this->Order_IDP = $orderIdp;
 
         return $this;
     }
 
     /**
-     * Возвращает сумму покупки в валюте, оговоренной в договоре с банком-эквайером.
+     * Устанавливает сумму покупки в валюте, оговоренной в договоре с банком-эквайером.
      * В качестве десятичного разделителя используется точка,
      * не более 2 знаков после разделителя. Например, 12.34
      *
@@ -404,26 +405,26 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setSubtotalP($subtotalP)
     {
-        $this->subtotalP = $subtotalP;
+        $this->Subtotal_P = $subtotalP;
 
         return $this;
     }
 
     /**
-     * Возвращает подпись, гарантирующую неизменность критичных данных оплаты (суммы, Order_IDP).
+     * Устанавливает подпись, гарантирующую неизменность критичных данных оплаты (суммы, Order_IDP).
      *
      * @param string $signature
      * @return $this
      */
     public function setSignature($signature)
     {
-        $this->signature = $signature;
+        $this->Signature = $signature;
 
         return $this;
     }
 
     /**
-     * Задаёт URL страницы, на которую должен вернуться Покупатель
+     * Устанавливает URL страницы, на которую должен вернуться Покупатель
      * после успешного осуществления платежа в системе Client.
      *
      * @param string $urlReturnOk URL страницы.
@@ -431,13 +432,13 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setUrlReturnOk($urlReturnOk)
     {
-        $this->urlReturnOk = $urlReturnOk;
+        $this->URL_RETURN_OK = $urlReturnOk;
 
         return $this;
     }
 
     /**
-     * Задаёт URL страницы, на которую должен вернуться Покупатель
+     * Устанавливает URL страницы, на которую должен вернуться Покупатель
      * после неуспешного осуществления платежа в системе.
      *
      * @param string $urlReturnNo URL страницы.
@@ -445,13 +446,13 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setUrlReturnNo($urlReturnNo)
     {
-        $this->urlReturnNo = $urlReturnNo;
+        $this->URL_RETURN_NO = $urlReturnNo;
 
         return $this;
     }
 
     /**
-     * Задаёт валюту платежа. Параметр обязателен для точек продажи, работающих с
+     * Устанавливает валюту платежа. Параметр обязателен для точек продажи, работающих с
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
@@ -462,7 +463,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setCurrency($currency)
     {
-        $this->currency = $currency;
+        $this->Currency = $currency;
 
         return $this;
     }
@@ -495,7 +496,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: OrderIdp = '{$email}'. Expected length of the OrderIdp <= 64.");
         }
 
-        $this->email = $email;
+        $this->Email = $email;
 
         return $this;
     }
@@ -516,7 +517,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setLifetime($lifetime)
     {
-        $this->lifetime = $lifetime;
+        $this->Lifetime = $lifetime;
 
         return $this;
     }
@@ -543,7 +544,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: orderLifetime = '{$orderLifetime}'. Expected orderLifetime > 0.");
         }
 
-        $this->orderLifetime = $orderLifetime;
+        $this->OrderLifetime = $orderLifetime;
 
         return $this;
     }
@@ -563,7 +564,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: customerIdp = '{$customerIdp}'. Expected length of the customerIdp <= 64.");
         }
 
-        $this->customerIdp = $customerIdp;
+        $this->Customer_IDP = $customerIdp;
 
         return $this;
     }
@@ -583,7 +584,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: cardIdp = '{$cardIdp}'. Expected length of the cardIdp <= 64.");
         }
 
-        $this->cardIdp = $cardIdp;
+        $this->Card_IDP = $cardIdp;
 
         return $this;
     }
@@ -598,7 +599,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setPtCode($ptCode)
     {
-        $this->ptCode = $ptCode;
+        $this->PT_Code = $ptCode;
 
         return $this;
     }
@@ -614,7 +615,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setMeanType($meanType)
     {
-        $this->meanType = $meanType;
+        $this->MeanType = $meanType;
 
         return $this;
     }
@@ -630,7 +631,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setEMoneyType($eMoneyType)
     {
-        $this->eMoneyType = $eMoneyType;
+        $this->EMoneyType = $eMoneyType;
 
         return $this;
     }
@@ -653,7 +654,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: billLifetime = '{$billLifetime}'. Expected 1 <= billLifetime <= 1080.");
         }
 
-        $this->billLifetime = $billLifetime;
+        $this->BillLifetime = $billLifetime;
 
         return $this;
     }
@@ -667,7 +668,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function usePreAuth()
     {
-        $this->preAuth = true;
+        $this->Preauth = 1;
 
         return $this;
     }
@@ -683,7 +684,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function useRecurrentPayment()
     {
-        $this->IsRecurrentStart = true;
+        $this->IsRecurrentStart = 1;
 
         return $this;
     }
@@ -700,7 +701,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setCallbackFields(array $callbackFields)
     {
-        $this->callbackFields = join(' ', $callbackFields);
+        $this->CallbackFields = join(' ', $callbackFields);
 
         return $this;
     }
@@ -716,7 +717,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function setCallbackFormat($callbackFormat)
     {
-        $this->callbackFormat = $callbackFormat;
+        $this->CallbackFormat = $callbackFormat;
 
         return $this;
     }
@@ -736,7 +737,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: language = '{$language}'. Expected length of the language == 2.");
         }
 
-        $this->language = $language;
+        $this->Language = $language;
 
         return $this;
     }
@@ -756,7 +757,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: comment = '{$comment}'. Expected length of the comment <= 1024.");
         }
 
-        $this->comment = $comment;
+        $this->Comment = $comment;
 
         return $this;
     }
@@ -776,7 +777,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: firstName = '{$firstName}'. Expected length of the firstName <= 64.");
         }
 
-        $this->firstName = $firstName;
+        $this->FirstName = $firstName;
 
         return $this;
     }
@@ -796,7 +797,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: lastName = '{$lastName}'. Expected length of the lastName <= 64.");
         }
 
-        $this->lastName = $lastName;
+        $this->LastName = $lastName;
 
         return $this;
     }
@@ -816,7 +817,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: middleName = '{$middleName}'. Expected length of the middleName <= 64.");
         }
 
-        $this->middleName = $middleName;
+        $this->MiddleName = $middleName;
 
         return $this;
     }
@@ -836,7 +837,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
         }
 
-        $this->phone = $phone;
+        $this->Phone = $phone;
 
         return $this;
     }
@@ -858,8 +859,8 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
         }
 
-        $this->phone = $phone;
-        $this->phoneVerified = $phone;
+        $this->Phone = $phone;
+        $this->PhoneVerified = $phone;
 
         return $this;
     }
@@ -880,7 +881,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: address = '{$address}'. Expected length of the address <= 128.");
         }
 
-        $this->address = $address;
+        $this->Address = $address;
 
         return $this;
     }
@@ -900,7 +901,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: country = '{$country}'. Expected length of the country <= 64.");
         }
 
-        $this->country = $country;
+        $this->Country = $country;
 
         return $this;
     }
@@ -920,7 +921,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: state = '{$state}'. Expected length of the state <= 3.");
         }
 
-        $this->state = $state;
+        $this->State = $state;
 
         return $this;
     }
@@ -940,7 +941,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: city = '{$city}'. Expected length of the city <= 64.");
         }
 
-        $this->city = $city;
+        $this->City = $city;
 
         return $this;
     }
@@ -960,7 +961,7 @@ class PaymentBuilder implements ArraybleInterface
             throw new BuilderIncorrectValueException("Wrong: zip = '{$zip}'. Expected length of the  zip <= 64.");
         }
 
-        $this->zip = $zip;
+        $this->Zip = $zip;
 
         return $this;
     }
@@ -983,7 +984,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getShopIdp()
     {
-        return $this->shopIdp;
+        return $this->Shop_IDP;
 
         return $this;
     }
@@ -1005,7 +1006,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getOrderIdp()
     {
-        return $this->orderIdp;
+        return $this->Order_IDP;
 
         return $this;
     }
@@ -1019,7 +1020,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getSubtotalP()
     {
-        return $this->subtotalP;
+        return $this->Subtotal_P;
 
         return $this;
     }
@@ -1031,7 +1032,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getSignature()
     {
-        return $this->signature;
+        return $this->Signature;
     }
 
     /**
@@ -1042,7 +1043,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getUrlReturnOk()
     {
-        return $this->urlReturnOk;
+        return $this->URL_RETURN_OK;
     }
 
     /**
@@ -1053,7 +1054,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getUrlReturnNo()
     {
-        return $this->urlReturnNo;
+        return $this->URL_RETURN_NO;
     }
 
     /**
@@ -1067,7 +1068,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCurrency()
     {
-        return $this->currency;
+        return $this->Currency;
     }
 
     /**
@@ -1091,7 +1092,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->Email;
     }
 
     /**
@@ -1109,7 +1110,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getLifetime()
     {
-        return $this->lifetime;
+        return $this->Lifetime;
     }
 
     /**
@@ -1127,7 +1128,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getOrderLifetime()
     {
-        return $this->orderLifetime;
+        return $this->OrderLifetime;
     }
 
 
@@ -1139,7 +1140,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCustomerIdp()
     {
-        return $this->customerIdp;
+        return $this->Customer_IDP;
     }
 
     /**
@@ -1150,7 +1151,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCardIdp()
     {
-        return $this->cardIdp;
+        return $this->Card_IDP;
     }
 
     /**
@@ -1162,7 +1163,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getPtCode()
     {
-        return $this->ptCode;
+        return $this->PT_Code;
     }
 
     /**
@@ -1175,7 +1176,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getMeanType()
     {
-        return $this->meanType;
+        return $this->MeanType;
     }
 
     /**
@@ -1188,7 +1189,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getEMoneyType()
     {
-        return $this->eMoneyType;
+        return $this->EMoneyType;
     }
 
     /**
@@ -1202,7 +1203,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getBillLifetime()
     {
-        return $this->billLifetime;
+        return $this->BillLifetime;
     }
 
     /**
@@ -1214,7 +1215,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function isPreAuth()
     {
-        return $this->preAuth;
+        return $this->Preauth === 1;
     }
 
     /**
@@ -1228,7 +1229,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function isIsRecurrentStart()
     {
-        return $this->IsRecurrentStart;
+        return $this->IsRecurrentStart === 1;
     }
 
     /**
@@ -1242,7 +1243,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCallbackFields()
     {
-        return $this->callbackFields;
+        return $this->CallbackFields;
     }
 
     /**
@@ -1255,7 +1256,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCallbackFormat()
     {
-        return $this->callbackFormat;
+        return $this->CallbackFormat;
     }
 
     /**
@@ -1266,7 +1267,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getLanguage()
     {
-        return $this->language;
+        return $this->Language;
     }
 
     /**
@@ -1277,7 +1278,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getComment()
     {
-        return $this->comment;
+        return $this->Comment;
     }
 
     /**
@@ -1288,7 +1289,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->FirstName;
     }
 
     /**
@@ -1299,7 +1300,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->LastName;
     }
 
     /**
@@ -1310,7 +1311,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getMiddleName()
     {
-        return $this->middleName;
+        return $this->MiddleName;
     }
 
     /**
@@ -1321,7 +1322,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getPhone()
     {
-        return $this->phone;
+        return $this->Phone;
     }
 
     /**
@@ -1334,7 +1335,7 @@ class PaymentBuilder implements ArraybleInterface
     */
     public function getPhoneVerified()
     {
-        return $this->phoneVerified;
+        return $this->PhoneVerified;
     }
 
     /**
@@ -1345,7 +1346,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getAddress()
     {
-        return $this->address;
+        return $this->Address;
     }
 
     /**
@@ -1356,7 +1357,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCountry()
     {
-        return $this->country;
+        return $this->Country;
     }
 
     /**
@@ -1367,7 +1368,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getState()
     {
-        return $this->state;
+        return $this->State;
     }
 
     /**
@@ -1378,7 +1379,7 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getCity()
     {
-        return $this->city;
+        return $this->City;
     }
 
     /**
@@ -1389,47 +1390,48 @@ class PaymentBuilder implements ArraybleInterface
      */
     public function getZip()
     {
-        return $this->zip;
+        return $this->Zip;
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
+     * @see \Tmconsulting\Uniteller\ArraybleInterface::toArray()
      */
     public function toArray()
     {
-        return [
-            'Shop_IDP'         => $this->getShopIdp(),
-            'Order_IDP'        => $this->getOrderIdp(),
-            'Subtotal_P'       => $this->getSubtotalP(),
-            'Signature'        => $this->getSignature(),
-            'URL_RETURN_OK'    => $this->getUrlReturnOk(),
-            'URL_RETURN_NO'    => $this->getUrlReturnNo(),
-            'Currency'         => $this->getCurrency(),
-            'Email'            => $this->getEmail(),
-            'Lifetime'         => $this->getLifetime(),
-            'OrderLifetime'    => $this->getOrderLifetime(),
-            'Customer_IDP'     => $this->getCustomerIdp(),
-            'Card_IDP'         => $this->getCardIdp(),
-            'PT_Code'          => $this->getPtCode(),
-            'MeanType'         => $this->getMeanType(),
-            'EMoneyType'       => $this->getEMoneyType(),
-            'BillLifetime'     => $this->getBillLifetime(),
-            'Preauth'          => $this->isPreAuth(),
-            'IsRecurrentStart' => $this->isIsRecurrentStart(),
-            'CallbackFields'   => $this->getCallbackFields(),
-            'CallbackFormat'   => $this->getCallbackFormat(),
-            'Language'         => $this->getLanguage(),
-            'Comment'          => $this->getComment(),
-            'FirstName'        => $this->getFirstName(),
-            'LastName'         => $this->getLastName(),
-            'MiddleName'       => $this->getMiddleName(),
-            'Phone'            => $this->getPhone(),
-            'PhoneVerified'    => $this->getPhoneVerified(),
-            'Address'          => $this->getAddress(),
-            'Country'          => $this->getCountry(),
-            'State'            => $this->getState(),
-            'City'             => $this->getCity(),
-            'Zip'              => $this->getZip(),
-        ];
+        $_result = [];
+        foreach ($this as $_key => $_val)
+        {
+            $_result[$_key] = $_val;
+        }
+        return $_result;
     }
+
+    /**
+     * {@inheritDoc}
+     * @see \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface::getSignatureFields()
+     */
+    public function getSignatureFields()
+    {
+        $_result = [
+            $this->getShopIdp(),
+            $this->getOrderIdp(),
+            $this->getSubtotalP(),
+            $this->getMeanType(),
+            $this->getEMoneyType(),
+            $this->getLifetime(),
+            $this->getCustomerIdp(),
+            $this->getCardIdp(),
+            '',
+            $this->getPtCode()
+        ];
+        if ($this->getOrderLifetime() > 0) {
+            $_result[] = $this->getOrderLifetime();
+        }
+        if (!empty($this->getPhoneVerified())) {
+            $_result[] = $this->getPhoneVerified();
+        }
+        return ['Signature' => ['HashFcn' => 'md5', 'Keys' => $_result]];
+    }
+
 }

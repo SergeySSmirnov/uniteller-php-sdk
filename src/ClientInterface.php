@@ -3,6 +3,10 @@
  * Created by Roquie.
  * E-mail: roquie0@gmail.com
  * GitHub: Roquie
+ *
+ * Modified by Sergey S. Smirnov
+ * E-mail: sergeyssmirnov@mail.ru
+ * Github: SergeySSmirnov
  */
 
 namespace Tmconsulting\Uniteller;
@@ -17,9 +21,12 @@ use Tmconsulting\Uniteller\Payment\UriInterface;
  */
 interface ClientInterface
 {
+
     /**
-     * @param \Tmconsulting\Uniteller\Payment\PaymentBuilder|array $parameters
-     * @return UriInterface
+     * Генерирует URI для перехода на страницу оплаты.
+     *
+     * @param \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Tmconsulting\Client\Payment\PaymentBuilder}.
+     * @return \Tmconsulting\Uniteller\Payment\UriInterface
      */
     public function payment($parameters);
 

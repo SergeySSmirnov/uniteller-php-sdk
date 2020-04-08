@@ -27,8 +27,8 @@
 <br />
 
 ## Compliance with technical procedures
-* TP Internet Equation v. 1.41 rev. 2
-* Payments with fiscalization v. 2.1.10 rev. 1-1
+* TP Internet Equation v. 1.41 rev. 2 (implemented not all)
+* Payments with fiscalization v. 2.1.10 rev. 1-1 (implemented not all)
 
 ## Description
 PHP (5.5+) SDK for integration internet-acquiring of the Uniteller (unofficial).
