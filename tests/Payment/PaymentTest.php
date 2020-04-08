@@ -14,6 +14,7 @@ use Rusproj\Uniteller\Tests\TestCase;
 
 class PaymentTest extends TestCase
 {
+
     public function testCanPaymentRequestReceiveUri()
     {
         $payment = new Payment();
@@ -22,4 +23,5 @@ class PaymentTest extends TestCase
         $this->assertInstanceOf(UriInterface::class, $results);
         $this->assertEquals('https://google.com/pay?q=banana', $results->getUri());
     }
+
 }

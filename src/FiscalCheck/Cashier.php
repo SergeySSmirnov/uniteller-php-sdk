@@ -12,7 +12,8 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 
 /**
  * Информация о кассире.
- * Этот блок может отсутствовать целиком.
+ * Этот блок может отсутствовать целиком
+ * (опциональный блок).
  *
  * @package Rusproj\Uniteller\FiscalCheck
  */
@@ -29,14 +30,14 @@ class Cashier implements ObjectableInterface
      *
      * @var string
      */
-    private $name = null;
+    private $name = '';
 
     /**
      * ИНН кассира.
      *
      * @var string
      */
-    private $inn = null;
+    private $inn = '';
 
     /**
      * Ф.И.О. кассира.

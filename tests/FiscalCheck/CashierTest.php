@@ -1,6 +1,11 @@
 <?php
+/**
+ * Created by Sergey S. Smirnov
+ * E-mail: sergeyssmirnov@mail.ru
+ * Github: SergeySSmirnov
+ */
 
-namespace Rusproj\Uniteller\Tests\Payment;
+namespace Rusproj\Uniteller\Tests\FiscalCheck;
 
 use PHPUnit\Framework\TestCase;
 use Rusproj\Uniteller\FiscalCheck\Cashier;
@@ -22,7 +27,6 @@ class CashierTest extends TestCase
         $this->expectException(FieldIncorrectValueException::class);
         $_cashier = new Cashier();
         $_cashier->setName($_name);
-
     }
 
     public function testWrongInn()
@@ -30,12 +34,10 @@ class CashierTest extends TestCase
         $this->expectException(FieldIncorrectValueException::class);
         $_cashier = new Cashier();
         $_cashier->setInn(123);
-
     }
 
     public function testCashierObjectable()
     {
-
         $_cashier = new Cashier();
         $_cashier
             ->setName('Cashier')
@@ -50,5 +52,5 @@ class CashierTest extends TestCase
         $this->assertObjectHasAttribute('inn', $_objectableResult);
         $this->assertTrue($_objectableResult->inn === '123456789012');
     }
-}
 
+}
