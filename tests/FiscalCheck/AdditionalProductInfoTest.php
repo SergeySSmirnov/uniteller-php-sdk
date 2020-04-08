@@ -17,6 +17,20 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 class AdditionalProductInfoTest extends TestCase
 {
 
+    /**
+     * @return \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
+     */
+    public static function getAdditionalProductInfoTestInstance()
+    {
+        $_additiionalProductInfo = new AdditionalProductInfo();
+        $_additiionalProductInfo
+            ->setCoc('Код товара')
+            ->setExc('Акциз')
+            ->setKt('RU')
+            ->setNcd('123456');
+        return $_additiionalProductInfo;
+    }
+
     public function testAdditionalProductInfoObjectable()
     {
         $_additiionalProductInfo = new AdditionalProductInfo();

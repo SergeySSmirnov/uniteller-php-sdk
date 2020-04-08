@@ -17,7 +17,10 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 class AgentTest extends TestCase
 {
 
-    public function testCashierObjectable()
+    /**
+     * @return \Rusproj\Uniteller\FiscalCheck\Agent
+     */
+    public static function getTestAgentInstance()
     {
         $_agent = new Agent();
         $_agent
@@ -32,6 +35,12 @@ class AgentTest extends TestCase
             ->setSupplierinn('098765432109')
             ->setSuppliername('SUP_NAME')
             ->setSupplierphone('+6789043165');
+        return $_agent;
+    }
+
+    public function testCashierObjectable()
+    {
+        $_agent = self::getTestAgentInstance();
 
         $_objectableResult = $_agent->toObject();
         $this->assertTrue($_objectableResult instanceof \stdClass);

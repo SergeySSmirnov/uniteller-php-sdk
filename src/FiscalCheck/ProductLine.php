@@ -5,10 +5,10 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\FiscalCheck;
 
 use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
-use Rusproj\Uniteller\Exception\BuilderIncorrectValueException;
+use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 
 /**
  * Информация о товаре в фискальном чеке.
@@ -17,7 +17,7 @@ use Rusproj\Uniteller\Exception\BuilderIncorrectValueException;
  * кодировке UTF-8, то в поле “name” («Наименование позиции») можно указывать только те
  * Unicode-символы, для которых есть соответствие в CP866.
  *
- * @package Rusproj\Uniteller\Payment
+ * @package Rusproj\Uniteller\FiscalCheck
  */
 class ProductLine implements ObjectableInterface
 {
@@ -32,37 +32,28 @@ class ProductLine implements ObjectableInterface
      *
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      * Цена за единицу измерения.
      *
      * @var float|string
      */
-    private $price;
+    private $price = '';
 
     /**
      * Количество.
      *
      * @var integer|string
      */
-    private $qty;
+    private $qty = '';
 
     /**
      * Сумма.
      *
      * @var float|string
      */
-    private $sum;
-
-    /**
-     * Код системы налогообложения.
-     *
-     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
-     *
-     * @var integer
-     */
-    private $taxmode;
+    private $sum = '';
 
     /**
      * Код ставки налогообложения.
@@ -70,7 +61,7 @@ class ProductLine implements ObjectableInterface
      *
      * @var integer
      */
-    private $vat;
+    private $vat = -1000;
 
     /**
      * Признак способа расчета.
@@ -79,7 +70,7 @@ class ProductLine implements ObjectableInterface
      *
      * @var int
      */
-    private $payattr;
+    private $payattr = -1000;
 
     /**
      * Признак предмета расчета.
@@ -88,7 +79,23 @@ class ProductLine implements ObjectableInterface
      *
      * @var int
      */
-    private $lineattr;
+    private $lineattr = -1000;
+
+    /**
+     * [* Опционально]
+     * Дополнительные сведения о продукте.
+     *
+     * @var \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
+     */
+    private $product = null;
+
+    /**
+     * [* Опционально]
+     * Данные агента.
+     *
+     * @var \Rusproj\Uniteller\FiscalCheck\Agent
+     */
+    private $agent = null;
 
     /**
      * Возвращает наименование позиции.
@@ -105,15 +112,13 @@ class ProductLine implements ObjectableInterface
      *
      * @param string $name
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется если длина строки параметра больше 128 символов.
      */
     public function setName($name)
     {
-        if (strlen($name) > 128)
-        {
-            throw new BuilderIncorrectValueException("Wrong: Name = '{$name}'. Expected length of the Name <= 128.");
+        if (strlen($name) > 128) {
+            throw new FieldIncorrectValueException('Длина строки с Названием продукта должна быть 0-128 символов включительно.');
         }
-
         $this->name = $name;
         return $this;
     }
@@ -181,32 +186,6 @@ class ProductLine implements ObjectableInterface
     public function setSum($sum)
     {
         $this->sum = $sum;
-        return $this;
-    }
-
-    /**
-     * Возвращает код системы налогообложения.
-     *
-     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
-     *
-     * @return number
-     */
-    public function getTaxmode()
-    {
-        return $this->taxmode;
-    }
-
-    /**
-     * Задаёт код системы налогообложения.
-     *
-     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
-     *
-     * @param number $taxmode
-     * @return $this
-     */
-    public function setTaxmode($taxmode)
-    {
-        $this->taxmode = $taxmode;
         return $this;
     }
 
@@ -285,6 +264,54 @@ class ProductLine implements ObjectableInterface
     public function setLineattr($lineattr)
     {
         $this->lineattr = $lineattr;
+        return $this;
+    }
+
+    /**
+     * [* Опционально]
+     * Дополнительные сведения о продукте.
+     *
+     * @return \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * [* Опционально]
+     * Дополнительные сведения о продукте.
+     *
+     * @param \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo $product
+     * @return $this
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
+    /**
+     * [* Опционально]
+     * Данные агента.
+     *
+     * @return \Rusproj\Uniteller\FiscalCheck\Agent
+     */
+    public function getAgent()
+    {
+        return $this->agent;
+    }
+
+    /**
+     * [* Опционально]
+     * Данные агента.
+     *
+     * @param \Rusproj\Uniteller\FiscalCheck\Agent $agent
+     * @return $this
+     */
+    public function setAgent($agent)
+    {
+        $this->agent = $agent;
         return $this;
     }
 

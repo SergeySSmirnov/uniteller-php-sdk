@@ -24,6 +24,15 @@ class Receipt implements ReceiptInterface
     private $customer;
 
     /**
+     * Код системы налогообложения.
+     *
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
+     *
+     * @var integer
+     */
+    private $taxmode;
+
+    /**
      * Массив товарных позиций в чеке.
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека.
@@ -87,6 +96,32 @@ class Receipt implements ReceiptInterface
     public function setCustomer($customer)
     {
         $this->customer = $customer;
+    }
+
+    /**
+     * Возвращает код системы налогообложения.
+     *
+     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
+     *
+     * @return number
+     */
+    public function getTaxmode()
+    {
+        return $this->taxmode;
+    }
+
+    /**
+     * Задаёт код системы налогообложения.
+     *
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
+     *
+     * @param number $taxmode
+     * @return $this
+     */
+    public function setTaxmode($taxmode)
+    {
+        $this->taxmode = $taxmode;
+        return $this;
     }
 
     /**
