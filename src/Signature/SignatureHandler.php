@@ -9,7 +9,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Signature;
+namespace Rusproj\Uniteller\Signature;
 
 /**
  * Механизм вычисления сигнатуры запроса.
@@ -22,9 +22,9 @@ class SignatureHandler implements SignatureHandlerInterface
     /**
      * Выполняет расчёт сигнатуры и возвращает список обновлённых полей.
      *
-     * @param \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
      * @param string $passwd Пароль для расчёта сигнатуры.
-     * @return \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface
+     * @return \Rusproj\Uniteller\Signature\SignatureFieldsInterface
      */
     private function updateSignatureFields($fields, $passwd)
     {
@@ -49,7 +49,7 @@ class SignatureHandler implements SignatureHandlerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface::sign()
+     * @see \Rusproj\Uniteller\Signature\SignatureHandlerInterface::sign()
      */
     public function sign($fields, $passwd)
     {
@@ -58,7 +58,7 @@ class SignatureHandler implements SignatureHandlerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface::verify()
+     * @see \Rusproj\Uniteller\Signature\SignatureHandlerInterface::verify()
      */
     public function verify($fields, $passwd, $signature)
     {

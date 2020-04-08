@@ -5,9 +5,9 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Cancel;
+namespace Rusproj\Uniteller\Cancel;
 
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Class CancelBuilder

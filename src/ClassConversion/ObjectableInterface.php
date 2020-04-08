@@ -5,12 +5,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\ClassConversion;
+namespace Rusproj\Uniteller\ClassConversion;
 
 /**
  * Интерфейс преобразования экземпляров классов в {@see \stdClass}.
  *
- * @package Tmconsulting\Uniteller\ClassConversion
+ * @package Rusproj\Uniteller\ClassConversion
  */
 interface ObjectableInterface
 {

@@ -5,7 +5,7 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Cancel;
+namespace Rusproj\Uniteller\Cancel;
 
 /**
  * Class RVRReason

@@ -5,7 +5,7 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller;
+namespace Rusproj\Uniteller;
 
 /**
  * @param $array

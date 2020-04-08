@@ -6,13 +6,13 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Results;
+namespace Rusproj\Uniteller\Tests\Results;
 
-use Tmconsulting\Uniteller\Http\HttpManagerInterface;
-use Tmconsulting\Uniteller\Order\Order;
-use Tmconsulting\Uniteller\Order\Status;
-use Tmconsulting\Uniteller\Results\ResultsRequest;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Http\HttpManagerInterface;
+use Rusproj\Uniteller\Order\Order;
+use Rusproj\Uniteller\Order\Status;
+use Rusproj\Uniteller\Results\ResultsRequest;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class ResultsRequestTest extends TestCase
 {
@@ -25,7 +25,7 @@ class ResultsRequestTest extends TestCase
             ->willReturn($this->getStubContents('cancel'));
 
         $request = new ResultsRequest();
-        /** @var \Tmconsulting\Uniteller\Order\Order $order */
+        /** @var \Rusproj\Uniteller\Order\Order $order */
         foreach ($request->execute($manager) as $order) {
             $this->assertInstanceOf(Order::class, $order);
             $this->assertEquals('Value of address', $order->getAddress());

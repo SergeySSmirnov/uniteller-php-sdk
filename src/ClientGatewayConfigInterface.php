@@ -5,12 +5,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller;
+namespace Rusproj\Uniteller;
 
 /**
  * Интерфейс для получения настроек доступа к платёжному шлюзу.
  *
- * @package Tmconsulting\Uniteller
+ * @package Rusproj\Uniteller
  */
 interface ClientGatewayConfigInterface
 {

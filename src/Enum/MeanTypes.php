@@ -9,12 +9,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enum;
+namespace Rusproj\Uniteller\Enum;
 
 /**
  * Виды платёжных систем кредитных карт.
  *
- * @package Tmconsulting\Uniteller\Enum
+ * @package Rusproj\Uniteller\Enum
  */
 final class MeanTypes
 {

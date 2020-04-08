@@ -5,12 +5,12 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Cancel;
+namespace Rusproj\Uniteller\Cancel;
 
-use Tmconsulting\Uniteller\Http\HttpManagerInterface;
-use Tmconsulting\Uniteller\Order\Order;
-use Tmconsulting\Uniteller\Request\RequestInterface;
-use Tmconsulting\Uniteller;
+use Rusproj\Uniteller\Http\HttpManagerInterface;
+use Rusproj\Uniteller\Order\Order;
+use Rusproj\Uniteller\Request\RequestInterface;
+use Rusproj\Uniteller;
 
 /**
  * Class CancelRequest
@@ -22,7 +22,7 @@ class CancelRequest implements RequestInterface
     /**
      * Выполнение запроса к шлюзу.
      *
-     * @param \Tmconsulting\Uniteller\Http\HttpManagerInterface $httpManager
+     * @param \Rusproj\Uniteller\Http\HttpManagerInterface $httpManager
      * @param array $parameters
      * @return array
      */

@@ -64,7 +64,7 @@ PHP (5.5+) SDK для интеграции с интернет-эквайрин�
 
 ```php
 <?php
-$uniteller = new \Tmconsulting\Uniteller\Client();
+$uniteller = new \Rusproj\Uniteller\Client();
 $uniteller->setShopId('you_shop_id');
 $uniteller->setLogin('you_login_number');
 $uniteller->setPassword('you_password');
@@ -78,7 +78,7 @@ $uniteller->setBaseUri('https://wpay.uniteller.ru');
 
 ```php
 <?php
-use Tmconsulting\Uniteller\Payment\PaymentBuilder;
+use Rusproj\Uniteller\Payment\PaymentBuilder;
 
 $builder = new PaymentBuilder();
 $builder
@@ -109,7 +109,7 @@ $uniteller->payment([
  
 ```php
 <?php
-use Tmconsulting\Uniteller\Recurrent\RecurrentBuilder;
+use Rusproj\Uniteller\Recurrent\RecurrentBuilder;
 
 $builder = (new RecurrentBuilder())
     ->setOrderIdp(mt_rand(10000, 99999))
@@ -134,7 +134,7 @@ $results = $uniteller->recurrent([
  
 ```php
 <?php
-use Tmconsulting\Uniteller\Cancel\CancelBuilder;
+use Rusproj\Uniteller\Cancel\CancelBuilder;
 
 $builder = (new CancelBuilder())->setBillNumber('RRN Number, (12 digits)');
 $results = $uniteller->cancel($builder);
@@ -144,7 +144,7 @@ $results = $uniteller->cancel($builder);
 
 ```php
 <?php
-use Tmconsulting\Uniteller\Order\Status;
+use Rusproj\Uniteller\Order\Status;
 
 $results = $uniteller->cancel([
     'Billnumber' => 'RRN Number, (12 digits)',
@@ -154,7 +154,7 @@ $results = $uniteller->cancel([
 var_dump($results);
 
 foreach ($results as $payment) {
-    // смотрите в Tmconsulting\Uniteller\Order\Order остальные методы.
+    // смотрите в Rusproj\Uniteller\Order\Order остальные методы.
     if ($payment->getStatus() === Status::CANCELLED) {
         // платеж отменён
     }    

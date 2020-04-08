@@ -5,12 +5,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enum;
+namespace Rusproj\Uniteller\Enum;
 
 /**
  * Виды предметов расчёта.
  *
- * @package Tmconsulting\Uniteller\Enum
+ * @package Rusproj\Uniteller\Enum
  */
 class CalculationSubjectTypes
 {

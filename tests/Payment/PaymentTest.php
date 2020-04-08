@@ -6,11 +6,11 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Payment;
+namespace Rusproj\Uniteller\Tests\Payment;
 
-use Tmconsulting\Uniteller\Payment\Payment;
-use Tmconsulting\Uniteller\Payment\UriInterface;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Payment\Payment;
+use Rusproj\Uniteller\Payment\UriInterface;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class PaymentTest extends TestCase
 {

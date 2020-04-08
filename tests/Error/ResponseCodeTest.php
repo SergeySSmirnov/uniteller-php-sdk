@@ -6,10 +6,10 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Error;
+namespace Rusproj\Uniteller\Tests\Error;
 
-use Tmconsulting\Uniteller\Error\ResponseCode;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Error\ResponseCode;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class ResponseCodeTest extends TestCase
 {

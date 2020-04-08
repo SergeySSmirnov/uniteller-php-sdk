@@ -5,9 +5,9 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Request;
+namespace Rusproj\Uniteller\Request;
 
-use Tmconsulting\Uniteller\Http\HttpManagerInterface;
+use Rusproj\Uniteller\Http\HttpManagerInterface;
 
 /**
  * Interface RequestInterface
@@ -44,7 +44,7 @@ interface RequestInterface
     /**
      * Выполнение запроса к шлюзу.
      *
-     * @param \Tmconsulting\Uniteller\Http\HttpManagerInterface $httpManager
+     * @param \Rusproj\Uniteller\Http\HttpManagerInterface $httpManager
      * @param array $parameters
      * @return mixed
      */

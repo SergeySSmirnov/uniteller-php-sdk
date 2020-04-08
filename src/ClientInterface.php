@@ -9,10 +9,10 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller;
+namespace Rusproj\Uniteller;
 
-use Tmconsulting\Uniteller\Order\Order;
-use Tmconsulting\Uniteller\Payment\UriInterface;
+use Rusproj\Uniteller\Order\Order;
+use Rusproj\Uniteller\Payment\UriInterface;
 
 /**
  * Interface ClientInterface
@@ -25,19 +25,19 @@ interface ClientInterface
     /**
      * Генерирует URI для перехода на страницу оплаты.
      *
-     * @param \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Tmconsulting\Client\Payment\PaymentBuilder}.
-     * @return \Tmconsulting\Uniteller\Payment\UriInterface
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Tmconsulting\Client\Payment\PaymentBuilder}.
+     * @return \Rusproj\Uniteller\Payment\UriInterface
      */
     public function payment($parameters);
 
     /**
-     * @param \Tmconsulting\Uniteller\Cancel\CancelBuilder|array $parameters
+     * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters
      * @return Order
      */
     public function cancel($parameters);
 
     /**
-     * @param \Tmconsulting\Uniteller\Cancel\CancelBuilder|array $parameters
+     * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters
      * @return Order
      */
     public function results($parameters);

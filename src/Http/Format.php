@@ -5,13 +5,13 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Http;
+namespace Rusproj\Uniteller\Http;
 
 use BadMethodCallException;
-use Tmconsulting\Uniteller\Exception\FormatNotSupportedException;
-use Tmconsulting\Uniteller\Exception\RequestNotSupportedException;
-use Tmconsulting\Uniteller\Request\RequestInterface;
-use Tmconsulting\Uniteller;
+use Rusproj\Uniteller\Exception\FormatNotSupportedException;
+use Rusproj\Uniteller\Exception\RequestNotSupportedException;
+use Rusproj\Uniteller\Request\RequestInterface;
+use Rusproj\Uniteller;
 
 /**
  * Class Format
@@ -43,8 +43,8 @@ final class Format
      * @param $format
      * @param $requestName
      * @return int
-     * @throws \Tmconsulting\Uniteller\Exception\FormatNotSupportedException
-     * @throws \Tmconsulting\Uniteller\Exception\RequestNotSupportedException
+     * @throws \Rusproj\Uniteller\Exception\FormatNotSupportedException
+     * @throws \Rusproj\Uniteller\Exception\RequestNotSupportedException
      */
     public static function resolve($format, $requestName)
     {

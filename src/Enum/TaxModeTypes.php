@@ -5,12 +5,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Enum;
+namespace Rusproj\Uniteller\Enum;
 
 /**
  * Виды систем налогообложения.
  *
- * @package Tmconsulting\Uniteller\Enum
+ * @package Rusproj\Uniteller\Enum
  */
 class TaxModeTypes
 {

@@ -5,11 +5,11 @@
  * GitHub: Roquie
  */
 
-use Tmconsulting\Uniteller\Cancel\CancelBuilder;
+use Rusproj\Uniteller\Cancel\CancelBuilder;
 
 require __DIR__ . '/credentials.php';
 
-/** @var \Tmconsulting\Uniteller\Client $uniteller */
+/** @var \Rusproj\Uniteller\Client $uniteller */
 
 $builder = (new CancelBuilder())->setBillNumber('RRN Number, (12 digits)');
 $results = $uniteller->cancel($builder);

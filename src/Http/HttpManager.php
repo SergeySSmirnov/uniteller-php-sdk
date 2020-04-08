@@ -5,16 +5,16 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Http;
+namespace Rusproj\Uniteller\Http;
 
 use GuzzleHttp\Psr7\Request;
 use Http\Client\Exception\RequestException;
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Tmconsulting\Uniteller\Exception\ExceptionFactory;
-use Tmconsulting\Uniteller\Exception\UnitellerException;
-use function Tmconsulting\Uniteller\csv_to_array;
+use Rusproj\Uniteller\Exception\ExceptionFactory;
+use Rusproj\Uniteller\Exception\UnitellerException;
+use function Rusproj\Uniteller\csv_to_array;
 
 /**
  * Class HttpManager

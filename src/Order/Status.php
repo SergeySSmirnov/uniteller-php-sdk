@@ -5,7 +5,7 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Order;
+namespace Rusproj\Uniteller\Order;
 
 /**
  * Class Status

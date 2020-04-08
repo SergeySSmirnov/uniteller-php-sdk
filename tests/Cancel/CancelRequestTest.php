@@ -6,13 +6,13 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Cancel;
+namespace Rusproj\Uniteller\Tests\Cancel;
 
-use Tmconsulting\Uniteller\Cancel\CancelRequest;
-use Tmconsulting\Uniteller\Http\HttpManagerInterface;
-use Tmconsulting\Uniteller\Order\Order;
-use Tmconsulting\Uniteller\Order\Status;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Cancel\CancelRequest;
+use Rusproj\Uniteller\Http\HttpManagerInterface;
+use Rusproj\Uniteller\Order\Order;
+use Rusproj\Uniteller\Order\Status;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class CancelRequestTest extends TestCase
 {
@@ -25,7 +25,7 @@ class CancelRequestTest extends TestCase
             ->willReturn($this->getStubContents('cancel'));
 
         $request = new CancelRequest();
-        /** @var \Tmconsulting\Uniteller\Order\Order $order */
+        /** @var \Rusproj\Uniteller\Order\Order $order */
         foreach ($request->execute($manager) as $order) {
             $this->assertInstanceOf(Order::class, $order);
             $this->assertEquals('Value of address', $order->getAddress());

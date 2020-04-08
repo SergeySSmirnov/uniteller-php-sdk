@@ -6,11 +6,11 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Cancel;
+namespace Rusproj\Uniteller\Tests\Cancel;
 
-use Tmconsulting\Uniteller\Cancel\CancelBuilder;
-use Tmconsulting\Uniteller\Cancel\RVRReason;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Cancel\CancelBuilder;
+use Rusproj\Uniteller\Cancel\RVRReason;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class CancelBuilderTest extends TestCase
 {

@@ -7,7 +7,7 @@
 
 require __DIR__ . '/credentials.php';
 
-/** @var \Tmconsulting\Uniteller\Client $uniteller */
+/** @var \Rusproj\Uniteller\Client $uniteller */
 
 if (! $uniteller->getSignature()->verify('signature_from_post_params', ['all_parameters_from_post'])) {
     return 'invalid_signature';

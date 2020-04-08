@@ -9,7 +9,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
 /**
  * Интерфейс для формирования ссылки перехода на страницу оплаты.

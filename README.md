@@ -65,7 +65,7 @@ Just follow instruction on `README.md` file.
 
 ```php
 <?php
-$uniteller = new \Tmconsulting\Uniteller\Client();
+$uniteller = new \Rusproj\Uniteller\Client();
 $uniteller->setShopId('you_shop_id');
 $uniteller->setLogin('you_login_number');
 $uniteller->setPassword('you_password');
@@ -78,7 +78,7 @@ So, for redirect to page your enough to run `payment` method with parameters lik
 
 ```php
 <?php
-use Tmconsulting\Uniteller\Payment\PaymentBuilder;
+use Rusproj\Uniteller\Payment\PaymentBuilder;
 
 $builder = new PaymentBuilder();
 $builder
@@ -108,7 +108,7 @@ $uniteller->payment([
  
 ```php
 <?php
-use Tmconsulting\Uniteller\Recurrent\RecurrentBuilder;
+use Rusproj\Uniteller\Recurrent\RecurrentBuilder;
 
 $builder = (new RecurrentBuilder())
     ->setOrderIdp(mt_rand(10000, 99999))
@@ -133,7 +133,7 @@ $results = $uniteller->recurrent([
  
 ```php
 <?php
-use Tmconsulting\Uniteller\Cancel\CancelBuilder;
+use Rusproj\Uniteller\Cancel\CancelBuilder;
 
 $builder = (new CancelBuilder())->setBillNumber('RRN Number, (12 digits)');
 $results = $uniteller->cancel($builder);
@@ -143,7 +143,7 @@ or
 
 ```php
 <?php
-use Tmconsulting\Uniteller\Order\Status;
+use Rusproj\Uniteller\Order\Status;
 
 $results = $uniteller->cancel([
     'Billnumber' => 'RRN Number, (12 digits)',
@@ -151,7 +151,7 @@ $results = $uniteller->cancel([
 ]);
 
 foreach ($results as $payment) {
-    // see Tmconsulting\Uniteller\Order\Order for other methods.
+    // see Rusproj\Uniteller\Order\Order for other methods.
     if ($payment->getStatus() === Status::CANCELLED) {
         // payment was cancelled
     }    

@@ -6,19 +6,19 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Exception;
+namespace Rusproj\Uniteller\Tests\Exception;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Tmconsulting\Uniteller\Exception\AuthConfirmIsNotAllowedException;
-use Tmconsulting\Uniteller\Exception\AuthenticationException;
-use Tmconsulting\Uniteller\Exception\BadFieldFormatException;
-use Tmconsulting\Uniteller\Exception\ErrorException;
-use Tmconsulting\Uniteller\Exception\ExceptionFactory;
-use Tmconsulting\Uniteller\Exception\MandatoryParameterException;
-use Tmconsulting\Uniteller\Exception\NotSupportedSFieldException;
-use Tmconsulting\Uniteller\Exception\OperationFailedException;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Exception\AuthConfirmIsNotAllowedException;
+use Rusproj\Uniteller\Exception\AuthenticationException;
+use Rusproj\Uniteller\Exception\BadFieldFormatException;
+use Rusproj\Uniteller\Exception\ErrorException;
+use Rusproj\Uniteller\Exception\ExceptionFactory;
+use Rusproj\Uniteller\Exception\MandatoryParameterException;
+use Rusproj\Uniteller\Exception\NotSupportedSFieldException;
+use Rusproj\Uniteller\Exception\OperationFailedException;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class ExceptionFactoryTest extends TestCase
 {

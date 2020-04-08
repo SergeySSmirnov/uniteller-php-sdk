@@ -5,11 +5,11 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Order;
+namespace Rusproj\Uniteller\Order;
 
 use DateTime;
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
-use Tmconsulting\Uniteller\Error\ResponseCode;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\Error\ResponseCode;
 
 /**
  * Class Order

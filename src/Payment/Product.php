@@ -5,10 +5,10 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ClassConversion\ObjectableInterface;
-use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
+use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
+use Rusproj\Uniteller\Exception\BuilderIncorrectValueException;
 
 /**
  * Информация о товаре в фискальном чеке.
@@ -17,7 +17,7 @@ use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
  * кодировке UTF-8, то в поле “name” («Наименование позиции») можно указывать только те
  * Unicode-символы, для которых есть соответствие в CP866.
  *
- * @package Tmconsulting\Uniteller\Payment
+ * @package Rusproj\Uniteller\Payment
  */
 class Product implements ObjectableInterface
 {
@@ -25,7 +25,7 @@ class Product implements ObjectableInterface
     /*
      * Импорт метода toObject().
      */
-    use \Tmconsulting\Uniteller\ClassConversion\ObjectableTrait;
+    use \Rusproj\Uniteller\ClassConversion\ObjectableTrait;
 
     /**
      * Наименование позиции.
@@ -58,7 +58,7 @@ class Product implements ObjectableInterface
     /**
      * Код системы налогообложения.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\TaxModeTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
      *
      * @var integer
      */
@@ -66,7 +66,7 @@ class Product implements ObjectableInterface
 
     /**
      * Код ставки налогообложения.
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\VatRateTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\VatRateTypes}.
      *
      * @var integer
      */
@@ -75,7 +75,7 @@ class Product implements ObjectableInterface
     /**
      * Признак способа расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationMethodTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\CalculationMethodTypes}.
      *
      * @var int
      */
@@ -84,7 +84,7 @@ class Product implements ObjectableInterface
     /**
      * Признак предмета расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationSubjectTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\CalculationSubjectTypes}.
      *
      * @var int
      */
@@ -105,7 +105,7 @@ class Product implements ObjectableInterface
      *
      * @param string $name
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
      */
     public function setName($name)
     {
@@ -187,7 +187,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает код системы налогообложения.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\TaxModeTypes}.
+     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
      *
      * @return number
      */
@@ -199,7 +199,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт код системы налогообложения.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\TaxModeTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
      *
      * @param number $taxmode
      * @return $this
@@ -213,7 +213,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает код ставки налогообложения.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\VatRateTypes}.
+     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\VatRateTypes}.
      *
      * @return number
      */
@@ -225,7 +225,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт код ставки налогообложения.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\VatRateTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\VatRateTypes}.
      *
      * @param number $vat
      * @return $this
@@ -239,7 +239,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает признак способа расчета.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationMethodTypes}.
+     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\CalculationMethodTypes}.
      *
      * @return number
      */
@@ -251,7 +251,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт признак способа расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationMethodTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\CalculationMethodTypes}.
      *
      * @param number $payattr
      * @return $this
@@ -265,7 +265,7 @@ class Product implements ObjectableInterface
     /**
      * Возвращает признак предмета расчета.
      *
-     * Для разрешения значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationSubjectTypes}.
+     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\CalculationSubjectTypes}.
      *
      * @return number
      */
@@ -277,7 +277,7 @@ class Product implements ObjectableInterface
     /**
      * Задаёт признак предмета расчета.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CalculationSubjectTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\CalculationSubjectTypes}.
      *
      * @param number $lineattr
      * @return $this

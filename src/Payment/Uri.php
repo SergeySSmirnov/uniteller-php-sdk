@@ -9,7 +9,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
 /**
  * Uri для перехода на страницу оплаты.
@@ -25,7 +25,7 @@ final class Uri implements UriInterface
     private $uri;
 
     /**
-     * Инициализирует новый экземпляр класса @see \Tmconsulting\Uniteller\Payment\Uri.
+     * Инициализирует новый экземпляр класса @see \Rusproj\Uniteller\Payment\Uri.
      *
      * @param $uri
      */
@@ -44,7 +44,7 @@ final class Uri implements UriInterface
     }
 
     /**
-     * Устанавливает заголовок ответа "Location" в значение @see \Tmconsulting\Uniteller\Payment\Uri::getUri().
+     * Устанавливает заголовок ответа "Location" в значение @see \Rusproj\Uniteller\Payment\Uri::getUri().
      * @return void
      */
     public function go()

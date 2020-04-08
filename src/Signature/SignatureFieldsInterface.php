@@ -5,9 +5,9 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Signature;
+namespace Rusproj\Uniteller\Signature;
 
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Интерфейс, описывающий механизм получения списка полей, участвующих в вычислении сигнатуры.

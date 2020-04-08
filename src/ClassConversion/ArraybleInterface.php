@@ -9,12 +9,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\ClassConversion;
+namespace Rusproj\Uniteller\ClassConversion;
 
 /**
  * Интерфейс преобразования экземпляров классов в {@see array}.
  *
- * @package Tmconsulting\Uniteller\ClassConversion
+ * @package Rusproj\Uniteller\ClassConversion
  */
 interface ArraybleInterface
 {

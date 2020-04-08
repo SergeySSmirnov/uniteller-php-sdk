@@ -5,7 +5,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
 /**
  * Интерфейс получения чека для фискализации.

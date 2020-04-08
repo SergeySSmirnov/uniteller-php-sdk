@@ -5,9 +5,9 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ClassConversion\ObjectableInterface;
+use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
 
 /**
  * Контакты плательщика для отправки текста фискального чека.
@@ -19,7 +19,7 @@ class Customer implements ObjectableInterface
     /*
      * Импорт метода toObject().
      */
-    use \Tmconsulting\Uniteller\ClassConversion\ObjectableTrait;
+    use \Rusproj\Uniteller\ClassConversion\ObjectableTrait;
 
     /**
      * Номер телефона плательщика.

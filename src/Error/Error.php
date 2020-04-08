@@ -5,7 +5,7 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Error;
+namespace Rusproj\Uniteller\Error;
 
 
 class Error

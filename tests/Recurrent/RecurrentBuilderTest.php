@@ -5,10 +5,10 @@
  * GitHub: gitkv
  */
 
-namespace Tmconsulting\Uniteller\Tests\Recurrent;
+namespace Rusproj\Uniteller\Tests\Recurrent;
 
-use Tmconsulting\Uniteller\Recurrent\RecurrentBuilder;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Recurrent\RecurrentBuilder;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class RecurrentBuilderTest extends TestCase
 {

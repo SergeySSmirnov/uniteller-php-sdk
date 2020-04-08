@@ -1,11 +1,11 @@
 <?php
 
-use Tmconsulting\Uniteller\Payment\PaymentBuilder;
+use Rusproj\Uniteller\Payment\PaymentBuilder;
 
 require __DIR__ . '/credentials.php';
 
 
-/** @var \Tmconsulting\Uniteller\Client $uniteller */
+/** @var \Rusproj\Uniteller\Client $uniteller */
 
 $builder = new PaymentBuilder();
 $builder

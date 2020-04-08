@@ -7,7 +7,7 @@
 
 require __DIR__ . '/credentials.php';
 
-/** @var \Tmconsulting\Uniteller\Client $uniteller */
+/** @var \Rusproj\Uniteller\Client $uniteller */
 
 $results = $uniteller->results([
     'ShopOrderNumber' => 'number'

@@ -5,11 +5,11 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Exception;
+namespace Rusproj\Uniteller\Exception;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Tmconsulting\Uniteller\Error\Error;
+use Rusproj\Uniteller\Error\Error;
 
 class NotSupportedSFieldException extends ErrorException
 {

@@ -9,11 +9,11 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
-use Tmconsulting\Uniteller\Signature\SignatureFieldsInterface;
-use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\Signature\SignatureFieldsInterface;
+use Rusproj\Uniteller\Exception\BuilderIncorrectValueException;
 
 /**
  * Параметры запроса для генерации ссылки для оплаты.
@@ -26,7 +26,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
     /*
      * Импорт метода toArray().
      */
-    use \Tmconsulting\Uniteller\ClassConversion\ArraybleTrait;
+    use \Rusproj\Uniteller\ClassConversion\ArraybleTrait;
 
     /**
      * Идентификатор точки продажи в системе Uniteller.
@@ -98,7 +98,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\CurrencyTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\CurrencyTypes}.
      *
      * @var string
      */
@@ -195,7 +195,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\MeanTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\MeanTypes}.
      *
      * @var integer
      */
@@ -205,7 +205,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Тип электронной валюты.
      *
-     * Для указания значения используйте {@see \Tmconsulting\Uniteller\Enum\EMoneyTypes}.
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\EMoneyTypes}.
      *
      * @var integer
      */
@@ -387,7 +387,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $orderIdp Номер заказа.
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 127 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 127 символов.
      */
     public function setOrderIdp($orderIdp)
     {
@@ -462,7 +462,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enum\CurrencyTypes}.
+     * Для указания значения параметра используйте {@see \Rusproj\Uniteller\Enum\CurrencyTypes}.
      *
      * @param integer $currency Валюта платежа.
      * @return $this
@@ -493,7 +493,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $email
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setEmail($email)
     {
@@ -541,7 +541,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param integer $orderLifetime
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра < 0 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра < 0 символов.
      */
     public function setOrderLifetime($orderLifetime)
     {
@@ -561,7 +561,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $customerIdp
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCustomerIdp($customerIdp)
     {
@@ -581,7 +581,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $cardIdp
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCardIdp($cardIdp)
     {
@@ -614,7 +614,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enum\MeanTypes}.
+     * Для указания значения параметра используйте {@see \Rusproj\Uniteller\Enum\MeanTypes}.
      *
      * @param integer $meanType
      * @return $this
@@ -630,7 +630,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Тип электронной валюты.
      *
-     * Для указания значения параметра используйте {@see \Tmconsulting\Uniteller\Enum\EMoneyTypes}.
+     * Для указания значения параметра используйте {@see \Rusproj\Uniteller\Enum\EMoneyTypes}.
      *
      * @param integer $eMoneyType
      * @return $this
@@ -651,7 +651,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param integer $billLifetime
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1080 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1080 символов.
      */
     public function setBillLifetime($billLifetime)
     {
@@ -734,7 +734,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $language
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 2 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 2 символов.
      */
     public function setLanguage($language)
     {
@@ -754,7 +754,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $comment
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1024 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1024 символов.
      */
     public function setComment($comment)
     {
@@ -774,7 +774,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $firstName
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setFirstName($firstName)
     {
@@ -794,7 +794,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $lastName
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setLastName($lastName)
     {
@@ -814,7 +814,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $middleName
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setMiddleName($middleName)
     {
@@ -834,7 +834,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $phone
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setPhone($phone)
     {
@@ -856,7 +856,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
     *
     * @param string $phone
     * @return $this
-    * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+    * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
     */
     public function setPhoneVerified($phone)
     {
@@ -878,7 +878,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $address
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
      */
     public function setAddress($address)
     {
@@ -898,7 +898,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $country
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCountry($country)
     {
@@ -918,7 +918,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $state
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 3 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 3 символов.
      */
     public function setState($state)
     {
@@ -938,7 +938,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $city
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCity($city)
     {
@@ -958,7 +958,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $zip
      * @return $this
-     * @throws \Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setZip($zip)
     {
@@ -1068,7 +1068,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * валютой, отличной от российского рубля. Для оплат в российских рублях
      * параметр необязательный.
      *
-     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enum\CurrencyTypes}.
+     * Возвращаемое значение соответствует значению перечисления {@see \Rusproj\Uniteller\Enum\CurrencyTypes}.
      *
      * @return integer
      */
@@ -1176,7 +1176,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Платёжная система кредитной карты.
      *
-     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enum\MeanTypes}.
+     * Возвращаемое значение соответствует значению перечисления {@see \Rusproj\Uniteller\Enum\MeanTypes}.
      *
      * @return integer
      */
@@ -1189,7 +1189,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      * [* Опционально]
      * Тип электронной валюты.
      *
-     * Возвращаемое значение соответствует значению перечисления {@see \Tmconsulting\Uniteller\Enum\EMoneyTypes}.
+     * Возвращаемое значение соответствует значению перечисления {@see \Rusproj\Uniteller\Enum\EMoneyTypes}.
      *
      * @return integer
      */
@@ -1401,7 +1401,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface::getSignatureFields()
+     * @see \Rusproj\Uniteller\Signature\SignatureFieldsInterface::getSignatureFields()
      */
     public function getSignatureFields()
     {
@@ -1428,7 +1428,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface::updateField()
+     * @see \Rusproj\Uniteller\Signature\SignatureFieldsInterface::updateField()
      */
     public function updateField($name, $val) {
         $this->$name = $val;

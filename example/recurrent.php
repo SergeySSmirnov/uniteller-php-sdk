@@ -1,10 +1,10 @@
 <?php
 
-use Tmconsulting\Uniteller\Recurrent\RecurrentBuilder;
+use Rusproj\Uniteller\Recurrent\RecurrentBuilder;
 
 require __DIR__ . '/credentials.php';
 
-/** @var \Tmconsulting\Uniteller\Client $uniteller */
+/** @var \Rusproj\Uniteller\Client $uniteller */
 
 $builder = (new RecurrentBuilder())
     ->setOrderIdp(mt_rand(10000, 99999))

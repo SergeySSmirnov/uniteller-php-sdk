@@ -9,7 +9,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
 /**
  * Интерфейс генерации ссылки для перехода к странице оплаты.
@@ -20,8 +20,8 @@ interface PaymentInterface
      * Генерирует и возвращает ссылку для перехода к странице оплаты.
      *
      * @param array $parameters Параметры для генерации ссылки.
-     * @param \Tmconsulting\Uniteller\ClientGatewayConfigInterface $gatewayConfig Настройки доступа к платёжному шлюзу.
-     * @return \Tmconsulting\Uniteller\Payment\UriInterface
+     * @param \Rusproj\Uniteller\ClientGatewayConfigInterface $gatewayConfig Настройки доступа к платёжному шлюзу.
+     * @return \Rusproj\Uniteller\Payment\UriInterface
      */
     public function execute($parameters, $gatewayConfig);
 }

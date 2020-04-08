@@ -9,7 +9,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
 /**
  * Механизм генерации ссылки для перехода к странице оплаты.
@@ -21,7 +21,7 @@ class Payment implements PaymentInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Payment\PaymentInterface::execute()
+     * @see \Rusproj\Uniteller\Payment\PaymentInterface::execute()
      */
     public function execute($parameters, $gatewayConfig)
     {

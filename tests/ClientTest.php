@@ -5,16 +5,16 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Tests;
+namespace Rusproj\Uniteller\Tests;
 
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
-use Tmconsulting\Uniteller\Cancel\CancelRequest;
-use Tmconsulting\Uniteller\Client;
-use Tmconsulting\Uniteller\Exception\NotImplementedException;
-use Tmconsulting\Uniteller\Http\HttpManagerInterface;
-use Tmconsulting\Uniteller\Payment\PaymentInterface;
-use Tmconsulting\Uniteller\Request\RequestInterface;
-use Tmconsulting\Uniteller\Signature\SignatureInterface;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\Cancel\CancelRequest;
+use Rusproj\Uniteller\Client;
+use Rusproj\Uniteller\Exception\NotImplementedException;
+use Rusproj\Uniteller\Http\HttpManagerInterface;
+use Rusproj\Uniteller\Payment\PaymentInterface;
+use Rusproj\Uniteller\Request\RequestInterface;
+use Rusproj\Uniteller\Signature\SignatureInterface;
 
 class ClientTest extends TestCase
 {
@@ -80,8 +80,8 @@ class ClientTest extends TestCase
         try {
             $client->setHttpManager(new \stdClass());
         } catch (\Exception $e) { // PHP 5.6
-            // Argument 1 passed to Tmconsulting\Uniteller\Client::setHttpManager()
-            // must be an instance of Tmconsulting\Uniteller\Http\HttpManagerInterface,
+            // Argument 1 passed to Rusproj\Uniteller\Client::setHttpManager()
+            // must be an instance of Rusproj\Uniteller\Http\HttpManagerInterface,
             // instance of stdClass given
             // 4096 - is equivalet to the error above.
             $this->assertEquals(4096, $e->getCode());

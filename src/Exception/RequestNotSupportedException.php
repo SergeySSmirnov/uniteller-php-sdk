@@ -5,7 +5,7 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Exception;
+namespace Rusproj\Uniteller\Exception;
 
 
 class RequestNotSupportedException extends \Exception

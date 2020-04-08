@@ -5,14 +5,14 @@
  * GitHub: gitkv
  */
 
-namespace Tmconsulting\Uniteller\Recurrent;
+namespace Rusproj\Uniteller\Recurrent;
 
 
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Class RecurrentBuilder
- * @package Tmconsulting\Uniteller\Recurrent
+ * @package Rusproj\Uniteller\Recurrent
  */
 class RecurrentBuilder implements ArraybleInterface
 {

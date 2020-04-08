@@ -5,12 +5,12 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Tests\Signature;
+namespace Rusproj\Uniteller\Tests\Signature;
 
-use Tmconsulting\Uniteller\Signature\SignatureCallback;
-use Tmconsulting\Uniteller\Signature\SignaturePayment;
-use Tmconsulting\Uniteller\Signature\SignatureRecurrent;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Signature\SignatureCallback;
+use Rusproj\Uniteller\Signature\SignaturePayment;
+use Rusproj\Uniteller\Signature\SignatureRecurrent;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class SignatureTest extends TestCase
 {

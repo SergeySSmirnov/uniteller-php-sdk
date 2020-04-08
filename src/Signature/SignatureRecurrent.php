@@ -5,7 +5,7 @@
  * GitHub: gitkv
  */
 
-namespace Tmconsulting\Uniteller\Signature;
+namespace Rusproj\Uniteller\Signature;
 
 
 /**

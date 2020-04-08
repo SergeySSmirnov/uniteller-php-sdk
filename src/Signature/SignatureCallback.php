@@ -5,12 +5,12 @@
  * GitHub: gitkv
  */
 
-namespace Tmconsulting\Uniteller\Signature;
+namespace Rusproj\Uniteller\Signature;
 
 
 /**
  * Class SignatureCallback
- * @package Tmconsulting\Uniteller\Signature
+ * @package Rusproj\Uniteller\Signature
  */
 final class SignatureCallback extends AbstractSignature
 {

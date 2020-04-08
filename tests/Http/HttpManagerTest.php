@@ -6,7 +6,7 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Http;
+namespace Rusproj\Uniteller\Tests\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
@@ -15,12 +15,12 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
-use Tmconsulting\Uniteller\Exception\AuthConfirmIsNotAllowedException;
-use Tmconsulting\Uniteller\Exception\AuthenticationException;
-use Tmconsulting\Uniteller\Exception\UnitellerException;
-use Tmconsulting\Uniteller\Http\HttpManager;
-use Tmconsulting\Uniteller\Request\RequestInterface;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Exception\AuthConfirmIsNotAllowedException;
+use Rusproj\Uniteller\Exception\AuthenticationException;
+use Rusproj\Uniteller\Exception\UnitellerException;
+use Rusproj\Uniteller\Http\HttpManager;
+use Rusproj\Uniteller\Request\RequestInterface;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class HttpManagerTest extends TestCase
 {
@@ -84,7 +84,7 @@ class HttpManagerTest extends TestCase
 
     /**
      * @param $queue
-     * @return \Tmconsulting\Uniteller\Http\HttpManager
+     * @return \Rusproj\Uniteller\Http\HttpManager
      */
     protected function http($queue)
     {

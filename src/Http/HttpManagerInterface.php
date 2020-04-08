@@ -1,6 +1,6 @@
 <?php
 
-namespace Tmconsulting\Uniteller\Http;
+namespace Rusproj\Uniteller\Http;
 
 /**
  * Created by Roquie.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tmconsulting\Uniteller\Tests;
+namespace Rusproj\Uniteller\Tests;
 
 use PHPUnit_Framework_TestCase;
 

@@ -6,14 +6,14 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Http;
+namespace Rusproj\Uniteller\Tests\Http;
 
 use BadMethodCallException;
-use Tmconsulting\Uniteller\Exception\FormatNotSupportedException;
-use Tmconsulting\Uniteller\Exception\RequestNotSupportedException;
-use Tmconsulting\Uniteller\Http\Format;
-use Tmconsulting\Uniteller\Request\RequestInterface;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Exception\FormatNotSupportedException;
+use Rusproj\Uniteller\Exception\RequestNotSupportedException;
+use Rusproj\Uniteller\Http\Format;
+use Rusproj\Uniteller\Request\RequestInterface;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class FormatTest extends TestCase
 {

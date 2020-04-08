@@ -9,30 +9,30 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller;
+namespace Rusproj\Uniteller;
 
-use Tmconsulting\Uniteller\Cancel\CancelRequest;
-use Tmconsulting\Uniteller\Exception\NotImplementedException;
-use Tmconsulting\Uniteller\Http\HttpManager;
-use Tmconsulting\Uniteller\Http\HttpManagerInterface;
-use Tmconsulting\Uniteller\Order\Order;
-use Tmconsulting\Uniteller\Payment\Payment;
-use Tmconsulting\Uniteller\Payment\PaymentInterface;
-use Tmconsulting\Uniteller\Recurrent\RecurrentRequest;
-use Tmconsulting\Uniteller\Request\RequestInterface;
-use Tmconsulting\Uniteller\Results\ResultsRequest;
-use Tmconsulting\Uniteller\Signature\SignatureCallback;
-use Tmconsulting\Uniteller\Signature\SignatureHandlerInterface;
-use Tmconsulting\Uniteller\Signature\SignatureRecurrent;
+use Rusproj\Uniteller\Cancel\CancelRequest;
+use Rusproj\Uniteller\Exception\NotImplementedException;
+use Rusproj\Uniteller\Http\HttpManager;
+use Rusproj\Uniteller\Http\HttpManagerInterface;
+use Rusproj\Uniteller\Order\Order;
+use Rusproj\Uniteller\Payment\Payment;
+use Rusproj\Uniteller\Payment\PaymentInterface;
+use Rusproj\Uniteller\Recurrent\RecurrentRequest;
+use Rusproj\Uniteller\Request\RequestInterface;
+use Rusproj\Uniteller\Results\ResultsRequest;
+use Rusproj\Uniteller\Signature\SignatureCallback;
+use Rusproj\Uniteller\Signature\SignatureHandlerInterface;
+use Rusproj\Uniteller\Signature\SignatureRecurrent;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
-use Tmconsulting\Uniteller\Signature\SignatureHandler;
-use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\Signature\SignatureHandler;
+use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Class Client
  *
- * @package Tmconsulting\Uniteller
+ * @package Rusproj\Uniteller
  */
 class Client implements ClientInterface, ClientGatewayConfigInterface
 {
@@ -190,7 +190,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * Осуществляет регистрацию объекта, отвечающего за вычисление сигнатуры параметров запроса.
      *
-     * @param \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface $signature
+     * @param \Rusproj\Uniteller\Signature\SignatureHandlerInterface $signature
      * @return $this
      */
     public function registerSignatureHandler(SignatureHandlerInterface $signature)
@@ -250,7 +250,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * Возвращает объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * @return \Tmconsulting\Uniteller\Payment\PaymentInterface
+     * @return \Rusproj\Uniteller\Payment\PaymentInterface
      */
     public function getPayment()
     {
@@ -258,7 +258,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @return \Tmconsulting\Uniteller\Request\RequestInterface
+     * @return \Rusproj\Uniteller\Request\RequestInterface
      */
     public function getCancelRequest()
     {
@@ -266,7 +266,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @return \Tmconsulting\Uniteller\Request\RequestInterface
+     * @return \Rusproj\Uniteller\Request\RequestInterface
      */
     public function getResultsRequest()
     {
@@ -274,7 +274,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @return \Tmconsulting\Uniteller\Request\RequestInterface
+     * @return \Rusproj\Uniteller\Request\RequestInterface
      */
     public function getRecurrentRequest()
     {
@@ -284,7 +284,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * Возвращает объект, отвечающий за генерацию сигнатуры параметров запроса.
      *
-     * @return \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface
+     * @return \Rusproj\Uniteller\Signature\SignatureHandlerInterface
      */
     public function getSignatureHandler()
     {
@@ -292,7 +292,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @return \Tmconsulting\Uniteller\Http\HttpManagerInterface
+     * @return \Rusproj\Uniteller\Http\HttpManagerInterface
      */
     public function getHttpManager()
     {
@@ -301,7 +301,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\ClientInterface::payment()
+     * @see \Rusproj\Uniteller\ClientInterface::payment()
      */
     public function payment($parameters)
     {
@@ -317,7 +317,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * Отмена платежа.
      *
-     * @param \Tmconsulting\Uniteller\Cancel\CancelBuilder|array $parameters
+     * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters
      * @return mixed
      * @internal param  $builder
      */
@@ -327,7 +327,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @param \Tmconsulting\Uniteller\Cancel\CancelBuilder|array $parameters
+     * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters
      * @return Order
      */
     public function results($parameters)
@@ -336,9 +336,9 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @param \Tmconsulting\Uniteller\Recurrent\RecurrentBuilder|array $parameters
+     * @param \Rusproj\Uniteller\Recurrent\RecurrentBuilder|array $parameters
      * @return mixed
-     * @throws \Tmconsulting\Uniteller\Exception\NotImplementedException
+     * @throws \Rusproj\Uniteller\Exception\NotImplementedException
      */
     public function recurrent($parameters)
     {
@@ -363,7 +363,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * @param array $parameters
      * @return mixed
-     * @throws \Tmconsulting\Uniteller\Exception\NotImplementedException
+     * @throws \Rusproj\Uniteller\Exception\NotImplementedException
      */
     public function confirm($parameters)
     {
@@ -375,7 +375,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     /**
      * @param array $parameters
      * @return mixed
-     * @throws \Tmconsulting\Uniteller\Exception\NotImplementedException
+     * @throws \Rusproj\Uniteller\Exception\NotImplementedException
      */
     public function card($parameters)
     {

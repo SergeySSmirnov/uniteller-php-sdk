@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$uniteller = new \Tmconsulting\Uniteller\Client();
+$uniteller = new \Rusproj\Uniteller\Client();
 $uniteller->setShopId('your_shop_id');
 $uniteller->setLogin(1234);
 $uniteller->setPassword('your_password');

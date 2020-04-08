@@ -6,10 +6,10 @@
  * Date: 17/05/2017
  */
 
-namespace Tmconsulting\Uniteller\Tests\Order;
+namespace Rusproj\Uniteller\Tests\Order;
 
-use Tmconsulting\Uniteller\Order\Status;
-use Tmconsulting\Uniteller\Tests\TestCase;
+use Rusproj\Uniteller\Order\Status;
+use Rusproj\Uniteller\Tests\TestCase;
 
 class StatusTest extends TestCase
 {

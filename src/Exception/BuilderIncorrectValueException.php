@@ -5,7 +5,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Exception;
+namespace Rusproj\Uniteller\Exception;
 
 /**
  * Исключение, генерируемое если значение параметра построителя некорректно.

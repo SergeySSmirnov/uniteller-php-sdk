@@ -5,12 +5,12 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Exception;
+namespace Rusproj\Uniteller\Exception;
 
 /**
  * Class NotImplementedException
  *
- * @package Tmconsulting\Uniteller\Exception
+ * @package Rusproj\Uniteller\Exception
  */
 class NotImplementedException extends \Exception
 {

@@ -5,7 +5,7 @@
  * GitHub: Roquie
  */
 
-namespace Tmconsulting\Uniteller\Exception;
+namespace Rusproj\Uniteller\Exception;
 
 use Http\Client\Exception\HttpException;
 use Psr\Http\Message\RequestInterface;

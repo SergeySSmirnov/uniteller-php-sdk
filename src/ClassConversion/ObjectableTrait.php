@@ -5,7 +5,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\ClassConversion;
+namespace Rusproj\Uniteller\ClassConversion;
 
 /**
  * Базовая реализация метода toObject.

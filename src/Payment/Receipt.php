@@ -5,9 +5,9 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ClassConversion\ObjectableInterface;
+use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
 
 /**
  * Чек для фискализации.
@@ -18,7 +18,7 @@ class Receipt implements ReceiptInterface
     /**
      * Информация о плательщике.
      *
-     * @var \Tmconsulting\Uniteller\Payment\Customer
+     * @var \Rusproj\Uniteller\Payment\Customer
      */
     private $customer;
 
@@ -27,7 +27,7 @@ class Receipt implements ReceiptInterface
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека.
      *
-     * @var \Tmconsulting\Uniteller\Payment\Product[]
+     * @var \Rusproj\Uniteller\Payment\Product[]
      */
     private $lines;
 
@@ -57,7 +57,7 @@ class Receipt implements ReceiptInterface
     private $total = 0;
 
     /**
-     * Инициализирует экземпляр класса {@see \Tmconsulting\Uniteller\Payment\Receipt}.
+     * Инициализирует экземпляр класса {@see \Rusproj\Uniteller\Payment\Receipt}.
      */
     public function __construct()
     {
@@ -70,7 +70,7 @@ class Receipt implements ReceiptInterface
     /**
      * Возвращает информацию о плательщике.
      *
-     * @return \Tmconsulting\Uniteller\Payment\Customer
+     * @return \Rusproj\Uniteller\Payment\Customer
      */
     public function getCustomer()
     {
@@ -80,7 +80,7 @@ class Receipt implements ReceiptInterface
     /**
      * Задаёт информацию о плательщике.
      *
-     * @param \Tmconsulting\Uniteller\Payment\Customer $customer
+     * @param \Rusproj\Uniteller\Payment\Customer $customer
      * @return $this
      */
     public function setCustomer($customer)
@@ -93,7 +93,7 @@ class Receipt implements ReceiptInterface
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека..
      *
-     * @return \Tmconsulting\Uniteller\Payment\Product[]
+     * @return \Rusproj\Uniteller\Payment\Product[]
      */
     public function getLines()
     {
@@ -105,7 +105,7 @@ class Receipt implements ReceiptInterface
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека..
      *
-     * @param \Tmconsulting\Uniteller\Payment\Product[] $lines
+     * @param \Rusproj\Uniteller\Payment\Product[] $lines
      * @return $this
      */
     public function setLines($lines)
@@ -220,7 +220,7 @@ class Receipt implements ReceiptInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Payment\ReceiptInterface::generate()
+     * @see \Rusproj\Uniteller\Payment\ReceiptInterface::generate()
      */
     public function generate()
     {

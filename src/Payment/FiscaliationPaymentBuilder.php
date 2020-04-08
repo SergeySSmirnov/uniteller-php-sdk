@@ -5,7 +5,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller\Payment;
+namespace Rusproj\Uniteller\Payment;
 
 /**
  * Параметры запроса для генерации ссылки для оплаты с фискализацией.
@@ -18,12 +18,12 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     /*
      * Импорт метода toArray().
      */
-    use \Tmconsulting\Uniteller\ClassConversion\ArraybleTrait;
+    use \Rusproj\Uniteller\ClassConversion\ArraybleTrait;
 
     /**
      * Описание чека для фискализации.
      *
-     * @var \Tmconsulting\Uniteller\Payment\ReceiptInterface
+     * @var \Rusproj\Uniteller\Payment\ReceiptInterface
      */
     private $Receipt;
 
@@ -37,7 +37,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     /**
      * Возвращает описание чека для фискализации.
      *
-     * @return \Tmconsulting\Uniteller\Payment\ReceiptInterface
+     * @return \Rusproj\Uniteller\Payment\ReceiptInterface
      */
     public function getReceipt() {
         return $this->Receipt;
@@ -46,7 +46,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     /**
      * Задаёт описание чека для фискализации.
      *
-     * @param \Tmconsulting\Uniteller\Payment\ReceiptInterface $receipt
+     * @param \Rusproj\Uniteller\Payment\ReceiptInterface $receipt
      * @return $this
      */
     public function setReceipt($receipt) {
@@ -78,7 +78,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Payment\PaymentBuilder::getSignatureFields()
+     * @see \Rusproj\Uniteller\Payment\PaymentBuilder::getSignatureFields()
      */
     public function getSignatureFields() {
         $this->setReceipt(base64_encode($this->getReceipt()->generate()));
@@ -95,7 +95,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureFieldsInterface::updateField()
+     * @see \Rusproj\Uniteller\Signature\SignatureFieldsInterface::updateField()
      */
     public function updateField($name, $val) {
         $this->$name = $val;
