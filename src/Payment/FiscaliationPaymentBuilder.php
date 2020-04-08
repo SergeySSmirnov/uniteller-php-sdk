@@ -15,6 +15,11 @@ namespace Tmconsulting\Uniteller\Payment;
 class FiscaliationPaymentBuilder extends PaymentBuilder
 {
 
+    /*
+     * Импорт метода toArray().
+     */
+    use \Tmconsulting\Uniteller\ClassConversion\ArraybleTrait;
+
     /**
      * Описание чека для фискализации.
      *
@@ -69,20 +74,6 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     {
         $this->ReceiptSignature = $ReceiptSignature;
         return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\ArraybleInterface::toArray()
-     */
-    public function toArray()
-    {
-        $_result = [];
-        foreach ($this as $_key => $_val)
-        {
-            $_result[$_key] = $_val;
-        }
-        return $_result;
     }
 
     /**

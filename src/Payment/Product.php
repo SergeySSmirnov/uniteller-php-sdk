@@ -7,7 +7,7 @@
 
 namespace Tmconsulting\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ObjectableInterface;
+use Tmconsulting\Uniteller\ClassConversion\ObjectableInterface;
 use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
 
 /**
@@ -21,6 +21,12 @@ use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
  */
 class Product implements ObjectableInterface
 {
+
+    /*
+     * Импорт метода toObject().
+     */
+    use \Tmconsulting\Uniteller\ClassConversion\ObjectableTrait;
+
     /**
      * Наименование позиции.
      *
@@ -280,20 +286,6 @@ class Product implements ObjectableInterface
     {
         $this->lineattr = $lineattr;
         return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\ObjectableInterface::toObject()
-     */
-    public function toObject()
-    {
-        $_result = [];
-        foreach ($this as $_key => $_val)
-        {
-            $_result[$_key] = $_val;
-        }
-        return (object)$_result;
     }
 
 }

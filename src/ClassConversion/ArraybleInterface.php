@@ -9,19 +9,21 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller;
+namespace Tmconsulting\Uniteller\ClassConversion;
 
 /**
  * Интерфейс преобразования экземпляров классов в {@see array}.
  *
- * @package Tmconsulting\Client
+ * @package Tmconsulting\Uniteller\ClassConversion
  */
 interface ArraybleInterface
 {
+
     /**
-     * Преобразует экземпляр класса в {@see array}, включая все свойства (в т.ч. приватные).
+     * Преобразует экземпляр текущего класса в {@see array}, включая все свойства (в т.ч. приватные).
      *
      * @return array
      */
     public function toArray();
+
 }

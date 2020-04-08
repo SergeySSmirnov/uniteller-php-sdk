@@ -7,7 +7,7 @@
 
 namespace Tmconsulting\Uniteller\Signature;
 
-use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Интерфейс, описывающий механизм получения списка полей, участвующих в вычислении сигнатуры.

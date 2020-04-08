@@ -11,7 +11,7 @@
 
 namespace Tmconsulting\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 use Tmconsulting\Uniteller\Signature\SignatureFieldsInterface;
 use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
 
@@ -22,6 +22,12 @@ use Tmconsulting\Uniteller\Exception\BuilderIncorrectValueException;
  */
 class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
 {
+
+    /*
+     * Импорт метода toArray().
+     */
+    use \Tmconsulting\Uniteller\ClassConversion\ArraybleTrait;
+
     /**
      * Идентификатор точки продажи в системе Uniteller.
      *
@@ -1391,20 +1397,6 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
     public function getZip()
     {
         return $this->Zip;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\ArraybleInterface::toArray()
-     */
-    public function toArray()
-    {
-        $_result = [];
-        foreach ($this as $_key => $_val)
-        {
-            $_result[$_key] = $_val;
-        }
-        return $_result;
     }
 
     /**

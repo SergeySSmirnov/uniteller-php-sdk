@@ -7,7 +7,7 @@
 
 namespace Tmconsulting\Uniteller\Tests;
 
-use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 use Tmconsulting\Uniteller\Cancel\CancelRequest;
 use Tmconsulting\Uniteller\Client;
 use Tmconsulting\Uniteller\Exception\NotImplementedException;

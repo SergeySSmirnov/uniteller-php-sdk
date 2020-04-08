@@ -8,7 +8,7 @@
 namespace Tmconsulting\Uniteller\Order;
 
 use DateTime;
-use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 use Tmconsulting\Uniteller\Error\ResponseCode;
 
 /**

@@ -5,19 +5,21 @@
  * Github: SergeySSmirnov
  */
 
-namespace Tmconsulting\Uniteller;
+namespace Tmconsulting\Uniteller\ClassConversion;
 
 /**
  * Интерфейс преобразования экземпляров классов в {@see \stdClass}.
  *
- * @package Tmconsulting\Client
+ * @package Tmconsulting\Uniteller\ClassConversion
  */
 interface ObjectableInterface
 {
+
     /**
-     * Преобразует экземпляр класса в {@see \stdClass}, включая все свойства (в т.ч. приватные).
+     * Преобразует экземпляр текущего класса в {@see \stdClass}, включая все свойства (в т.ч. приватные).
      *
      * @return object
      */
     public function toObject();
+
 }

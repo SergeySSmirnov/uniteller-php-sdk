@@ -49,7 +49,7 @@ class SignatureHandler implements SignatureHandlerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureInterface::sign()
+     * @see \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface::sign()
      */
     public function sign($fields, $passwd)
     {
@@ -58,7 +58,7 @@ class SignatureHandler implements SignatureHandlerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\Signature\SignatureInterface::verify()
+     * @see \Tmconsulting\Uniteller\Signature\SignatureHandlerInterface::verify()
      */
     public function verify($fields, $passwd, $signature)
     {

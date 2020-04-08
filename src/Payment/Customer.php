@@ -7,7 +7,7 @@
 
 namespace Tmconsulting\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ObjectableInterface;
+use Tmconsulting\Uniteller\ClassConversion\ObjectableInterface;
 
 /**
  * Контакты плательщика для отправки текста фискального чека.
@@ -15,6 +15,12 @@ use Tmconsulting\Uniteller\ObjectableInterface;
  */
 class Customer implements ObjectableInterface
 {
+
+    /*
+     * Импорт метода toObject().
+     */
+    use \Tmconsulting\Uniteller\ClassConversion\ObjectableTrait;
+
     /**
      * Номер телефона плательщика.
      *
@@ -100,20 +106,6 @@ class Customer implements ObjectableInterface
     {
         $this->id = $id;
         return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \Tmconsulting\Uniteller\ObjectableInterface::toObject()
-     */
-    public function toObject()
-    {
-        $_result = [];
-        foreach ($this as $_key => $_val)
-        {
-            $_result[$_key] = $_val;
-        }
-        return (object)$_result;
     }
 
 }

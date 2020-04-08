@@ -7,7 +7,7 @@
 
 namespace Tmconsulting\Uniteller\Cancel;
 
-use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Class CancelBuilder

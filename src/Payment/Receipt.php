@@ -7,7 +7,7 @@
 
 namespace Tmconsulting\Uniteller\Payment;
 
-use Tmconsulting\Uniteller\ObjectableInterface;
+use Tmconsulting\Uniteller\ClassConversion\ObjectableInterface;
 
 /**
  * Чек для фискализации.

@@ -27,6 +27,7 @@ use Tmconsulting\Uniteller\Signature\SignatureRecurrent;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Tmconsulting\Uniteller\Signature\SignatureHandler;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Class Client
@@ -92,17 +93,6 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     public function setBaseUri($uri)
     {
         $this->options['base_uri'] = $uri;
-
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setLogin($value)
-    {
-        $this->options['login'] = $value;
 
         return $this;
     }
@@ -239,14 +229,6 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     public function getBaseUri()
     {
         return $this->getOption('base_uri');
-    }
-
-    /**
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->getOption('login');
     }
 
     /**

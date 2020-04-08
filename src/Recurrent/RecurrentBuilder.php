@@ -8,7 +8,7 @@
 namespace Tmconsulting\Uniteller\Recurrent;
 
 
-use Tmconsulting\Uniteller\ArraybleInterface;
+use Tmconsulting\Uniteller\ClassConversion\ArraybleInterface;
 
 /**
  * Class RecurrentBuilder
