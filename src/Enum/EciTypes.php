@@ -12,8 +12,9 @@ namespace Rusproj\Uniteller\Enum;
  *
  * @package Rusproj\Uniteller\Enum
  */
-class EciTypes
+final class EciTypes
 {
+
     /**
      * 3DS Full.
      *
@@ -34,5 +35,5 @@ class EciTypes
      * @var integer
      */
     const E_COMMERCE = 7;
-}
 
+}

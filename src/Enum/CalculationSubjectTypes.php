@@ -12,7 +12,7 @@ namespace Rusproj\Uniteller\Enum;
  *
  * @package Rusproj\Uniteller\Enum
  */
-class CalculationSubjectTypes
+final class CalculationSubjectTypes
 {
 
     /**
@@ -152,4 +152,3 @@ class CalculationSubjectTypes
     const CALC_SUBJECT_19 = 19;
 
 }
-

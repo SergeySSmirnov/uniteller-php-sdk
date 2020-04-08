@@ -18,6 +18,7 @@ namespace Rusproj\Uniteller\Enum;
  */
 final class EMoneyTypes
 {
+
     /**
      * Любая система электронных платежей.
      *
@@ -59,4 +60,5 @@ final class EMoneyTypes
      * @var integer
      */
     const WEBMONEY_WMR = 29;
+
 }

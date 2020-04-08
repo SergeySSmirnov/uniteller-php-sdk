@@ -12,7 +12,7 @@ namespace Rusproj\Uniteller\Enum;
  *
  * @package Rusproj\Uniteller\Enum
  */
-class CalculationMethodTypes
+final class CalculationMethodTypes
 {
 
     /**
@@ -65,4 +65,3 @@ class CalculationMethodTypes
     const CALC_METHOD_7 = 7;
 
 }
-

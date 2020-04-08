@@ -18,6 +18,7 @@ namespace Rusproj\Uniteller\Enum;
  */
 final class PaymentTypes
 {
+
     /**
      * Оплата кредитной картой.
      *
@@ -31,4 +32,5 @@ final class PaymentTypes
      * @var integer
      */
     const EMONEY = 3;
+
 }

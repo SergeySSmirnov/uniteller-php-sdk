@@ -12,7 +12,7 @@ namespace Rusproj\Uniteller\Enum;
  *
  * @package Rusproj\Uniteller\Enum
  */
-class VatRateTypes
+final class VatRateTypes
 {
 
     /**
@@ -62,4 +62,3 @@ class VatRateTypes
     const VAT_20_120 = 120;
 
 }
-

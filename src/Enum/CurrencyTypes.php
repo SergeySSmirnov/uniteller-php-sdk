@@ -18,6 +18,7 @@ namespace Rusproj\Uniteller\Enum;
  */
 final class CurrencyTypes
 {
+
     /**
      * Российский рубль.
      *
@@ -66,4 +67,5 @@ final class CurrencyTypes
      * @var string
      */
     const USD = 'USD';
+
 }

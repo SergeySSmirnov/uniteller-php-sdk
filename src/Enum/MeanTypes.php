@@ -18,6 +18,7 @@ namespace Rusproj\Uniteller\Enum;
  */
 final class MeanTypes
 {
+
     /**
      * Любая.
      *
@@ -59,4 +60,5 @@ final class MeanTypes
      * @var integer
      */
     const AMERICAN_EXPRESS = 5;
+
 }

@@ -12,7 +12,7 @@ namespace Rusproj\Uniteller\Enum;
  *
  * @package Rusproj\Uniteller\Enum
  */
-class TaxModeTypes
+final class TaxModeTypes
 {
 
     /**
