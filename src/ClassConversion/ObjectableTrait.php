@@ -27,6 +27,14 @@ trait ObjectableTrait
             if (!is_null($_val)) {
                 if ($_val instanceof ObjectableInterface) {
                     $_result[$_key] = $_val->toObject();
+                } elseif (is_array($_val)) {
+                    foreach ($_val as $_rec) {
+                        if ($_rec instanceof ObjectableInterface) {
+                            $_result[$_key][] = $_val->toObject();
+                        } else {
+                            $_result[$_key][] = $_val;
+                        }
+                    }
                 } else {
                     $_result[$_key] = $_val;
                 }
