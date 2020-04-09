@@ -5,23 +5,39 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\FiscalCheck;
 
 use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
-use Rusproj\Uniteller\FiscalCheck\Customer;
+use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 
 /**
  * Чек для фискализации.
+ *
+ * @package Rusproj\Uniteller\FiscalCheck
  */
-class Receipt implements ReceiptInterface
+class Receipt implements ObjectableInterface, ReceiptInterface
 {
 
+    /*
+     * Импорт метода toObject().
+     */
+    use \Rusproj\Uniteller\ClassConversion\ObjectableTrait;
+
     /**
-     * Информация о плательщике.
+     * Контакты плательщика для отправки текста фискального чека.
+     * Этот блок может отсутствовать целиком, или в нем могут отсутствовать какие-то элементы.
      *
      * @var \Rusproj\Uniteller\FiscalCheck\Customer
      */
     private $customer;
+
+    /**
+     * [* Опционально]
+     * Блок данных кассира.
+     *
+     * @var null|\Rusproj\Uniteller\FiscalCheck\Cashier
+     */
+    private $cashier = null;
 
     /**
      * Код системы налогообложения.
@@ -30,34 +46,43 @@ class Receipt implements ReceiptInterface
      *
      * @var integer
      */
-    private $taxmode;
+    private $taxmode = -1000;
 
     /**
      * Массив товарных позиций в чеке.
      * Должен содержать хотя бы один элемент.
      * Общая сумма по всем позициям должна быть равна общей сумме чека.
      *
-     * @var \Rusproj\Uniteller\Payment\ProductLine[]
+     * @var \Rusproj\Uniteller\FiscalCheck\ProductLine[]
      */
-    private $lines;
+    private $lines = [];
 
     /**
+     * [* Опционально]
      * Опциональный параметр с произвольными данными от мерчанта.
      * Транслируется в неизменном виде во всех фискализированных
      * чеках, созданных в процессе оплаты по данному чеку.
      * Формат: объект произвольной внутренней структуры.
      *
-     * @var object
+     * @var null|object
      */
-    private $optional;
+    private $optional = null;
 
     /**
+     * [* Опционально]
      * Дополнительные параметры платежа.
      * Этот блок может отсутствовать целиком, или в нем могут отсутствовать какие-то элементы.
      *
-     * @var object
+     * @var null|object
      */
-    private $params;
+    private $params = null;
+
+    /**
+     * Информации об оплате дополнительными платежными средствами.
+     *
+     * @var \Rusproj\Uniteller\FiscalCheck\Payment[]
+     */
+    private $payments = [];
 
     /**
      * Итоговая сумма чека.
@@ -73,12 +98,11 @@ class Receipt implements ReceiptInterface
     {
         $this->customer = new Customer();
         $this->lines = [];
-        $this->optional = (object)[];
-        $this->params = (object)[];
     }
 
     /**
-     * Возвращает информацию о плательщике.
+     * Контакты плательщика для отправки текста фискального чека.
+     * Этот блок может отсутствовать целиком, или в нем могут отсутствовать какие-то элементы.
      *
      * @return \Rusproj\Uniteller\FiscalCheck\Customer
      */
@@ -88,7 +112,8 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Задаёт информацию о плательщике.
+     * Контакты плательщика для отправки текста фискального чека.
+     * Этот блок может отсутствовать целиком, или в нем могут отсутствовать какие-то элементы.
      *
      * @param \Rusproj\Uniteller\FiscalCheck\Customer $customer
      * @return $this
@@ -96,12 +121,37 @@ class Receipt implements ReceiptInterface
     public function setCustomer($customer)
     {
         $this->customer = $customer;
+        return $this;
     }
 
     /**
-     * Возвращает код системы налогообложения.
+     * [* Опционально]
+     * Блок данных кассира.
      *
-     * Для разрешения значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
+     * @return \Rusproj\Uniteller\FiscalCheck\Cashier
+     */
+    public function getCashier()
+    {
+        return $this->cashier;
+    }
+
+    /**
+     * [* Опционально]
+     * Блок данных кассира.
+     *
+     * @param \Rusproj\Uniteller\FiscalCheck\Cashier $cashier
+     * @return $this
+     */
+    public function setCashier($cashier)
+    {
+        $this->cashier = $cashier;
+        return $this;
+    }
+
+    /**
+     * Код системы налогообложения.
+     *
+     * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
      *
      * @return number
      */
@@ -111,7 +161,7 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Задаёт код системы налогообложения.
+     * Код системы налогообложения.
      *
      * Для указания значения используйте {@see \Rusproj\Uniteller\Enum\TaxModeTypes}.
      *
@@ -125,11 +175,11 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Возвращает массив товарных позиций в чеке.
+     * Массив товарных позиций в чеке.
      * Должен содержать хотя бы один элемент.
-     * Общая сумма по всем позициям должна быть равна общей сумме чека..
+     * Общая сумма по всем позициям должна быть равна общей сумме чека.
      *
-     * @return \Rusproj\Uniteller\Payment\ProductLine[]
+     * @return \Rusproj\Uniteller\FiscalCheck\ProductLine[]
      */
     public function getLines()
     {
@@ -137,21 +187,26 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Задаёт массив товарных позиций в чеке.
+     * Массив товарных позиций в чеке.
      * Должен содержать хотя бы один элемент.
-     * Общая сумма по всем позициям должна быть равна общей сумме чека..
+     * Общая сумма по всем позициям должна быть равна общей сумме чека.
      *
-     * @param \Rusproj\Uniteller\Payment\ProductLine[] $lines
+     * @param \Rusproj\Uniteller\FiscalCheck\ProductLine[] $lines
      * @return $this
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение будет сгенерировано в том случае, если значение параметра не является массивом.
      */
     public function setLines($lines)
     {
+        if (!is_array($lines)) {
+            throw new FieldIncorrectValueException('Значение параметра должно быть массивом элементов ProductLine.');
+        }
         $this->lines = $lines;
         return $this;
     }
 
     /**
-     * Возвращает опциональный параметр с произвольными данными от мерчанта.
+     * [* Опционально]
+     * Опциональный параметр с произвольными данными от мерчанта.
      * Транслируется в неизменном виде во всех фискализированных
      * чеках, созданных в процессе оплаты по данному чеку.
      * Формат: объект произвольной внутренней структуры.
@@ -164,7 +219,8 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Задаёт опциональный параметр с произвольными данными от мерчанта.
+     * [* Опционально]
+     * Опциональный параметр с произвольными данными от мерчанта.
      * Транслируется в неизменном виде во всех фискализированных
      * чеках, созданных в процессе оплаты по данному чеку.
      * Формат: объект произвольной внутренней структуры.
@@ -179,7 +235,8 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Возвращает дополнительные параметры платежа.
+     * [* Опционально]
+     * Дополнительные параметры платежа.
      * Этот блок может отсутствовать целиком, или в нем могут отсутствовать какие-то элементы.
      *
      * @return object
@@ -190,7 +247,8 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Задаёт дополнительные параметры платежа.
+     * [* Опционально]
+     * Дополнительные параметры платежа.
      * Этот блок может отсутствовать целиком, или в нем могут отсутствовать какие-то элементы.
      *
      * @param object $params
@@ -203,7 +261,7 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Возвращает место расчета.
+     * Место расчета.
      *
      * В этом параметре можно указать url одного из сайтов, перечисленных в Личном кабинете налоговой мерчанта.
      * Данное значение будет помещено в свойство {@see $this->getParams}.
@@ -212,11 +270,11 @@ class Receipt implements ReceiptInterface
      */
     public function getPlace()
     {
-        return $this->params->place;
+        return is_null($this->params) ? null : $this->params->place;
     }
 
     /**
-     * Задаёт есто расчета.
+     * Место расчета.
      *
      * В этом параметре можно указать url одного из сайтов, перечисленных в Личном кабинете налоговой мерчанта.
      * Данное значение будет помещено в свойство {@see $this->getParams}.
@@ -233,7 +291,33 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Возвращает итоговую сумму чека.
+     * Информации об оплате дополнительными платежными средствами.
+     *
+     * @return \Rusproj\Uniteller\FiscalCheck\Payment[]
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
+     * Информации об оплате дополнительными платежными средствами.
+     *
+     * @param \Rusproj\Uniteller\FiscalCheck\Payment[] $payments
+     * @return $this
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение будет сгенерировано в том случае, если значение параметра не является массивом.
+     */
+    public function setPayments($payments)
+    {
+        if (!is_array($payments)) {
+            throw new FieldIncorrectValueException('Значение параметра должно быть массивом элементов Payment.');
+        }
+        $this->payments = $payments;
+        return $this;
+    }
+
+    /**
+     * Итоговая сумма чека.
      *
      * @return float
      */
@@ -243,7 +327,7 @@ class Receipt implements ReceiptInterface
     }
 
     /**
-     * Задаёт итоговую сумму чека.
+     * Итоговая сумма чека.
      *
      * @param float $total
      * @return $this
@@ -256,32 +340,11 @@ class Receipt implements ReceiptInterface
 
     /**
      * {@inheritDoc}
-     * @see \Rusproj\Uniteller\Payment\ReceiptInterface::generate()
+     * @see \Rusproj\Uniteller\FiscalCheck\ReceiptInterface::generate()
      */
     public function generate()
     {
-        $_result = [];
-
-        foreach ($this as $_key => $_val) {
-            if (is_object($_val) && ($_val instanceof ObjectableInterface)) {
-                $_result[$_key] = $_val->toObject();
-            }
-            elseif (is_array($_val)) {
-                foreach ($_val as $_rec) {
-                    if (is_object($_rec) && ($_rec instanceof ObjectableInterface)) {
-                        $_result[$_key][] = $_rec->toObject();
-                    }
-                    else {
-                        $_result[$_key][] = $_val;
-                    }
-                }
-            }
-            else {
-                $_result[$_key] = $_val;
-            }
-        }
-        return json_encode((object)$_result, JSON_UNESCAPED_UNICODE);
+        return json_encode($this->toObject(), JSON_UNESCAPED_UNICODE);
     }
 
 }
-

@@ -16,8 +16,19 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
  */
 class CashierTest extends TestCase
 {
+    /**
+     * @return \Rusproj\Uniteller\FiscalCheck\Cashier
+     */
+    public static function getCashierTestInstance()
+    {
+        $_cashier = new Cashier();
+        $_cashier
+            ->setName('Cashier')
+            ->setInn('123456789012');
+        return $_cashier;
+    }
 
-    public function testWrongName()
+    public function testWrongValInNameSetter()
     {
         $_name = '';
         for ($_i = 0; $_i < 241; $_i++) {
@@ -29,7 +40,7 @@ class CashierTest extends TestCase
         $_cashier->setName($_name);
     }
 
-    public function testWrongInn()
+    public function testWrongValInInnSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_cashier = new Cashier();
@@ -38,10 +49,7 @@ class CashierTest extends TestCase
 
     public function testCashierObjectable()
     {
-        $_cashier = new Cashier();
-        $_cashier
-            ->setName('Cashier')
-            ->setInn('123456789012');
+        $_cashier = self::getCashierTestInstance();
 
         $_objectableResult = $_cashier->toObject();
         $this->assertTrue($_objectableResult instanceof \stdClass);

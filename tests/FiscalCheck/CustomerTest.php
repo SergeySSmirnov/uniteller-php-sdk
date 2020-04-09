@@ -17,7 +17,19 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 class CustomerTest extends TestCase
 {
 
-    public function testWrongName()
+    public static function getCustomerTestInstance()
+    {
+        $_customer = new Customer();
+        $_customer
+            ->setEmail('test@test.tt')
+            ->setId(12345)
+            ->setPhone('+71234567890')
+            ->setName('Client')
+            ->setInn('123456789012');
+        return $_customer;
+    }
+
+    public function testWrongValForNameSetter()
     {
         $_name = '';
         for ($_i = 0; $_i < 244; $_i++) {
@@ -29,7 +41,7 @@ class CustomerTest extends TestCase
         $_cashier->setName($_name);
     }
 
-    public function testWrongInn()
+    public function testWrongValForInnSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_cashier = new Customer();

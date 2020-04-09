@@ -30,9 +30,9 @@ trait ObjectableTrait
                 } elseif (is_array($_val)) {
                     foreach ($_val as $_rec) {
                         if ($_rec instanceof ObjectableInterface) {
-                            $_result[$_key][] = $_val->toObject();
+                            $_result[$_key][] = $_rec->toObject();
                         } else {
-                            $_result[$_key][] = $_val;
+                            $_result[$_key][] = $_rec;
                         }
                     }
                 } else {

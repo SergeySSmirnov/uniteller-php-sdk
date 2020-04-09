@@ -39,7 +39,7 @@ class ProductLineTest extends TestCase
         return $_productLine;
     }
 
-    public function testWrongName()
+    public function testWrongValForNameSetter()
     {
         $_name = '';
         for ($_i = 0; $_i < 130; $_i++) {

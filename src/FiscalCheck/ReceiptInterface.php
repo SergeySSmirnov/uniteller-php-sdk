@@ -5,10 +5,12 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\FiscalCheck;
 
 /**
  * Интерфейс получения чека для фискализации.
+ *
+ * @package Rusproj\Uniteller\FiscalCheck
  */
 interface ReceiptInterface
 {
