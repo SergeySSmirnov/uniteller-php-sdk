@@ -23,19 +23,19 @@ class ReceiptTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\Receipt
      */
-    public static function getReceiptTestInstance()
+    public static function createReceiptTestInstance()
     {
         $_receipt = new Receipt();
         $_receipt
-            ->setCustomer(CustomerTest::getCustomerTestInstance())
+            ->setCustomer(CustomerTest::createCustomerTestInstance())
             ->setLines([
-                ProductLineTest::getProductLineTestInstance(),
-                ProductLineTest::getProductLineTestInstance()
+                ProductLineTest::createProductLineTestInstance(),
+                ProductLineTest::createProductLineTestInstance()
             ])
-            ->setPayments([PaymentTest::getPaymentTestInstance()])
+            ->setPayments([PaymentTest::createPaymentTestInstance()])
             ->setTaxmode(TaxModeTypes::TAX_0)
             ->setTotal('98.32')
-            ->setCashier(CashierTest::getCashierTestInstance())
+            ->setCashier(CashierTest::createCashierTestInstance())
             ->setPlace('IVA')
             ->setOptional((object)['val' => 'Some merchant data']);
         return $_receipt;
@@ -59,12 +59,12 @@ class ReceiptTest extends TestCase
     {
         $_receipt = new Receipt();
         $_receipt
-            ->setCustomer(CustomerTest::getCustomerTestInstance())
+            ->setCustomer(CustomerTest::createCustomerTestInstance())
             ->setLines([
-                ProductLineTest::getProductLineTestInstance(),
-                ProductLineTest::getProductLineTestInstance()
+                ProductLineTest::createProductLineTestInstance(),
+                ProductLineTest::createProductLineTestInstance()
             ])
-            ->setPayments([PaymentTest::getPaymentTestInstance()])
+            ->setPayments([PaymentTest::createPaymentTestInstance()])
             ->setTaxmode(TaxModeTypes::TAX_0)
             ->setTotal('98.32');
 
@@ -93,7 +93,7 @@ class ReceiptTest extends TestCase
         $this->assertTrue($_objectableResult->payments[0] instanceof  \stdClass);
 
         $_receipt
-            ->setCashier(CashierTest::getCashierTestInstance())
+            ->setCashier(CashierTest::createCashierTestInstance())
             ->setPlace('IVA')
             ->setOptional((object)['val' => 'Some merchant data']);
 

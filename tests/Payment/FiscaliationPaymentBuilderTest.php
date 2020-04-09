@@ -18,7 +18,7 @@ use Rusproj\Uniteller\Tests\FiscalCheck\ReceiptTest;
 class FiscaliationPaymentBuilderTest extends TestCase
 {
 
-    public static function getFiscaliationPaymentBuilderTestInstance()
+    public static function createFiscaliationPaymentBuilderTestInstance()
     {
         $_builder = new FiscaliationPaymentBuilder();
         $_builder
@@ -28,7 +28,7 @@ class FiscaliationPaymentBuilderTest extends TestCase
             ->setSubtotalP('100.30')
             ->setUrlReturnOk('http://mysite.com/success')
             ->setUrlReturnNo('http://mysite.com/error')
-            ->setReceipt(ReceiptTest::getReceiptTestInstance());
+            ->setReceipt(ReceiptTest::createReceiptTestInstance());
         return $_builder;
     }
 
@@ -42,7 +42,7 @@ class FiscaliationPaymentBuilderTest extends TestCase
             ->setSubtotalP('100.30')
             ->setUrlReturnOk('http://mysite.com/success')
             ->setUrlReturnNo('http://mysite.com/error')
-            ->setReceipt(ReceiptTest::getReceiptTestInstance());
+            ->setReceipt(ReceiptTest::createReceiptTestInstance());
 
         $_arraybleResult = $_paymentBuilder->toArray();
 

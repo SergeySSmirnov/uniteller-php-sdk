@@ -20,7 +20,7 @@ class CustomerTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\Customer
      */
-    public static function getCustomerTestInstance()
+    public static function createCustomerTestInstance()
     {
         $_customer = new Customer();
         $_customer

@@ -21,7 +21,7 @@ class PaymentTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\Payment
      */
-    public static function getPaymentTestInstance()
+    public static function createPaymentTestInstance()
     {
         $_paymentInfo = new Payment();
         $_paymentInfo

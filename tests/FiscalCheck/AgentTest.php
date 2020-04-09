@@ -19,7 +19,7 @@ class AgentTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\Agent
      */
-    public static function getTestAgentInstance()
+    public static function createTestAgentInstance()
     {
         $_agent = new Agent();
         $_agent
@@ -39,7 +39,7 @@ class AgentTest extends TestCase
 
     public function testAgentObjectable()
     {
-        $_agent = self::getTestAgentInstance();
+        $_agent = self::createTestAgentInstance();
 
         $_objectableResult = $_agent->toObject();
         $this->assertTrue($_objectableResult instanceof \stdClass);

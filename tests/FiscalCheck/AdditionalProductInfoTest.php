@@ -19,7 +19,7 @@ class AdditionalProductInfoTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
      */
-    public static function getAdditionalProductInfoTestInstance()
+    public static function createAdditionalProductInfoTestInstance()
     {
         $_additiionalProductInfo = new AdditionalProductInfo();
         $_additiionalProductInfo

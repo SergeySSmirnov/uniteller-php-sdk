@@ -19,7 +19,7 @@ class CashierTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\Cashier
      */
-    public static function getCashierTestInstance()
+    public static function createCashierTestInstance()
     {
         $_cashier = new Cashier();
         $_cashier
@@ -49,7 +49,7 @@ class CashierTest extends TestCase
 
     public function testCashierObjectable()
     {
-        $_cashier = self::getCashierTestInstance();
+        $_cashier = self::createCashierTestInstance();
 
         $_objectableResult = $_cashier->toObject();
         $this->assertTrue($_objectableResult instanceof \stdClass);

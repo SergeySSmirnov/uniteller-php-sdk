@@ -23,7 +23,7 @@ class ProductLineTest extends TestCase
     /**
      * @return \Rusproj\Uniteller\FiscalCheck\ProductLine
      */
-    public static function getProductLineTestInstance()
+    public static function createProductLineTestInstance()
     {
         $_productLine = new ProductLine();
         $_productLine
@@ -34,8 +34,8 @@ class ProductLineTest extends TestCase
             ->setQty('5')
             ->setSum('122.4')
             ->setVat(VatRateTypes::VAT_20_120)
-            ->setProduct(AdditionalProductInfoTest::getAdditionalProductInfoTestInstance())
-            ->setAgent(AgentTest::getTestAgentInstance());
+            ->setProduct(AdditionalProductInfoTest::createAdditionalProductInfoTestInstance())
+            ->setAgent(AgentTest::createTestAgentInstance());
         return $_productLine;
     }
 
@@ -53,7 +53,7 @@ class ProductLineTest extends TestCase
 
     public function testProductLineTestObjectable()
     {
-        $_productLine = self::getProductLineTestInstance();
+        $_productLine = self::createProductLineTestInstance();
 
         $_objectableResult = $_productLine->toObject();
         $this->assertTrue($_objectableResult instanceof \stdClass);

@@ -23,7 +23,7 @@ class SignatureTest extends TestCase
     public function testSignatureHandler()
     {
         $_signatureHandler = new SignatureHandler();
-        $_keys = $_signatureHandler->sign(FiscaliationPaymentBuilderTest::getFiscaliationPaymentBuilderTestInstance(), 'Some passwd');
+        $_keys = $_signatureHandler->sign(FiscaliationPaymentBuilderTest::createFiscaliationPaymentBuilderTestInstance(), 'Some passwd');
 
         $this->assertTrue(is_array($_keys));
         $this->assertArrayHasKey('Receipt', $_keys);
