@@ -23,7 +23,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     /**
      * Описание чека для фискализации.
      *
-     * @var \Rusproj\Uniteller\Payment\ReceiptInterface
+     * @var \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
      */
     private $Receipt;
 
@@ -35,18 +35,18 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     private $ReceiptSignature;
 
     /**
-     * Возвращает описание чека для фискализации.
+     * Описание чека для фискализации.
      *
-     * @return \Rusproj\Uniteller\Payment\ReceiptInterface
+     * @return \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
      */
     public function getReceipt() {
         return $this->Receipt;
     }
 
     /**
-     * Задаёт описание чека для фискализации.
+     * Описание чека для фискализации.
      *
-     * @param \Rusproj\Uniteller\Payment\ReceiptInterface $receipt
+     * @param \Rusproj\Uniteller\FiscalCheck\ReceiptInterface $receipt
      * @return $this
      */
     public function setReceipt($receipt) {
@@ -55,7 +55,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     }
 
     /**
-     * Возвращает подпись поля Receipt.
+     * Подпись поля Receipt.
      *
      * @return string
      */
@@ -65,7 +65,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     }
 
     /**
-     * Задаёт подпись поля Receipt.
+     * Подпись поля Receipt.
      *
      * @param string $ReceiptSignature
      * @return $this
