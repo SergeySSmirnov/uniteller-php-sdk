@@ -34,20 +34,24 @@ use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
  *
  * @package Rusproj\Uniteller
  */
-class Client implements ClientInterface, ClientGatewayConfigInterface
+class Client implements ClientInterface
 {
     /**
+     * Опции запроса.
+     *
      * @var array
      */
     protected $options = [];
 
     /**
-     * @var PaymentInterface
+     * @var \Rusproj\Uniteller\Payment\PaymentInterface
      */
     protected $payment;
 
     /**
-     * @var SignatureHandlerInterface
+     * Объект, отвечающий за вычисление сигнатуры параметров запроса.
+     *
+     * @var \Rusproj\Uniteller\Signature\SignatureHandlerInterface
      */
     protected $signatureHandler;
 
@@ -72,22 +76,24 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     protected $httpManager;
 
     /**
-     * Client constructor.
+     * Инициализирует экземпляр класса {@see \Rusproj\Uniteller\Client}.
      */
     public function __construct()
     {
         $this->registerSignatureHandler(new SignatureHandler());
         $this->registerPayment(new Payment());
 
+
+
         $this->registerCancelRequest(new CancelRequest());
         $this->registerResultsRequest(new ResultsRequest());
         $this->registerRecurrentRequest(new RecurrentRequest());
-
     }
 
     /**
-     * Устанавливает значение базового Uri платёжного шлюза.
-     * @param string $uri Uri платёжного шлюза.
+     * Базовый Uri платёжного шлюза.
+     *
+     * @param string $uri
      * @return $this
      */
     public function setBaseUri($uri)
@@ -98,6 +104,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Пароль.
+     *
      * @param $value
      * @return $this
      */
@@ -109,6 +117,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Идентификатор магазина в системе Uniteller.
+     *
      * @param $value
      * @return $this
      */
@@ -120,6 +130,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Опции запроса.
+     *
      * @param array $options
      * @return $this
      */
@@ -142,9 +154,9 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * Регистрирует объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * @param PaymentInterface $payment
+     * @param \Rusproj\Uniteller\Payment\PaymentInterface $payment
      * @return $this
      */
     public function registerPayment(PaymentInterface $payment)
@@ -188,7 +200,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * Осуществляет регистрацию объекта, отвечающего за вычисление сигнатуры параметров запроса.
+     * Объект, отвечающий за вычисление сигнатуры параметров запроса.
      *
      * @param \Rusproj\Uniteller\Signature\SignatureHandlerInterface $signature
      * @return $this
@@ -201,6 +213,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Опции запроса.
+     *
      * @return array
      */
     public function getOptions()
@@ -209,8 +223,10 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * @param $key
-     * @param null $default
+     * Возвращает значение указанной опции запроса.
+     *
+     * @param string $key Ключ опции.
+     * @param null|string $default Значение по-умолчанию в случае отсутствия ключа.
      * @return string|mixed
      */
     public function getOption($key, $default = null)
@@ -223,7 +239,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * Возвращает Uri платёжного шлюза.
+     * Базовый Uri платёжного шлюза.
+     *
      * @return string
      */
     public function getBaseUri()
@@ -232,6 +249,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Идентификатор магазина в системе Uniteller.
+     *
      * @return string
      */
     public function getShopId()
@@ -240,6 +259,8 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
+     * Пароль.
+     *
      * @return string
      */
     public function getPassword()
@@ -248,7 +269,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * Возвращает объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
      * @return \Rusproj\Uniteller\Payment\PaymentInterface
      */
@@ -282,7 +303,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
     }
 
     /**
-     * Возвращает объект, отвечающий за генерацию сигнатуры параметров запроса.
+     * Объект, отвечающий за вычисление сигнатуры параметров запроса.
      *
      * @return \Rusproj\Uniteller\Signature\SignatureHandlerInterface
      */
@@ -311,7 +332,7 @@ class Client implements ClientInterface, ClientGatewayConfigInterface
 
         return $this
             ->getPayment()
-            ->execute($_fields, $this);
+            ->execute($this->getBaseUri(), $_fields);
     }
 
     /**

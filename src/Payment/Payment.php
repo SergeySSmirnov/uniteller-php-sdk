@@ -23,9 +23,9 @@ class Payment implements PaymentInterface
      * {@inheritDoc}
      * @see \Rusproj\Uniteller\Payment\PaymentInterface::execute()
      */
-    public function execute($parameters, $gatewayConfig)
+    public function execute($baseGatewayUri, $parameters)
     {
-        $uri = sprintf('%s/pay?%s', $gatewayConfig->getBaseUri(), http_build_query($parameters));
+        $uri = sprintf('%s/pay?%s', $baseGatewayUri, http_build_query($parameters));
 
         return new Uri($uri);
     }

@@ -11,7 +11,6 @@
 
 namespace Rusproj\Uniteller\Payment;
 
-use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 use Rusproj\Uniteller\Signature\SignatureFieldsInterface;
 use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 use Rusproj\Uniteller\Enum\CurrencyTypes;
@@ -21,7 +20,7 @@ use Rusproj\Uniteller\Enum\CurrencyTypes;
  *
  * @package Tmconsulting\Client\Payment
  */
-class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
+class PaymentBuilder implements SignatureFieldsInterface
 {
 
     /*

@@ -102,4 +102,3 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     }
 
 }
-

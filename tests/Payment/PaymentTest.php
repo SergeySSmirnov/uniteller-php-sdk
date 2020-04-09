@@ -25,11 +25,11 @@ class PaymentTest extends TestCase
         $_client = new Client();
         $_client->setBaseUri('https://google.com');
 
-        $payment = new Payment();
-        $results = $payment->execute(['q' => 'banana'], $_client);
+        $_payment = new Payment();
+        $_results = $_payment->execute($_client->getBaseUri(), ['q' => 'banana']);
 
-        $this->assertInstanceOf(UriInterface::class, $results);
-        $this->assertEquals('https://google.com/pay?q=banana', $results->getUri());
+        $this->assertInstanceOf(UriInterface::class, $_results);
+        $this->assertEquals('https://google.com/pay?q=banana', $_results->getUri());
     }
 
 }

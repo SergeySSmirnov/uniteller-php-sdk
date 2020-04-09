@@ -19,9 +19,9 @@ interface PaymentInterface
     /**
      * Генерирует и возвращает ссылку для перехода к странице оплаты.
      *
+     * @param string $baseGatewayUri Базовый Uri платёжного шлюза.
      * @param array $parameters Параметры для генерации ссылки.
-     * @param \Rusproj\Uniteller\ClientGatewayConfigInterface $gatewayConfig Настройки доступа к платёжному шлюзу.
      * @return \Rusproj\Uniteller\Payment\UriInterface
      */
-    public function execute($parameters, $gatewayConfig);
+    public function execute($baseGatewayUri, $parameters);
 }

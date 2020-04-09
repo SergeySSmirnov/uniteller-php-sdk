@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d3ae2e03b854bc778b37ba75c6a2560",
+    "content-hash": "cdccda6047176dc2fb4041d8fc08bd8a",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1734,9 +1734,6 @@
                 "portable",
                 "shim"
             ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.15.0"
-            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -1820,9 +1817,6 @@
                 "debug",
                 "dump"
             ],
-            "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/3.4"
-            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
