@@ -12,9 +12,9 @@ use Rusproj\Uniteller\Cancel\CancelRequest;
 use Rusproj\Uniteller\Client;
 use Rusproj\Uniteller\Exception\NotImplementedException;
 use Rusproj\Uniteller\Http\HttpManagerInterface;
-use Rusproj\Uniteller\Payment\PaymentInterface;
+use Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface;
 use Rusproj\Uniteller\Request\RequestInterface;
-use Rusproj\Uniteller\Signature\SignatureInterface;
+use Rusproj\Uniteller\Signature\SignatureHandlerInterface;
 
 class ClientTest extends TestCase
 {
@@ -29,12 +29,10 @@ class ClientTest extends TestCase
         $uniteller->setShopId('shop_id');
         $uniteller->setBaseUri('https://google.com');
         $uniteller->setPassword('security-long-password');
-        $uniteller->setLogin(330011);
 
         $this->assertSame('shop_id', $uniteller->getShopId());
         $this->assertSame('https://google.com', $uniteller->getBaseUri());
         $this->assertSame('security-long-password', $uniteller->getPassword());
-        $this->assertSame(330011, $uniteller->getLogin());
     }
 
     public function testOptionKeyResolver()
@@ -46,9 +44,9 @@ class ClientTest extends TestCase
     public function testDefaultObjectsIsRegistered()
     {
         $uniteller = new Client();
-        $this->assertInstanceOf(PaymentInterface::class, $uniteller->getPayment());
-        $this->assertInstanceOf(SignatureInterface::class, $uniteller->getSignaturePayment());
-        $this->assertInstanceOf(SignatureInterface::class, $uniteller->getSignatureRecurrent());
+        $this->assertInstanceOf(PaymentLinkCreatorInterface::class, $uniteller->getPayment());
+        $this->assertInstanceOf(SignatureHandlerInterface::class, $uniteller->getSignaturePayment());
+        $this->assertInstanceOf(SignatureHandlerInterface::class, $uniteller->getSignatureRecurrent());
     }
 
     public function testSetOptionsUseArrayNotation()
@@ -133,7 +131,7 @@ class ClientTest extends TestCase
 
     public function testShouldBePaymentMethodBuildCorrectArray()
     {
-        $payment = $this->createMock(PaymentInterface::class);
+        $payment = $this->createMock(PaymentLinkCreatorInterface::class);
         $payment
             ->expects($this->once())
             ->method('execute')
@@ -231,7 +229,7 @@ class ClientTest extends TestCase
         $client->registerResultsRequest($request);
         $client->registerCancelRequest($request);
         $client->registerRecurrentRequest($request);
-        $client->registerPayment($this->createMock(PaymentInterface::class));
+        $client->registerPayment($this->createMock(PaymentLinkCreatorInterface::class));
 
         $arrayble = $this->createMock(ArraybleInterface::class);
         $arrayble

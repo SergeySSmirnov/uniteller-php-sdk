@@ -16,14 +16,14 @@ namespace Rusproj\Uniteller\Payment;
  *
  * @package Tmconsulting\Client\Payment
  */
-class Payment implements PaymentInterface
+class PaymentLinkCreator implements PaymentLinkCreatorInterface
 {
 
     /**
      * {@inheritDoc}
-     * @see \Rusproj\Uniteller\Payment\PaymentInterface::execute()
+     * @see \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface::execute()
      */
-    public function execute($baseGatewayUri, $parameters)
+    public function create($baseGatewayUri, $parameters)
     {
         $uri = sprintf('%s/pay?%s', $baseGatewayUri, http_build_query($parameters));
 

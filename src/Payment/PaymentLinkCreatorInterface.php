@@ -14,7 +14,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Интерфейс генерации ссылки для перехода к странице оплаты.
  */
-interface PaymentInterface
+interface PaymentLinkCreatorInterface
 {
     /**
      * Генерирует и возвращает ссылку для перехода к странице оплаты.
@@ -23,5 +23,5 @@ interface PaymentInterface
      * @param array $parameters Параметры для генерации ссылки.
      * @return \Rusproj\Uniteller\Payment\UriInterface
      */
-    public function execute($baseGatewayUri, $parameters);
+    public function create($baseGatewayUri, $parameters);
 }

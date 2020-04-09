@@ -12,7 +12,7 @@
 
 namespace Rusproj\Uniteller\Tests\Payment;
 
-use Rusproj\Uniteller\Payment\Payment;
+use Rusproj\Uniteller\Payment\PaymentLinkCreator;
 use Rusproj\Uniteller\Payment\UriInterface;
 use Rusproj\Uniteller\Tests\TestCase;
 use Rusproj\Uniteller\Client;
@@ -25,8 +25,8 @@ class PaymentTest extends TestCase
         $_client = new Client();
         $_client->setBaseUri('https://google.com');
 
-        $_payment = new Payment();
-        $_results = $_payment->execute($_client->getBaseUri(), ['q' => 'banana']);
+        $_payment = new PaymentLinkCreator();
+        $_results = $_payment->create($_client->getBaseUri(), ['q' => 'banana']);
 
         $this->assertInstanceOf(UriInterface::class, $_results);
         $this->assertEquals('https://google.com/pay?q=banana', $_results->getUri());

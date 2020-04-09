@@ -16,8 +16,8 @@ use Rusproj\Uniteller\Exception\NotImplementedException;
 use Rusproj\Uniteller\Http\HttpManager;
 use Rusproj\Uniteller\Http\HttpManagerInterface;
 use Rusproj\Uniteller\Order\Order;
-use Rusproj\Uniteller\Payment\Payment;
-use Rusproj\Uniteller\Payment\PaymentInterface;
+use Rusproj\Uniteller\Payment\PaymentLinkCreator;
+use Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface;
 use Rusproj\Uniteller\Recurrent\RecurrentRequest;
 use Rusproj\Uniteller\Request\RequestInterface;
 use Rusproj\Uniteller\Results\ResultsRequest;
@@ -44,9 +44,9 @@ class Client implements ClientInterface
     protected $options = [];
 
     /**
-     * @var \Rusproj\Uniteller\Payment\PaymentInterface
+     * @var \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
      */
-    protected $payment;
+    protected $paymentLinkCreator;
 
     /**
      * Объект, отвечающий за вычисление сигнатуры параметров запроса.
@@ -81,7 +81,7 @@ class Client implements ClientInterface
     public function __construct()
     {
         $this->registerSignatureHandler(new SignatureHandler());
-        $this->registerPayment(new Payment());
+        $this->registerPaymentLinkCreator(new PaymentLinkCreator());
 
 
 
@@ -156,12 +156,12 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * @param \Rusproj\Uniteller\Payment\PaymentInterface $payment
+     * @param \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface $payment
      * @return $this
      */
-    public function registerPayment(PaymentInterface $payment)
+    public function registerPaymentLinkCreator(PaymentLinkCreatorInterface $payment)
     {
-        $this->payment = $payment;
+        $this->paymentLinkCreator = $payment;
 
         return $this;
     }
@@ -271,11 +271,11 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * @return \Rusproj\Uniteller\Payment\PaymentInterface
+     * @return \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
      */
-    public function getPayment()
+    public function getPaymentLinkCreator()
     {
-        return $this->payment;
+        return $this->paymentLinkCreator;
     }
 
     /**
@@ -331,7 +331,7 @@ class Client implements ClientInterface
             ->sign($parameters, $this->getPassword());
 
         return $this
-            ->getPayment()
+            ->getPaymentLinkCreator()
             ->execute($this->getBaseUri(), $_fields);
     }
 
