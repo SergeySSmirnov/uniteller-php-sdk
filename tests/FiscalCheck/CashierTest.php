@@ -52,7 +52,7 @@ class CashierTest extends TestCase
         $_cashier = self::createCashierTestInstance();
 
         $_objectableResult = $_cashier->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 2);
 
         $this->assertObjectHasAttribute('name', $_objectableResult);

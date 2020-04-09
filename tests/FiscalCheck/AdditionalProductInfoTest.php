@@ -38,7 +38,7 @@ class AdditionalProductInfoTest extends TestCase
             ->setExc('Акциз');
 
         $_objectableResult = $_additiionalProductInfo->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 4);
 
         $this->assertObjectHasAttribute('coc', $_objectableResult);
@@ -55,7 +55,7 @@ class AdditionalProductInfoTest extends TestCase
             ->setNcd('123456');
 
         $_objectableResult = $_additiionalProductInfo->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 4);
 
         $this->assertObjectHasAttribute('coc', $_objectableResult);

@@ -41,7 +41,7 @@ class PaymentTest extends TestCase
             ->setType(MeansPaymentTypes::AMPT_4);
 
         $_objectableResult = $_paymentInfo->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 3);
 
         $this->assertObjectHasAttribute('amount', $_objectableResult);
@@ -55,7 +55,7 @@ class PaymentTest extends TestCase
             ->setId('0035464');
 
         $_objectableResult = $_paymentInfo->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 4);
 
         $this->assertObjectHasAttribute('amount', $_objectableResult);

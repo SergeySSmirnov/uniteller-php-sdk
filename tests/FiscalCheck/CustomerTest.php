@@ -60,7 +60,7 @@ class CustomerTest extends TestCase
             ->setPhone('+71234567890');
 
         $_objectableResult = $_customer->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 3);
 
         $this->assertObjectHasAttribute('email', $_objectableResult);
@@ -75,7 +75,7 @@ class CustomerTest extends TestCase
             ->setInn('123456789012');
 
         $_objectableResult = $_customer->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 5);
 
         $this->assertObjectHasAttribute('email', $_objectableResult);

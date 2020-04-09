@@ -74,7 +74,7 @@ class FiscaliationPaymentBuilderTest extends TestCase
         $this->assertTrue($_arraybleResult['Signature'] === '');
 
         $this->assertArrayHasKey('Receipt', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Receipt'] instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_arraybleResult['Receipt']);
         $this->assertTrue(count((array)$_arraybleResult['Receipt']) === 8);
     }
 

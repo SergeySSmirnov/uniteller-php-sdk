@@ -56,7 +56,7 @@ class ProductLineTest extends TestCase
         $_productLine = self::createProductLineTestInstance();
 
         $_objectableResult = $_productLine->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 9);
 
         $this->assertObjectHasAttribute('name', $_objectableResult);
@@ -75,11 +75,11 @@ class ProductLineTest extends TestCase
         $this->assertTrue($_objectableResult->vat === VatRateTypes::VAT_20_120);
 
         $this->assertObjectHasAttribute('product', $_objectableResult);
-        $this->assertTrue($_objectableResult->product instanceof  \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult->product);
         $this->assertTrue(count((array)$_objectableResult->product) === 4);
 
         $this->assertObjectHasAttribute('agent', $_objectableResult);
-        $this->assertTrue($_objectableResult->agent instanceof  \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult->agent);
         $this->assertTrue(count((array)$_objectableResult->agent) === 11);
     }
 

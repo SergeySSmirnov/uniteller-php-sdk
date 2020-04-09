@@ -42,7 +42,7 @@ class AgentTest extends TestCase
         $_agent = self::createTestAgentInstance();
 
         $_objectableResult = $_agent->toObject();
-        $this->assertTrue($_objectableResult instanceof \stdClass);
+        $this->assertInstanceOf(\stdClass::class, $_objectableResult);
         $this->assertTrue(count((array)$_objectableResult) === 11);
 
         $this->assertObjectHasAttribute('accopphone', $_objectableResult);
