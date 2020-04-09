@@ -28,7 +28,7 @@ interface ClientInterface
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Tmconsulting\Client\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Payment\UriInterface
      */
-    public function payment($parameters);
+    public function createPymentLink($parameters);
 
     /**
      * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters

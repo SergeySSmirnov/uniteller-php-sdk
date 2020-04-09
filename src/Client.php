@@ -322,9 +322,9 @@ class Client implements ClientInterface
 
     /**
      * {@inheritDoc}
-     * @see \Rusproj\Uniteller\ClientInterface::payment()
+     * @see \Rusproj\Uniteller\ClientInterface::createPymentLink()
      */
-    public function payment($parameters)
+    public function createPymentLink($parameters)
     {
         $_fields = $this
             ->getSignatureHandler()
