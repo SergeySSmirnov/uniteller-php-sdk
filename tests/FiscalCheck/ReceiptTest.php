@@ -21,7 +21,7 @@ class ReceiptTest extends TestCase
 {
 
     /**
-     * @return \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
+     * @return \Rusproj\Uniteller\FiscalCheck\Receipt
      */
     public static function getReceiptTestInstance()
     {
@@ -32,7 +32,7 @@ class ReceiptTest extends TestCase
                 ProductLineTest::getProductLineTestInstance(),
                 ProductLineTest::getProductLineTestInstance()
             ])
-            ->setPayments(PaymentTest::getPaymentTestInstance())
+            ->setPayments([PaymentTest::getPaymentTestInstance()])
             ->setTaxmode(TaxModeTypes::TAX_0)
             ->setTotal('98.32')
             ->setCashier(CashierTest::getCashierTestInstance())

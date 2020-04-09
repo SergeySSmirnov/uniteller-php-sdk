@@ -17,6 +17,9 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 class CustomerTest extends TestCase
 {
 
+    /**
+     * @return \Rusproj\Uniteller\FiscalCheck\Customer
+     */
     public static function getCustomerTestInstance()
     {
         $_customer = new Customer();

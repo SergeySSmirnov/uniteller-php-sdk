@@ -19,7 +19,7 @@ class PaymentTest extends TestCase
 {
 
     /**
-     * @return \Rusproj\Uniteller\FiscalCheck\AdditionalProductInfo
+     * @return \Rusproj\Uniteller\FiscalCheck\Payment
      */
     public static function getPaymentTestInstance()
     {

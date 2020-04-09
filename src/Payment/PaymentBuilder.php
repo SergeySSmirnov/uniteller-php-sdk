@@ -13,7 +13,8 @@ namespace Rusproj\Uniteller\Payment;
 
 use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 use Rusproj\Uniteller\Signature\SignatureFieldsInterface;
-use Rusproj\Uniteller\Exception\BuilderIncorrectValueException;
+use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
+use Rusproj\Uniteller\Enum\CurrencyTypes;
 
 /**
  * Параметры запроса для генерации ссылки для оплаты.
@@ -42,7 +43,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Shop_IDP;
+    protected $Shop_IDP = '';
 
     /**
      * Номер заказа в системе расчётов интернет-магазина, соответствующий
@@ -59,7 +60,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Order_IDP;
+    protected $Order_IDP = '';
 
     /**
      * Сумма покупки в валюте, оговоренной в договоре с банком-эквайером.
@@ -68,14 +69,14 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var float|string
      */
-    protected $Subtotal_P;
+    protected $Subtotal_P = '';
 
     /**
      * Подпись, гарантирующая неизменность критичных данных оплаты (суммы, Order_IDP).
      *
      * @var string
      */
-    protected $Signature;
+    protected $Signature = '';
 
     /**
      * URL страницы, на которую должен вернуться Покупатель
@@ -83,7 +84,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $URL_RETURN_OK;
+    protected $URL_RETURN_OK = '';
 
     /**
      * URL страницы, на которую должен вернуться Покупатель
@@ -91,7 +92,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $URL_RETURN_NO;
+    protected $URL_RETURN_NO = '';
 
     /**
      * Валюта платежа. Параметр обязателен для точек продажи, работающих c
@@ -102,7 +103,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Currency;
+    protected $Currency = CurrencyTypes::RUB;
 
     /**
      * Признак того, что платёж является «родительским» для последующих
@@ -113,7 +114,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var int
      */
-    protected $IsRecurrentStart;
+    protected $IsRecurrentStart = '';
 
     /**
      * [* Опционально]
@@ -134,7 +135,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Email;
+    protected $Email = null;
 
     /**
      * [* Опционально]
@@ -149,7 +150,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var int
      */
-    protected $Lifetime;
+    protected $Lifetime = null;
 
     /**
      * [* Опционально]
@@ -164,7 +165,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var int
      */
-    protected $OrderLifetime = 0;
+    protected $OrderLifetime = null;
 
     /**
      * [* Опционально]
@@ -172,7 +173,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Customer_IDP;
+    protected $Customer_IDP = null;
 
     /**
      * [* Опционально]
@@ -180,7 +181,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Card_IDP;
+    protected $Card_IDP = null;
 
     /**
      * [* Опционально]
@@ -189,7 +190,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $PT_Code;
+    protected $PT_Code = null;
 
     /**
      * [* Опционально]
@@ -199,7 +200,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var integer
      */
-    protected $MeanType;
+    protected $MeanType = null;
 
     /**
      * [* Опционально]
@@ -209,7 +210,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var integer
      */
-    protected $EMoneyType;
+    protected $EMoneyType = null;
 
     /**
      * [* Опционально]
@@ -220,7 +221,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var integer
      */
-    protected $BillLifetime;
+    protected $BillLifetime = null;
 
     /**
      * [* Опционально]
@@ -229,7 +230,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var int
      */
-    protected $Preauth;
+    protected $Preauth = null;
 
     /**
      * [* Опционально]
@@ -240,7 +241,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var array
      */
-    protected $CallbackFields;
+    protected $CallbackFields = null;
 
     /**
      * [* Опционально]
@@ -250,7 +251,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $CallbackFormat;
+    protected $CallbackFormat = null;
 
     /**
      * [* Опционально]
@@ -258,7 +259,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Language;
+    protected $Language = null;
 
     /**
      * [* Опционально]
@@ -266,7 +267,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Comment;
+    protected $Comment = null;
 
     /**
      * [* Опционально]
@@ -274,7 +275,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $FirstName;
+    protected $FirstName = null;
 
     /**
      * [* Опционально]
@@ -282,7 +283,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @vars string
      */
-    protected $LastName;
+    protected $LastName = null;
 
     /**
      * [* Опционально]
@@ -290,7 +291,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $MiddleName;
+    protected $MiddleName = null;
 
     /**
      * [* Опционально]
@@ -298,7 +299,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Phone;
+    protected $Phone = null;
 
     /**
      * [* Опционально]
@@ -308,7 +309,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $PhoneVerified;
+    protected $PhoneVerified = null;
 
     /**
      * [* Опционально]
@@ -316,7 +317,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Address;
+    protected $Address = null;
 
     /**
      * [* Опционально]
@@ -324,7 +325,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $Country;
+    protected $Country = null;
 
     /**
      * [* Опционально]
@@ -332,7 +333,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $State;
+    protected $State = null;
 
     /**
      * [* Опционально]
@@ -340,7 +341,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var string
      */
-    protected $City;
+    protected $City = null;
 
     /**
      * [* Опционально]
@@ -348,7 +349,7 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @var
      */
-    protected $Zip;
+    protected $Zip = null;
 
     /**
      * Задаёт идентификатор точки продажи в системе Uniteller.
@@ -387,13 +388,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $orderIdp Номер заказа.
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 127 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 127 символов.
      */
     public function setOrderIdp($orderIdp)
     {
         if (strlen($orderIdp) > 127)
         {
-            throw new BuilderIncorrectValueException("Wrong: OrderIdp = '{$orderIdp}'. Expected length of the OrderIdp <= 127.");
+            throw new FieldIncorrectValueException("Wrong: OrderIdp = '{$orderIdp}'. Expected length of the OrderIdp <= 127.");
         }
 
         $this->Order_IDP = $orderIdp;
@@ -493,13 +494,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $email
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setEmail($email)
     {
         if (strlen($email) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: OrderIdp = '{$email}'. Expected length of the OrderIdp <= 64.");
+            throw new FieldIncorrectValueException("Wrong: OrderIdp = '{$email}'. Expected length of the OrderIdp <= 64.");
         }
 
         $this->Email = $email;
@@ -541,13 +542,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param integer $orderLifetime
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра < 0 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра < 0 символов.
      */
     public function setOrderLifetime($orderLifetime)
     {
         if ($orderLifetime <= 0)
         {
-            throw new BuilderIncorrectValueException("Wrong: orderLifetime = '{$orderLifetime}'. Expected orderLifetime > 0.");
+            throw new FieldIncorrectValueException("Wrong: orderLifetime = '{$orderLifetime}'. Expected orderLifetime > 0.");
         }
 
         $this->OrderLifetime = $orderLifetime;
@@ -561,13 +562,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $customerIdp
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCustomerIdp($customerIdp)
     {
         if (strlen($customerIdp) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: customerIdp = '{$customerIdp}'. Expected length of the customerIdp <= 64.");
+            throw new FieldIncorrectValueException("Wrong: customerIdp = '{$customerIdp}'. Expected length of the customerIdp <= 64.");
         }
 
         $this->Customer_IDP = $customerIdp;
@@ -581,13 +582,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $cardIdp
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCardIdp($cardIdp)
     {
         if (strlen($cardIdp) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: cardIdp = '{$cardIdp}'. Expected length of the cardIdp <= 64.");
+            throw new FieldIncorrectValueException("Wrong: cardIdp = '{$cardIdp}'. Expected length of the cardIdp <= 64.");
         }
 
         $this->Card_IDP = $cardIdp;
@@ -651,13 +652,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param integer $billLifetime
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1080 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1080 символов.
      */
     public function setBillLifetime($billLifetime)
     {
         if ($billLifetime > 1080 || $billLifetime < 1)
         {
-            throw new BuilderIncorrectValueException("Wrong: billLifetime = '{$billLifetime}'. Expected 1 <= billLifetime <= 1080.");
+            throw new FieldIncorrectValueException("Wrong: billLifetime = '{$billLifetime}'. Expected 1 <= billLifetime <= 1080.");
         }
 
         $this->BillLifetime = $billLifetime;
@@ -734,13 +735,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $language
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 2 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 2 символов.
      */
     public function setLanguage($language)
     {
         if (strlen($language) != 2)
         {
-            throw new BuilderIncorrectValueException("Wrong: language = '{$language}'. Expected length of the language == 2.");
+            throw new FieldIncorrectValueException("Wrong: language = '{$language}'. Expected length of the language == 2.");
         }
 
         $this->Language = $language;
@@ -754,13 +755,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $comment
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1024 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 1024 символов.
      */
     public function setComment($comment)
     {
         if (strlen($comment) > 1024)
         {
-            throw new BuilderIncorrectValueException("Wrong: comment = '{$comment}'. Expected length of the comment <= 1024.");
+            throw new FieldIncorrectValueException("Wrong: comment = '{$comment}'. Expected length of the comment <= 1024.");
         }
 
         $this->Comment = $comment;
@@ -774,13 +775,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $firstName
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setFirstName($firstName)
     {
         if (strlen($firstName) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: firstName = '{$firstName}'. Expected length of the firstName <= 64.");
+            throw new FieldIncorrectValueException("Wrong: firstName = '{$firstName}'. Expected length of the firstName <= 64.");
         }
 
         $this->FirstName = $firstName;
@@ -794,13 +795,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $lastName
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setLastName($lastName)
     {
         if (strlen($lastName) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: lastName = '{$lastName}'. Expected length of the lastName <= 64.");
+            throw new FieldIncorrectValueException("Wrong: lastName = '{$lastName}'. Expected length of the lastName <= 64.");
         }
 
         $this->LastName = $lastName;
@@ -814,13 +815,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $middleName
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setMiddleName($middleName)
     {
         if (strlen($middleName) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: middleName = '{$middleName}'. Expected length of the middleName <= 64.");
+            throw new FieldIncorrectValueException("Wrong: middleName = '{$middleName}'. Expected length of the middleName <= 64.");
         }
 
         $this->MiddleName = $middleName;
@@ -834,13 +835,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $phone
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setPhone($phone)
     {
         if (strlen($phone) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
+            throw new FieldIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
         }
 
         $this->Phone = $phone;
@@ -856,13 +857,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
     *
     * @param string $phone
     * @return $this
-    * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+    * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
     */
     public function setPhoneVerified($phone)
     {
         if (strlen($phone) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
+            throw new FieldIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
         }
 
         $this->Phone = $phone;
@@ -878,13 +879,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $address
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 128 символов.
      */
     public function setAddress($address)
     {
         if (strlen($address) > 128)
         {
-            throw new BuilderIncorrectValueException("Wrong: address = '{$address}'. Expected length of the address <= 128.");
+            throw new FieldIncorrectValueException("Wrong: address = '{$address}'. Expected length of the address <= 128.");
         }
 
         $this->Address = $address;
@@ -898,13 +899,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $country
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCountry($country)
     {
         if (strlen($country) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: country = '{$country}'. Expected length of the country <= 64.");
+            throw new FieldIncorrectValueException("Wrong: country = '{$country}'. Expected length of the country <= 64.");
         }
 
         $this->Country = $country;
@@ -918,13 +919,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $state
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 3 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 3 символов.
      */
     public function setState($state)
     {
         if (strlen($state) > 3)
         {
-            throw new BuilderIncorrectValueException("Wrong: state = '{$state}'. Expected length of the state <= 3.");
+            throw new FieldIncorrectValueException("Wrong: state = '{$state}'. Expected length of the state <= 3.");
         }
 
         $this->State = $state;
@@ -938,13 +939,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $city
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setCity($city)
     {
         if (strlen($city) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: city = '{$city}'. Expected length of the city <= 64.");
+            throw new FieldIncorrectValueException("Wrong: city = '{$city}'. Expected length of the city <= 64.");
         }
 
         $this->City = $city;
@@ -958,13 +959,13 @@ class PaymentBuilder implements ArraybleInterface, SignatureFieldsInterface
      *
      * @param string $zip
      * @return $this
-     * @throws \Rusproj\Uniteller\Exception\BuilderIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
+     * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется в том случае, если длина значения параметра > 64 символов.
      */
     public function setZip($zip)
     {
         if (strlen($zip) > 64)
         {
-            throw new BuilderIncorrectValueException("Wrong: zip = '{$zip}'. Expected length of the  zip <= 64.");
+            throw new FieldIncorrectValueException("Wrong: zip = '{$zip}'. Expected length of the  zip <= 64.");
         }
 
         $this->Zip = $zip;
