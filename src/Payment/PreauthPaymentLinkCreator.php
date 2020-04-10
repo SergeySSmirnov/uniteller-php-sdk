@@ -12,13 +12,11 @@
 namespace Rusproj\Uniteller\Payment;
 
 /**
- * @deprecated Используйте {@see FiscalizationPaymentLinkCreator_V1} или {@see FiscalizationPaymentLinkCreator_V2}.
- *
- * Механизм генерации ссылки для перехода к странице оплаты.
+ * Механизм генерации ссылки для перехода к странице преавторизации оплаты.
  *
  * @package Tmconsulting\Client\Payment
  */
-class PaymentLinkCreator implements PaymentLinkCreatorInterface
+class PreauthPaymentLinkCreator implements PaymentLinkCreatorInterface
 {
 
     /**
@@ -27,7 +25,7 @@ class PaymentLinkCreator implements PaymentLinkCreatorInterface
      */
     public function create($baseGatewayUri, $parameters)
     {
-        $uri = sprintf('%s/pay?%s', $baseGatewayUri, http_build_query($parameters));
+        $uri = sprintf('%s/v1/preauth?%s', $baseGatewayUri, http_build_query($parameters));
 
         return new Uri($uri);
     }

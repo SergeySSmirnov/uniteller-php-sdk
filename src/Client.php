@@ -16,7 +16,6 @@ use Rusproj\Uniteller\Exception\NotImplementedException;
 use Rusproj\Uniteller\Http\HttpManager;
 use Rusproj\Uniteller\Http\HttpManagerInterface;
 use Rusproj\Uniteller\Order\Order;
-use Rusproj\Uniteller\Payment\PaymentLinkCreator;
 use Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface;
 use Rusproj\Uniteller\Recurrent\RecurrentRequest;
 use Rusproj\Uniteller\Request\RequestInterface;
@@ -28,6 +27,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Rusproj\Uniteller\Signature\SignatureHandler;
 use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
+use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization_V2;
 
 /**
  * Class Client
@@ -44,6 +44,8 @@ class Client implements ClientInterface
     protected $options = [];
 
     /**
+     * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     *
      * @var \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
      */
     protected $paymentLinkCreator;
@@ -80,9 +82,6 @@ class Client implements ClientInterface
      */
     public function __construct()
     {
-        $this->registerSignatureHandler(new SignatureHandler());
-        $this->registerPaymentLinkCreator(new PaymentLinkCreator());
-
 
 
         $this->registerCancelRequest(new CancelRequest());
@@ -271,10 +270,15 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
+     * Если значение не было задано ранее, то вернёт экземпляр класса {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization_V2}.
+     *
      * @return \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
      */
     public function getPaymentLinkCreator()
     {
+        if (is_null($this->paymentLinkCreator)) {
+            $this->paymentLinkCreator = new PaymentLinkCreatorWithFiscalization_V2();
+        }
         return $this->paymentLinkCreator;
     }
 
@@ -305,10 +309,15 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за вычисление сигнатуры параметров запроса.
      *
+     * Если значение не было задано ранее, то вернёт экземпляр класса {@see \Rusproj\Uniteller\Signature\SignatureHandler}.
+     *
      * @return \Rusproj\Uniteller\Signature\SignatureHandlerInterface
      */
     public function getSignatureHandler()
     {
+        if (is_null($this->signatureHandler)) {
+            $this->signatureHandler = new SignatureHandler();
+        }
         return $this->signatureHandler;
     }
 
@@ -321,8 +330,13 @@ class Client implements ClientInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \Rusproj\Uniteller\ClientInterface::createPymentLink()
+     * Генерирует URI для перехода на страницу оплаты.
+     *
+     * Если не задано значение свойства SignatureHandler, то будет использован {@see \Rusproj\Uniteller\Signature\SignatureHandler}.
+     * Если не задано значение свойства PaymentLinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization_V2}.
+     *
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Tmconsulting\Client\Payment\PaymentBuilder}.
+     * @return \Rusproj\Uniteller\Payment\UriInterface
      */
     public function createPymentLink($parameters)
     {

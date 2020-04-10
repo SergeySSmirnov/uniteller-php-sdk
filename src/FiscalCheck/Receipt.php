@@ -11,7 +11,7 @@ use Rusproj\Uniteller\ClassConversion\ObjectableInterface;
 use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 
 /**
- * Чек для фискализации.
+ * Чек для фискализации для API v. 2.
  *
  * @package Rusproj\Uniteller\FiscalCheck
  */
