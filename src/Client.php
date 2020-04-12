@@ -346,7 +346,7 @@ class Client implements ClientInterface
 
         return $this
             ->getPaymentLinkCreator()
-            ->execute($this->getBaseUri(), $_fields);
+            ->create($this->getBaseUri(), $_fields);
     }
 
     /**
