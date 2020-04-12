@@ -16,11 +16,13 @@ use Rusproj\Uniteller\Signature\SignatureRecurrent;
 use Rusproj\Uniteller\Tests\TestCase;
 use Rusproj\Uniteller\Signature\SignatureHandler;
 use Rusproj\Uniteller\Tests\Payment\FiscaliationPaymentBuilderTest;
+use Rusproj\Uniteller\Payment\PaymentBuilder;
+use Rusproj\Uniteller\Enum\CurrencyTypes;
 
 class SignatureTest extends TestCase
 {
 
-    public function testSignatureHandler()
+    public function testSignatureHandlerForFiscaliationPaymentBuilder()
     {
         $_signatureHandler = new SignatureHandler();
         $_keys = $_signatureHandler->sign(FiscaliationPaymentBuilderTest::createFiscaliationPaymentBuilderTestInstance(), 'Some passwd');
@@ -48,6 +50,46 @@ class SignatureTest extends TestCase
         $this->assertTrue($_keys['IsRecurrentStart'] === '');
     }
 
+    public function testSignatureHandlerForPaymentBuilder()
+    {
+        $_builder = new PaymentBuilder();
+        $_builder
+            ->setCurrency(CurrencyTypes::RUB)
+            ->setOrderIdp('FOO')
+            ->setShopIdp('ACME')
+            ->setSubtotalP('100')
+            ->setLifetime('300')
+            ->setCustomerIdp('short_shop_string')
+            ->setUrlReturnOk('http://mysite.com/success')
+            ->setUrlReturnNo('http://mysite.com/error');
+
+        $_signatureHandler = new SignatureHandler();
+        $_keys = $_signatureHandler->sign($_builder, 'LONG-PWD');
+
+        $this->assertTrue(is_array($_keys));
+
+        $this->assertArrayHasKey('Signature', $_keys);
+        $this->assertTrue($_keys['Signature'] === '3D1D6F830384886A81AD672F66392B03');
+
+        $this->assertArrayHasKey('Shop_IDP', $_keys);
+        $this->assertArrayHasKey('Customer_IDP', $_keys);
+        $this->assertArrayHasKey('Order_IDP', $_keys);
+        $this->assertArrayHasKey('Subtotal_P', $_keys);
+        $this->assertArrayHasKey('Lifetime', $_keys);
+        $this->assertArrayHasKey('URL_RETURN_OK', $_keys);
+        $this->assertArrayHasKey('URL_RETURN_NO', $_keys);
+        $this->assertArrayHasKey('Currency', $_keys);
+        $this->assertArrayHasKey('IsRecurrentStart', $_keys);
+        $this->assertTrue($_keys['Shop_IDP'] === 'ACME');
+        $this->assertTrue($_keys['Customer_IDP'] === 'short_shop_string');
+        $this->assertTrue($_keys['Order_IDP'] === 'FOO');
+        $this->assertTrue($_keys['Subtotal_P'] === '100');
+        $this->assertTrue($_keys['Lifetime'] === '300');
+        $this->assertTrue($_keys['URL_RETURN_OK'] === 'http://mysite.com/success');
+        $this->assertTrue($_keys['URL_RETURN_NO'] === 'http://mysite.com/error');
+        $this->assertTrue($_keys['Currency'] === 'RUB');
+        $this->assertTrue($_keys['IsRecurrentStart'] === '');
+    }
 
     public function testRecurrentSignatureCreation()
     {
