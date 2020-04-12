@@ -116,7 +116,7 @@ class ProductLine implements ObjectableInterface
      */
     public function setName($name)
     {
-        if (strlen($name) > 128) {
+        if (mb_strlen($name) > 128) {
             throw new FieldIncorrectValueException('Длина строки с Названием продукта должна быть 0-128 символов включительно.');
         }
         $this->name = $name;

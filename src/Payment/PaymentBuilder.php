@@ -391,7 +391,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setOrderIdp($orderIdp)
     {
-        if (strlen($orderIdp) > 127)
+        if (mb_strlen($orderIdp) > 127)
         {
             throw new FieldIncorrectValueException("Wrong: OrderIdp = '{$orderIdp}'. Expected length of the OrderIdp <= 127.");
         }
@@ -497,7 +497,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setEmail($email)
     {
-        if (strlen($email) > 64)
+        if (mb_strlen($email) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: OrderIdp = '{$email}'. Expected length of the OrderIdp <= 64.");
         }
@@ -565,7 +565,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setCustomerIdp($customerIdp)
     {
-        if (strlen($customerIdp) > 64)
+        if (mb_strlen($customerIdp) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: customerIdp = '{$customerIdp}'. Expected length of the customerIdp <= 64.");
         }
@@ -585,7 +585,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setCardIdp($cardIdp)
     {
-        if (strlen($cardIdp) > 64)
+        if (mb_strlen($cardIdp) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: cardIdp = '{$cardIdp}'. Expected length of the cardIdp <= 64.");
         }
@@ -738,7 +738,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setLanguage($language)
     {
-        if (strlen($language) != 2)
+        if (mb_strlen($language) != 2)
         {
             throw new FieldIncorrectValueException("Wrong: language = '{$language}'. Expected length of the language == 2.");
         }
@@ -758,7 +758,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setComment($comment)
     {
-        if (strlen($comment) > 1024)
+        if (mb_strlen($comment) > 1024)
         {
             throw new FieldIncorrectValueException("Wrong: comment = '{$comment}'. Expected length of the comment <= 1024.");
         }
@@ -778,7 +778,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setFirstName($firstName)
     {
-        if (strlen($firstName) > 64)
+        if (mb_strlen($firstName) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: firstName = '{$firstName}'. Expected length of the firstName <= 64.");
         }
@@ -798,7 +798,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setLastName($lastName)
     {
-        if (strlen($lastName) > 64)
+        if (mb_strlen($lastName) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: lastName = '{$lastName}'. Expected length of the lastName <= 64.");
         }
@@ -818,7 +818,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setMiddleName($middleName)
     {
-        if (strlen($middleName) > 64)
+        if (mb_strlen($middleName) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: middleName = '{$middleName}'. Expected length of the middleName <= 64.");
         }
@@ -838,7 +838,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setPhone($phone)
     {
-        if (strlen($phone) > 64)
+        if (mb_strlen($phone) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
         }
@@ -860,7 +860,7 @@ class PaymentBuilder implements SignatureFieldsInterface
     */
     public function setPhoneVerified($phone)
     {
-        if (strlen($phone) > 64)
+        if (mb_strlen($phone) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: phone = '{$phone}'. Expected length of the phone <= 64.");
         }
@@ -882,7 +882,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setAddress($address)
     {
-        if (strlen($address) > 128)
+        if (mb_strlen($address) > 128)
         {
             throw new FieldIncorrectValueException("Wrong: address = '{$address}'. Expected length of the address <= 128.");
         }
@@ -902,7 +902,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setCountry($country)
     {
-        if (strlen($country) > 64)
+        if (mb_strlen($country) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: country = '{$country}'. Expected length of the country <= 64.");
         }
@@ -922,7 +922,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setState($state)
     {
-        if (strlen($state) > 3)
+        if (mb_strlen($state) > 3)
         {
             throw new FieldIncorrectValueException("Wrong: state = '{$state}'. Expected length of the state <= 3.");
         }
@@ -942,7 +942,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setCity($city)
     {
-        if (strlen($city) > 64)
+        if (mb_strlen($city) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: city = '{$city}'. Expected length of the city <= 64.");
         }
@@ -962,7 +962,7 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     public function setZip($zip)
     {
-        if (strlen($zip) > 64)
+        if (mb_strlen($zip) > 64)
         {
             throw new FieldIncorrectValueException("Wrong: zip = '{$zip}'. Expected length of the  zip <= 64.");
         }

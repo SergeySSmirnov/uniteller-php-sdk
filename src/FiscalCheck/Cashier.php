@@ -56,7 +56,7 @@ class Cashier implements ObjectableInterface
      * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется если длина строки параметра больше 240 символов.
      */
     public function setName($name) {
-        if (strlen($name) > 240) {
+        if (mb_strlen($name) > 240) {
             throw new FieldIncorrectValueException('Длина строки с Ф.И.О. кассира должна быть 0-240 символов включительно.');
         }
         $this->name = $name;
@@ -80,7 +80,7 @@ class Cashier implements ObjectableInterface
      * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется если длина строки параметра не 12 цифр и не пусто.
      */
     public function setInn($inn) {
-        if (!empty($inn) && strlen($inn) !== 12) {
+        if (!empty($inn) && mb_strlen($inn) !== 12) {
             throw new FieldIncorrectValueException('Длина строки с ИНН кассира должна быть 12 символов или пусто.');
         }
         $this->inn = $inn;

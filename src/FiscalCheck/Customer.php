@@ -147,7 +147,7 @@ class Customer implements ObjectableInterface
      * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется если длина строки параметра больше 243 символов.
      */
     public function setName($name) {
-        if (strlen($name) > 243) {
+        if (mb_strlen($name) > 243) {
             throw new FieldIncorrectValueException('Длина строки значения должна быть 0-243 символов включительно.');
         }
         $this->name = $name;
@@ -173,7 +173,7 @@ class Customer implements ObjectableInterface
      * @throws \Rusproj\Uniteller\Exception\FieldIncorrectValueException Исключение генерируется если длина строки параметра не 10-12 цифр и не пусто.
      */
     public function setInn($inn) {
-        $_innLen = strlen($inn);
+        $_innLen = mb_strlen($inn);
         if (!empty($inn) && ($_innLen < 10 || $_innLen > 12)) {
             throw new FieldIncorrectValueException('Длина строки значения должна быть 10-12 символов включительно или пусто.');
         }
