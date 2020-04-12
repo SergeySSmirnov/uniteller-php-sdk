@@ -471,4 +471,5 @@ class Client implements ClientInterface
             ->setPassword($this->getPassword())
             ->verify(array_get($params, 'Signature'));
     }
+
 }

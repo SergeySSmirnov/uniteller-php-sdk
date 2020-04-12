@@ -1,10 +1,6 @@
 <?php
 /**
- * Created by Roquie.
- * E-mail: roquie0@gmail.com
- * GitHub: Roquie
- *
- * Modified by Sergey S. Smirnov
+ * Created by Sergey S. Smirnov
  * E-mail: sergeyssmirnov@mail.ru
  * Github: SergeySSmirnov
  */
