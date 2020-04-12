@@ -49,18 +49,6 @@ interface ClientInterface
     public function recurrent($parameters);
 
     /**
-     * @param array $parameters
-     * @return mixed
-     */
-    public function confirm($parameters);
-
-    /**
-     * @param array $parameters
-     * @return mixed
-     */
-    public function card($parameters);
-
-    /**
      * Verify signature when Client will be send callback request.
      *
      * @param array $params
