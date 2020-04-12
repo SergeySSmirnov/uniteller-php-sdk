@@ -9,19 +9,21 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\Http;
 
 /**
- * Интерфейс генерации ссылки для перехода к странице оплаты.
+ * Интерфейс генерации ссылки для страницы выполнения некоторого действия.
+ *
+ * @package Rusproj\Uniteller\Http
  */
-interface PaymentLinkCreatorInterface
+interface LinkCreatorInterface
 {
     /**
-     * Генерирует и возвращает ссылку для перехода к странице оплаты.
+     * Генерирует и возвращает ссылку.
      *
      * @param string $baseGatewayUri Базовый Uri платёжного шлюза.
      * @param array $parameters Параметры для генерации ссылки.
      * @return \Rusproj\Uniteller\Http\UriInterface
      */
-    public function create($baseGatewayUri, $parameters);
+    public function create($baseGatewayUri, $parameters = null);
 }

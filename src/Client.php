@@ -16,7 +16,7 @@ use Rusproj\Uniteller\Exception\NotImplementedException;
 use Rusproj\Uniteller\Http\HttpManager;
 use Rusproj\Uniteller\Http\HttpManagerInterface;
 use Rusproj\Uniteller\Order\Order;
-use Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface;
+use Rusproj\Uniteller\Http\LinkCreatorInterface;
 use Rusproj\Uniteller\Recurrent\RecurrentRequest;
 use Rusproj\Uniteller\Request\RequestInterface;
 use Rusproj\Uniteller\Results\ResultsRequest;
@@ -46,7 +46,7 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * @var \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
+     * @var \Rusproj\Uniteller\Http\LinkCreatorInterface
      */
     protected $paymentLinkCreator;
 
@@ -155,10 +155,10 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * @param \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface $payment
+     * @param \Rusproj\Uniteller\Http\LinkCreatorInterface $payment
      * @return $this
      */
-    public function registerPaymentLinkCreator(PaymentLinkCreatorInterface $payment)
+    public function registerPaymentLinkCreator(LinkCreatorInterface $payment)
     {
         $this->paymentLinkCreator = $payment;
 
@@ -272,7 +272,7 @@ class Client implements ClientInterface
      *
      * Если значение не было задано ранее, то вернёт экземпляр класса {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
      *
-     * @return \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
+     * @return \Rusproj\Uniteller\Http\LinkCreatorInterface
      */
     public function getPaymentLinkCreator()
     {

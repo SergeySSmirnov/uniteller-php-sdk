@@ -8,18 +8,19 @@
 namespace Rusproj\Uniteller\Payment;
 
 use Rusproj\Uniteller\Http\Uri;
+use Rusproj\Uniteller\Http\LinkCreatorInterface;
 
 /**
  * Механизм генерации ссылки для перехода к странице оплаты с фискализацией API v. 2.
  *
  * @package Rusproj\Client\Payment
  */
-class PaymentLinkCreatorWithFiscalization implements PaymentLinkCreatorInterface
+class PaymentLinkCreatorWithFiscalization implements LinkCreatorInterface
 {
 
     /**
      * {@inheritDoc}
-     * @see \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface::execute()
+     * @see \Rusproj\Uniteller\Http\LinkCreatorInterface::execute()
      */
     public function create($baseGatewayUri, $parameters)
     {

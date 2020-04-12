@@ -8,18 +8,19 @@
 namespace Rusproj\Uniteller\Payment;
 
 use Rusproj\Uniteller\Http\Uri;
+use Rusproj\Uniteller\Http\LinkCreatorInterface;
 
 /**
  * Механизм генерации ссылки для перехода к странице преавторизации оплаты.
  *
  * @package Rusproj\Client\Payment
  */
-class PreauthPaymentLinkCreator implements PaymentLinkCreatorInterface
+class PreauthPaymentLinkCreator implements LinkCreatorInterface
 {
 
     /**
      * {@inheritDoc}
-     * @see \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface::execute()
+     * @see \Rusproj\Uniteller\Http\LinkCreatorInterface.php::execute()
      */
     public function create($baseGatewayUri, $parameters)
     {

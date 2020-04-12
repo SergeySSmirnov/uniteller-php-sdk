@@ -12,7 +12,7 @@ use Rusproj\Uniteller\Cancel\CancelRequest;
 use Rusproj\Uniteller\Client;
 use Rusproj\Uniteller\Exception\NotImplementedException;
 use Rusproj\Uniteller\Http\HttpManagerInterface;
-use Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface;
+use Rusproj\Uniteller\Http\LinkCreatorInterface;
 use Rusproj\Uniteller\Request\RequestInterface;
 use Rusproj\Uniteller\Signature\SignatureHandlerInterface;
 
@@ -44,7 +44,7 @@ class ClientTest extends TestCase
     public function testDefaultObjectsIsRegistered()
     {
         $uniteller = new Client();
-        $this->assertInstanceOf(PaymentLinkCreatorInterface::class, $uniteller->getPayment());
+        $this->assertInstanceOf(LinkCreatorInterface::class, $uniteller->getPayment());
         $this->assertInstanceOf(SignatureHandlerInterface::class, $uniteller->getSignaturePayment());
         $this->assertInstanceOf(SignatureHandlerInterface::class, $uniteller->getSignatureRecurrent());
     }
@@ -131,7 +131,7 @@ class ClientTest extends TestCase
 
     public function testShouldBePaymentMethodBuildCorrectArray()
     {
-        $payment = $this->createMock(PaymentLinkCreatorInterface::class);
+        $payment = $this->createMock(LinkCreatorInterface::class);
         $payment
             ->expects($this->once())
             ->method('execute')
@@ -229,7 +229,7 @@ class ClientTest extends TestCase
         $client->registerResultsRequest($request);
         $client->registerCancelRequest($request);
         $client->registerRecurrentRequest($request);
-        $client->registerPayment($this->createMock(PaymentLinkCreatorInterface::class));
+        $client->registerPayment($this->createMock(LinkCreatorInterface::class));
 
         $arrayble = $this->createMock(ArraybleInterface::class);
         $arrayble
