@@ -205,7 +205,7 @@ class PaymentBuilderTest extends TestCase
     {
         $_result = '';
         for ($_i = 0; $_i < $length; $_i++) {
-            $_result .= chr(rand(1, 255));
+            $_result .= mb_chr(rand(1, 255));
         }
         return $_result;
     }
