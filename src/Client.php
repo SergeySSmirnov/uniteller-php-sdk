@@ -27,7 +27,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Rusproj\Uniteller\Signature\SignatureHandler;
 use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
-use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization_V2;
+use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization;
 
 /**
  * Class Client
@@ -270,14 +270,14 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
      *
-     * Если значение не было задано ранее, то вернёт экземпляр класса {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization_V2}.
+     * Если значение не было задано ранее, то вернёт экземпляр класса {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
      *
      * @return \Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface
      */
     public function getPaymentLinkCreator()
     {
         if (is_null($this->paymentLinkCreator)) {
-            $this->paymentLinkCreator = new PaymentLinkCreatorWithFiscalization_V2();
+            $this->paymentLinkCreator = new PaymentLinkCreatorWithFiscalization();
         }
         return $this->paymentLinkCreator;
     }
@@ -333,9 +333,9 @@ class Client implements ClientInterface
      * Генерирует URI для перехода на страницу оплаты.
      *
      * Если не задано значение свойства SignatureHandler, то будет использован {@see \Rusproj\Uniteller\Signature\SignatureHandler}.
-     * Если не задано значение свойства PaymentLinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization_V2}.
+     * Если не задано значение свойства PaymentLinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
      *
-     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Tmconsulting\Client\Payment\PaymentBuilder}.
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Payment\UriInterface
      */
     public function createPymentLink($parameters)
@@ -393,30 +393,6 @@ class Client implements ClientInterface
         $array['Signature'] = $this->signatureRecurrent->create();
 
         return $this->callRequestFor('recurrent', $array);
-    }
-
-    /**
-     * @param array $parameters
-     * @return mixed
-     * @throws \Rusproj\Uniteller\Exception\NotImplementedException
-     */
-    public function confirm($parameters)
-    {
-        throw new NotImplementedException(sprintf(
-            'In current moment, feature [%s] not implemented.', __METHOD__
-        ));
-    }
-
-    /**
-     * @param array $parameters
-     * @return mixed
-     * @throws \Rusproj\Uniteller\Exception\NotImplementedException
-     */
-    public function card($parameters)
-    {
-        throw new NotImplementedException(sprintf(
-            'In current moment, feature [%s] not implemented.', __METHOD__
-        ));
     }
 
     /**
