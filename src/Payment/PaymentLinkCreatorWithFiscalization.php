@@ -10,7 +10,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Механизм генерации ссылки для перехода к странице оплаты с фискализацией API v. 2.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Rusproj\Client\Payment
  */
 class PaymentLinkCreatorWithFiscalization implements PaymentLinkCreatorInterface
 {

@@ -14,7 +14,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Uri для перехода на страницу оплаты.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Rusproj\Client\Payment
  */
 final class Uri implements UriInterface
 {

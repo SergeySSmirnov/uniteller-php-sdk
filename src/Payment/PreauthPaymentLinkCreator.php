@@ -10,7 +10,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Механизм генерации ссылки для перехода к странице преавторизации оплаты.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Rusproj\Client\Payment
  */
 class PreauthPaymentLinkCreator implements PaymentLinkCreatorInterface
 {

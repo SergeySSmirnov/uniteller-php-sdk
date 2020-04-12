@@ -18,7 +18,7 @@ use Rusproj\Uniteller\Enum\CurrencyTypes;
 /**
  * Параметры запроса для генерации ссылки для оплаты.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Rusproj\Client\Payment
  */
 class PaymentBuilder implements SignatureFieldsInterface
 {

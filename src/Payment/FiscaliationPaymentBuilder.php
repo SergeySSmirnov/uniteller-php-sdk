@@ -10,7 +10,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Параметры запроса для генерации ссылки для оплаты с фискализацией.
  *
- * @package Tmconsulting\Client\Payment
+ * @package Rusproj\Client\Payment
  */
 class FiscaliationPaymentBuilder extends PaymentBuilder
 {

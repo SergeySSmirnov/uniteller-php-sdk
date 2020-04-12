@@ -14,7 +14,7 @@ namespace Rusproj\Uniteller\Signature;
 /**
  * Интерфейс вычисления сигнатуры запроса.
  *
- * @package Tmconsulting\Client
+ * @package Rusproj\Uniteller\Signature
  */
 interface SignatureHandlerInterface
 {
