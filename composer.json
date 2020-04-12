@@ -4,9 +4,6 @@
 	"type" : "library",
 	"license" : "MIT",
 	"authors" : [{
-			"name" : "roquie",
-			"email" : "roquie0@gmail.com"
-		}, {
 			"name" : "Sergey S. Smirnov",
 			"email" : "sergeyssmirnov@mail.ru",
 			"homepage" : "https://rusproj.space"
