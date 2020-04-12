@@ -21,7 +21,7 @@ interface PaymentLinkCreatorInterface
      *
      * @param string $baseGatewayUri Базовый Uri платёжного шлюза.
      * @param array $parameters Параметры для генерации ссылки.
-     * @return \Rusproj\Uniteller\Payment\UriInterface
+     * @return \Rusproj\Uniteller\Http\UriInterface
      */
     public function create($baseGatewayUri, $parameters);
 }

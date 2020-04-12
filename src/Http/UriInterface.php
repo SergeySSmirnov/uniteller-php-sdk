@@ -9,21 +9,23 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\Http;
 
 /**
- * Интерфейс для формирования ссылки перехода на страницу оплаты.
+ * Интерфейс для формирования ссылки на ресурс.
+ *
+ * @package Rusproj\Uniteller\Http
  */
 interface UriInterface
 {
     /**
-     * Возвращает строку с ссылкой на страницу оплаты.
+     * Возвращает строку с ссылкой.
      * @return string
      */
     public function getUri();
 
     /**
-     * Осуществляет переход на страницу оплаты.
+     * Осуществляет переход на страницу.
      * @return void
      */
     public function go();

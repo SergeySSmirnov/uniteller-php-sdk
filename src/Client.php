@@ -330,13 +330,13 @@ class Client implements ClientInterface
     }
 
     /**
-     * Генерирует URI для перехода на страницу оплаты.
+     * Генерирует Uri для перехода на страницу оплаты.
      *
      * Если не задано значение свойства SignatureHandler, то будет использован {@see \Rusproj\Uniteller\Signature\SignatureHandler}.
      * Если не задано значение свойства PaymentLinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
-     * @return \Rusproj\Uniteller\Payment\UriInterface
+     * @return \Rusproj\Uniteller\Http\UriInterface
      */
     public function createPymentLink($parameters)
     {

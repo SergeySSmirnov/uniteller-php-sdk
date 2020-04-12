@@ -12,7 +12,7 @@
 
 namespace Rusproj\Uniteller\Tests\Payment;
 
-use Rusproj\Uniteller\Payment\UriInterface;
+use Rusproj\Uniteller\Http\UriInterface;
 use Rusproj\Uniteller\Tests\TestCase;
 use Rusproj\Uniteller\Client;
 use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization;

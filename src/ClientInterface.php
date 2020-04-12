@@ -12,7 +12,7 @@
 namespace Rusproj\Uniteller;
 
 use Rusproj\Uniteller\Order\Order;
-use Rusproj\Uniteller\Payment\UriInterface;
+use Rusproj\Uniteller\Http\UriInterface;
 
 /**
  * Interface ClientInterface
@@ -26,7 +26,7 @@ interface ClientInterface
      * Генерирует URI для перехода на страницу оплаты.
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
-     * @return \Rusproj\Uniteller\Payment\UriInterface
+     * @return \Rusproj\Uniteller\Http\UriInterface
      */
     public function createPymentLink($parameters);
 

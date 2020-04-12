@@ -9,23 +9,23 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\Http;
 
 /**
  * Uri для перехода на страницу оплаты.
  *
- * @package Rusproj\Client\Payment
+ * @package Rusproj\Uniteller\Http
  */
 final class Uri implements UriInterface
 {
     /**
-     * Uri на страницу оплаты.
+     * Uri.
      * @var string
      */
     private $uri;
 
     /**
-     * Инициализирует новый экземпляр класса @see \Rusproj\Uniteller\Payment\Uri.
+     * Инициализирует новый экземпляр класса {@see \Rusproj\Uniteller\Http\Uri}.
      *
      * @param $uri
      */
@@ -35,8 +35,8 @@ final class Uri implements UriInterface
     }
 
     /**
-     * Возвращает строку с ссылкой на страницу оплаты.
-     * @return string
+     * {@inheritDoc}
+     * @see \Rusproj\Uniteller\Http\UriInterface::getUri()
      */
     public function getUri()
     {
@@ -44,8 +44,8 @@ final class Uri implements UriInterface
     }
 
     /**
-     * Устанавливает заголовок ответа "Location" в значение @see \Rusproj\Uniteller\Payment\Uri::getUri().
-     * @return void
+     * {@inheritDoc}
+     * @see \Rusproj\Uniteller\Http\UriInterface::go()
      */
     public function go()
     {

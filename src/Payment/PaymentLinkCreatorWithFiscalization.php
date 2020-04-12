@@ -7,6 +7,8 @@
 
 namespace Rusproj\Uniteller\Payment;
 
+use Rusproj\Uniteller\Http\Uri;
+
 /**
  * Механизм генерации ссылки для перехода к странице оплаты с фискализацией API v. 2.
  *
