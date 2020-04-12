@@ -7,26 +7,22 @@
 
 namespace Rusproj\Uniteller\Payment;
 
-use Rusproj\Uniteller\Http\Uri;
-use Rusproj\Uniteller\Http\LinkCreatorInterface;
+use Rusproj\Uniteller\Http\LinkCreatorAbstract;
 
 /**
  * Механизм генерации ссылки для перехода к странице преавторизации оплаты.
  *
  * @package Rusproj\Client\Payment
  */
-class PreauthPaymentLinkCreator implements LinkCreatorInterface
+class PreauthPaymentLinkCreator extends LinkCreatorAbstract
 {
 
     /**
      * {@inheritDoc}
-     * @see \Rusproj\Uniteller\Http\LinkCreatorInterface.php::execute()
+     * @see \Rusproj\Uniteller\Http\LinkCreatorAbstract::getPath()
      */
-    public function create($baseGatewayUri, $parameters)
-    {
-        $uri = sprintf('%s/v1/preauth?%s', $baseGatewayUri, http_build_query($parameters));
-
-        return new Uri($uri);
+    protected function getPath() {
+        return 'v1/preauth';
     }
 
 }

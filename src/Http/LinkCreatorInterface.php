@@ -22,7 +22,7 @@ interface LinkCreatorInterface
      * Генерирует и возвращает ссылку.
      *
      * @param string $baseGatewayUri Базовый Uri платёжного шлюза.
-     * @param array $parameters Параметры для генерации ссылки.
+     * @param array|string|null $parameters $_GET-параметры для генерации ссылки.
      * @return \Rusproj\Uniteller\Http\UriInterface
      */
     public function create($baseGatewayUri, $parameters = null);

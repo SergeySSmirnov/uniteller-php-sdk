@@ -20,6 +20,22 @@ use Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator;
 
 class PaymentLinkCreatorTest extends TestCase
 {
+    public function testCreateAbstractLink()
+    {
+        $_client = new Client();
+        $_client->setBaseUri('https://google.com');
+
+        $_payment = new PaymentLinkCreatorWithFiscalization();
+        $_results = $_payment->create($_client->getBaseUri());
+
+        $this->assertInstanceOf(UriInterface::class, $_results);
+        $this->assertEquals('https://google.com/v2/pay', $_results->getUri());
+
+        $_results = $_payment->create($_client->getBaseUri(), 'param=val');
+
+        $this->assertInstanceOf(UriInterface::class, $_results);
+        $this->assertEquals('https://google.com/v2/pay?param=val', $_results->getUri());
+    }
 
     public function testCreateUriPaymentWithFiscalization()
     {
