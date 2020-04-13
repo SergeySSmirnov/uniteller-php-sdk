@@ -10,8 +10,10 @@
 <br />
 
 ## Description
-Fully refactored fork of the [tmconsulting/uniteller-php-sdk ](https://packagist.org/packages/tmconsulting/uniteller-php-sdk).<br />
-PHP (5.5+) SDK for integration internet-acquiring of the Uniteller (unofficial).<br />
+Fully refactored fork of the [tmconsulting/uniteller-php-sdk ](https://packagist.org/packages/tmconsulting/uniteller-php-sdk).  
+PHP (5.5+) SDK for integration internet-acquiring of the Uniteller (unofficial).    
+
+<b>Important! The actual version is not compatible with the version 0.2.*.</b>
 
 ## More info & Help
 

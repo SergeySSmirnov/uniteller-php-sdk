@@ -10,17 +10,22 @@
 
 
 ## Описание
-Полностью переработанный форк [tmconsulting/uniteller-php-sdk ](https://packagist.org/packages/tmconsulting/uniteller-php-sdk).  
-
-PHP (5.5+) SDK для интеграции с интернет-эквайрингом от Uniteller (не официальная).
+Полностью переработанный форк [tmconsulting/uniteller-php-sdk ](https://packagist.org/packages/tmconsulting/uniteller-php-sdk).    
+PHP (5.5+) SDK для интеграции с интернет-эквайрингом от Uniteller (не официальная).    
+  
+<b>Важно! Текущая версия не совместима с 0.2.*.</b>    
+<br />
+<b>Важно! На данный момент реализована поддержка только API v. 2.</b>
 
 ## Соответствие техническим порядкам
-* ТП Интернет-экваринг v. 1.41 rev. 2 (реализовано частично)
-* Платежи с фискализацией v. 2.1.10 rev. 1-1 (реализовано частично) (<b>* Основной документ</b>)
+* ТП Интернет-экваринг v. 1.41 rev. 2
+* Платежи с фискализацией v. 2.1.10 rev. 1-1
 
-## Реализовано (в скобках указан раздел *официальной документации)
+## Что реализовано
+В квадратных скобках указан раздел из [Платежи с фискализацией v. 2.1.10 rev. 1-1].
 * [3.2] Форма оплаты с фискализацией (версия 2.0)
 * [3.10] Преавторизация с печатью чека аванса с использованием
+* [3.13.2] Подтверждение платежа с преавторизацией
 платёжной формы
 * [3.19] callback (проверка сигнатуры)
 *
@@ -63,7 +68,7 @@ $_client = (new Client())
 
 Все константы, которые могут быть использованы для установки значений доступны в пространстве имён `\Rusproj\Uniteller\Enum\`.
 
-#### Неполный пример
+#### Пример
 ```php
 <?php
 use Rusproj\Uniteller\FiscalCheck\Customer;
@@ -114,7 +119,7 @@ $_receipt = (new Receipt())
 * `PaymentBuilder` - общий построитель параметров запросов для оплаты;
 * `FiscaliationPaymentBuilder` - построитель параметров запросов для оплаты с фискализацией.
 
-#### Неполный пример использования
+#### Пример
 ```php
 <?php
 use Rusproj\Uniteller\Payment\PaymentBuilder;
@@ -146,26 +151,33 @@ $_fiscalPaymentBuilder = (new FiscaliationPaymentBuilder())
 ```
 
 ### Генераторы ссылок
-Для генерации ссылок (адресов к которым будут генерироваться запросы) необходимо создать и зарегистрировать в клиенте соответствующий генератор из пространства имён `\Rusproj\Uniteller\Payment\`:
-* `PaymentLinkCreatorWithFiscalization_V2` - форма оплаты с фискализацией (версия 2.0);
-* `PreauthPaymentLinkCreator` - преавторизация с печатью чека аванса с использованием
+Для генерации ссылок (адресов к которым будут генерироваться запросы) необходимо создать и зарегистрировать в клиенте соответствующий генератор:
+* `\Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization` - [3.2] форма оплаты с фискализацией (версия 2.0);
+* `\Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator` - [3.10] преавторизация с печатью чека аванса с использованием
 платёжной формы;
+* `\Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentLinkCreator` - [3.13.2] подтверждение платежа с преавторизацией (версия 2.0);
 
-### Переход к оплате
+### Переход к оплате [3.2] Форма оплаты с фискализацией (версия 2.0)
 ```php
 
-// [3.2] Форма оплаты с фискализацией (версия 2.0)
 $_client
-    ->registerPaymentLinkCreator(new PaymentLinkCreatorWithFiscalization_V2());
+    ->setLinkCreator(new PaymentLinkCreatorWithFiscalization());
     ->createPymentLink($_fiscalPaymentBuilder); // ->go() или getUri()
+```
 
-
-// [3.10] Преавторизация с печатью чека аванса с использованием платёжной формы
+### Переход к оплате [3.10] Преавторизация с печатью чека аванса с использованием платёжной формы
+```php
 
 $_paymentBuilder->usePreAuth(); // Обязательный признак преавторизации
 $_client
-    ->registerPaymentLinkCreator(new PreauthPaymentLinkCreator())
-    ->createPymentLink($_paymentBuilder); // ->go() или getUri()
+    ->setLinkCreator(new PreauthPaymentLinkCreator())
+    ->createPaymentLink($_paymentBuilder); // ->go() или getUri()
+```
+
+### [3.13.2] Подтверждение платежа с преавторизацией (версия 2.0)
+```php
+
+$_queryResult = $_client->submitPreauthPayment($_paymentBuilder);
 ```
 
 ### Callback
@@ -180,12 +192,15 @@ if (! $_client->verifyCallbackRequest(['all_parameters_from_post_with_signature'
 ```
 
 ## Как реализовать остальное
-В большинстве случаев достаточно реализовать класс, реализующий `\Rusproj\Uniteller\Payment\PaymentLinkCreatorInterface`.
+В большинстве случаев достаточно реализовать класс, производный от `\Rusproj\Uniteller\Http\LinkCreatorInterface`.
 Смотрите примеры реализации в соответствующих классах.
+
+Дополнительные возможности в большинстве случаев создаются "по аналогии".
 
 ## TODO
 
 * В readme.md добавить https://poser.pugx.org бейджи.
+* Реализовать то, что ещё не сделано в соответствии с техническими регламентами.
 
 ## Тесты
 
