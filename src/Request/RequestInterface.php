@@ -45,8 +45,9 @@ interface RequestInterface
      * Выполнение запроса к шлюзу.
      *
      * @param \Rusproj\Uniteller\Http\HttpManagerInterface $httpManager
+     * @param \Rusproj\Uniteller\Http\Uri $uri
      * @param array $parameters
      * @return mixed
      */
-    public function execute(HttpManagerInterface $httpManager, array $parameters = []);
+    public function execute($httpManager, $uri, array $parameters = []);
 }

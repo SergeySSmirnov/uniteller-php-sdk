@@ -28,6 +28,8 @@ use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Rusproj\Uniteller\Signature\SignatureHandler;
 use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization;
+use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentLinkCreator;
+use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentRequest;
 
 /**
  * Class Client
@@ -44,50 +46,32 @@ class Client implements ClientInterface
     protected $options = [];
 
     /**
-     * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     * Объект, отвечающий за генерацию Uri-адресов.
      *
      * @var \Rusproj\Uniteller\Http\LinkCreatorInterface
      */
-    protected $paymentLinkCreator;
+    protected $linkCreator = null;
 
     /**
      * Объект, отвечающий за вычисление сигнатуры параметров запроса.
      *
      * @var \Rusproj\Uniteller\Signature\SignatureHandlerInterface
      */
-    protected $signatureHandler;
+    protected $signatureHandler = null;
 
     /**
+     * Объект, представляющий запрос к шлюзу.
+     *
      * @var RequestInterface
      */
-    protected $cancelRequest;
+    protected $request = null;
 
     /**
-     * @var RequestInterface
-     */
-    protected $resultsRequest;
-
-    /**
-     * @var RequestInterface
-     */
-    protected $recurrentRequest;
-
-    /**
+     * Менеджер для выполнения запросов к шлюзу.
+     *
      * @var HttpManagerInterface
      */
-    protected $httpManager;
-
-    /**
-     * Инициализирует экземпляр класса {@see \Rusproj\Uniteller\Client}.
-     */
-    public function __construct()
-    {
-
-
-        $this->registerCancelRequest(new CancelRequest());
-        $this->registerResultsRequest(new ResultsRequest());
-        $this->registerRecurrentRequest(new RecurrentRequest());
-    }
+    protected $httpManager = null;
 
     /**
      * Базовый Uri платёжного шлюза.
@@ -142,6 +126,8 @@ class Client implements ClientInterface
     }
 
     /**
+     * Менеджер для выполнения запросов к шлюзу.
+     *
      * @param HttpManagerInterface $httpManager
      * @return $this
      */
@@ -153,12 +139,12 @@ class Client implements ClientInterface
     }
 
     /**
-     * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
+     * Объект, отвечающий за генерацию Uri-адресов.
      *
      * @param \Rusproj\Uniteller\Http\LinkCreatorInterface $payment
      * @return $this
      */
-    public function registerPaymentLinkCreator(LinkCreatorInterface $payment)
+    public function setLinkCreator(LinkCreatorInterface $payment)
     {
         $this->paymentLinkCreator = $payment;
 
@@ -166,34 +152,14 @@ class Client implements ClientInterface
     }
 
     /**
+     * Объект, представляющий запрос к шлюзу.
+     *
      * @param RequestInterface $cancel
      * @return $this
      */
-    public function registerCancelRequest(RequestInterface $cancel)
+    public function setRequest(RequestInterface $cancel)
     {
-        $this->cancelRequest = $cancel;
-
-        return $this;
-    }
-
-    /**
-     * @param RequestInterface $request
-     * @return $this
-     */
-    public function registerResultsRequest(RequestInterface $request)
-    {
-        $this->resultsRequest = $request;
-
-        return $this;
-    }
-
-    /**
-     * @param RequestInterface $request
-     * @return $this
-     */
-    public function registerRecurrentRequest(RequestInterface $request)
-    {
-        $this->recurrentRequest = $request;
+        $this->request = $cancel;
 
         return $this;
     }
@@ -268,42 +234,23 @@ class Client implements ClientInterface
     }
 
     /**
-     * Объект, отвечающий за генерацию ссылки для перехода на страницу оплаты.
-     *
-     * Если значение не было задано ранее, то вернёт экземпляр класса {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
+     * Объект, отвечающий за генерацию Uri-адресов.
      *
      * @return \Rusproj\Uniteller\Http\LinkCreatorInterface
      */
-    public function getPaymentLinkCreator()
+    public function getLinkCreator()
     {
-        if (is_null($this->paymentLinkCreator)) {
-            $this->paymentLinkCreator = new PaymentLinkCreatorWithFiscalization();
-        }
-        return $this->paymentLinkCreator;
+        return $this->linkCreator;
     }
 
     /**
+     * Объект, представляющий запрос к шлюзу.
+     *
      * @return \Rusproj\Uniteller\Request\RequestInterface
      */
-    public function getCancelRequest()
+    public function getRequest()
     {
-        return $this->cancelRequest;
-    }
-
-    /**
-     * @return \Rusproj\Uniteller\Request\RequestInterface
-     */
-    public function getResultsRequest()
-    {
-        return $this->resultsRequest;
-    }
-
-    /**
-     * @return \Rusproj\Uniteller\Request\RequestInterface
-     */
-    public function getRecurrentRequest()
-    {
-        return $this->recurrentRequest;
+        return $this->request;
     }
 
     /**
@@ -322,10 +269,19 @@ class Client implements ClientInterface
     }
 
     /**
+     * Менеджер для выполнения запросов к шлюзу.
+     *
+     * Если значение не было задано ранее, то вернёт {@see \Rusproj\Uniteller\Http\HttpManager}.
+     *
      * @return \Rusproj\Uniteller\Http\HttpManagerInterface
      */
     public function getHttpManager()
     {
+        if (is_null($this->httpManager)) {
+            $_httpClient = new GuzzleAdapter(new GuzzleClient());
+            $this->httpManager = new HttpManager($_httpClient, $this->getOptions());
+        }
+
         return $this->httpManager;
     }
 
@@ -338,15 +294,45 @@ class Client implements ClientInterface
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Http\UriInterface
      */
-    public function createPymentLink($parameters)
+    public function createPaymentLink($parameters)
     {
         $_fields = $this
             ->getSignatureHandler()
             ->sign($parameters, $this->getPassword());
 
-        return $this
-            ->getPaymentLinkCreator()
-            ->create($this->getBaseUri(), $_fields);
+        $_paymentLinkCreator = $this->getLinkCreator();
+
+        if (is_null($_paymentLinkCreator)) {
+            $_paymentLinkCreator = new PaymentLinkCreatorWithFiscalization();
+        }
+
+        $_paymentLinkCreator->create($this->getBaseUri(), $_fields);
+    }
+
+    /**
+     * Отправляет запрос на подтверждение платежа с преавторизацией.
+     *
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\PaymentConfirm\PreauthConfirmBuilder}.
+     * @return mixed
+     */
+    public function submitPreauthPayment($parameters)
+    {
+        $_fields = $this
+            ->getSignatureHandler()
+            ->sign($parameters, $this->getPassword());
+
+        $_paymentLinkCreator = $this->getLinkCreator();
+        if (is_null($_paymentLinkCreator)) {
+            $_paymentLinkCreator = new PreauthConfirmPaymentLinkCreator();
+        }
+        $_uri = $_paymentLinkCreator->create($this->getBaseUri());
+
+        $_request = $this->getRequest();
+        if (is_null($_request)) {
+            $_request = new PreauthConfirmPaymentRequest();
+        }
+
+        return $_request->execute($this->getHttpManager(), $_uri, $_fields);
     }
 
     /**

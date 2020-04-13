@@ -31,6 +31,14 @@ interface ClientInterface
     public function createPymentLink($parameters);
 
     /**
+     * Отправляет запрос на подтверждение платежа с преавторизацией.
+     *
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
+     * @return mixed
+     */
+    public function submitPreauthPayment($parameters);
+
+    /**
      * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters
      * @return Order
      */
