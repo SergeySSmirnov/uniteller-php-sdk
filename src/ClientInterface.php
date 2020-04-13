@@ -28,7 +28,7 @@ interface ClientInterface
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Http\UriInterface
      */
-    public function createPymentLink($parameters);
+    public function createPaymentLink($parameters);
 
     /**
      * Отправляет запрос на подтверждение платежа с преавторизацией.

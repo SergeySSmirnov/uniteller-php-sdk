@@ -5,11 +5,10 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\Payment;
+namespace Rusproj\Uniteller\PaymentConfirm;
 
 use Rusproj\Uniteller\Signature\SignatureFieldsInterface;
 use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
-use Rusproj\Uniteller\Enum\CurrencyTypes;
 
 /**
  * Параметры запроса подтверждения платежа с преавторизацией.

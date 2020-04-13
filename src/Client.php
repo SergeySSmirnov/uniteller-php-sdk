@@ -146,7 +146,7 @@ class Client implements ClientInterface
      */
     public function setLinkCreator(LinkCreatorInterface $payment)
     {
-        $this->paymentLinkCreator = $payment;
+        $this->linkCreator = $payment;
 
         return $this;
     }
@@ -289,7 +289,7 @@ class Client implements ClientInterface
      * Генерирует Uri для перехода на страницу оплаты.
      *
      * Если не задано значение свойства SignatureHandler, то будет использован {@see \Rusproj\Uniteller\Signature\SignatureHandler}.
-     * Если не задано значение свойства PaymentLinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
+     * Если не задано значение свойства LinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Http\UriInterface
@@ -344,7 +344,8 @@ class Client implements ClientInterface
      */
     public function cancel($parameters)
     {
-        return $this->callRequestFor('cancel', $parameters);
+        throw new NotImplementedException();
+//         return $this->callRequestFor('cancel', $parameters);
     }
 
     /**
@@ -353,7 +354,8 @@ class Client implements ClientInterface
      */
     public function results($parameters)
     {
-        return $this->callRequestFor('results', $parameters);
+        throw new NotImplementedException();
+//         return $this->callRequestFor('results', $parameters);
     }
 
     /**
@@ -363,22 +365,24 @@ class Client implements ClientInterface
      */
     public function recurrent($parameters)
     {
-        $array = $this->getParameters($parameters);
-        $array['Shop_IDP'] = $this->getShopId();
+        throw new NotImplementedException();
 
-        $this->signatureRecurrent
-            ->setShopIdp(array_get($array, 'Shop_IDP'))
-            ->setOrderIdp(array_get($array, 'Order_IDP'))
-            ->setSubtotalP(array_get($array, 'Subtotal_P'))
-            ->setParentOrderIdp(array_get($array, 'Parent_Order_IDP'))
-            ->setPassword($this->getPassword());
-        if (array_get($array, 'Parent_Shop_IDP')) {
-            $this->signatureRecurrent->setParentShopIdp(array_get($array, 'Parent_Shop_IDP'));
-        }
+//         $array = $this->getParameters($parameters);
+//         $array['Shop_IDP'] = $this->getShopId();
 
-        $array['Signature'] = $this->signatureRecurrent->create();
+//         $this->signatureRecurrent
+//             ->setShopIdp(array_get($array, 'Shop_IDP'))
+//             ->setOrderIdp(array_get($array, 'Order_IDP'))
+//             ->setSubtotalP(array_get($array, 'Subtotal_P'))
+//             ->setParentOrderIdp(array_get($array, 'Parent_Order_IDP'))
+//             ->setPassword($this->getPassword());
+//         if (array_get($array, 'Parent_Shop_IDP')) {
+//             $this->signatureRecurrent->setParentShopIdp(array_get($array, 'Parent_Shop_IDP'));
+//         }
 
-        return $this->callRequestFor('recurrent', $array);
+//         $array['Signature'] = $this->signatureRecurrent->create();
+
+//         return $this->callRequestFor('recurrent', $array);
     }
 
     /**
