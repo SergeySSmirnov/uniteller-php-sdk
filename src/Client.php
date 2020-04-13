@@ -306,7 +306,7 @@ class Client implements ClientInterface
             $_paymentLinkCreator = new PaymentLinkCreatorWithFiscalization();
         }
 
-        $_paymentLinkCreator->create($this->getBaseUri(), $_fields);
+        return $_paymentLinkCreator->create($this->getBaseUri(), $_fields);
     }
 
     /**
