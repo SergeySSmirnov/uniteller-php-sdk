@@ -34,7 +34,7 @@ interface ClientInterface
      * Отправляет запрос на подтверждение платежа с преавторизацией.
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
-     * @return mixed
+     * @return object
      */
     public function confirmPreauthPayment($parameters);
 

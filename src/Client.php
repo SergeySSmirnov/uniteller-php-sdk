@@ -309,7 +309,7 @@ class Client implements ClientInterface
      * Отправляет запрос на подтверждение платежа с преавторизацией.
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\PaymentConfirm\PreauthConfirmBuilder}.
-     * @return mixed Ответ запроса.
+     * @return object Содержимое поля Receipt.
      */
     public function confirmPreauthPayment($parameters)
     {
