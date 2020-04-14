@@ -36,7 +36,7 @@ interface ClientInterface
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
      * @return mixed
      */
-    public function submitPreauthPayment($parameters);
+    public function confirmPreauthPayment($parameters);
 
     /**
      * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters
