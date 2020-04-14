@@ -315,7 +315,7 @@ class Client implements ClientInterface
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\PaymentConfirm\PreauthConfirmBuilder}.
      * @return mixed Ответ запроса.
      */
-    public function submitPreauthPayment($parameters)
+    public function confirmPreauthPayment($parameters)
     {
         $_fields = $this
             ->getSignatureHandler()
