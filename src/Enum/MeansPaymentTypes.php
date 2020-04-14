@@ -16,6 +16,13 @@ final class MeansPaymentTypes
 {
 
     /**
+     * Отсутствует.
+     *
+     * @var integer
+     */
+    const AMPT_0 = 0;
+
+    /**
      * Подарочные карты Мерчанта.
      *
      * @var integer

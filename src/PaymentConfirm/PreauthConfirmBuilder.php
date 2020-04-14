@@ -282,8 +282,8 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
         ];
 
         return [
-            'Signature' => ['HashFcn' => 'md5', 'Keys' => $_result_1],
-            'ReceiptSignature' => ['HashFcn' => 'sha256', 'Keys' => $_result_2]
+            'Signature' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '', 'HashFcn' => 'md5', 'Keys' => $_result_1],
+            'ReceiptSignature' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '&', 'HashFcn' => 'sha256', 'Keys' => $_result_2]
         ];
     }
 

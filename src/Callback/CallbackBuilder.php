@@ -521,7 +521,7 @@ class CallbackBuilder implements SignatureFieldsInterface
             $this->getStatus()
         ], $this->verificationFieldsList);
 
-        $_result = ['Signature' => ['HashFcn' => 'md5', 'Keys' => $_keys_1]];
+        $_result = ['Signature' => ['CalcHashForEachField' => false, 'ConcatSymbol' => '', 'HashFcn' => 'md5', 'Keys' => $_keys_1]];
 
         if (!empty($this->getReceiptSignature())) {
             $_keys_2 = [
@@ -530,7 +530,7 @@ class CallbackBuilder implements SignatureFieldsInterface
                 $this->getReceipt(false)
             ];
 
-            $_result['ReceiptSignature'] = ['HashFcn' => 'sha256', 'Keys' => $_keys_2];
+            $_result['ReceiptSignature'] = ['CalcHashForEachField' => false, 'ConcatSymbol' => '', 'HashFcn' => 'sha256', 'Keys' => $_keys_2];
         }
 
         return $_result;

@@ -1434,7 +1434,7 @@ class QueryParamsBuilder implements SignatureFieldsInterface
         if (!empty($this->getPhoneVerified())) {
             $_result[] = $this->getPhoneVerified();
         }
-        return ['Signature' => ['HashFcn' => 'md5', 'Keys' => $_result]];
+        return ['Signature' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '&', 'HashFcn' => 'md5', 'Keys' => $_result]];
     }
 
     /**

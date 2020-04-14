@@ -24,24 +24,27 @@ class SignatureHandler implements SignatureHandlerInterface
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
      * @param string $passwd Пароль для расчёта сигнатуры.
-     * @param bool $simpleCalculation Использовать упрощённое вычисление сигнатуры.
      * @return \Rusproj\Uniteller\Signature\SignatureFieldsInterface
      */
-    private function updateSignatureFields($fields, $passwd, $simpleCalculation)
+    private function updateSignatureFields($fields, $passwd)
     {
         $_items = $fields->getSignatureFields();
 
+        // ['Ключ' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '&', 'HashFcn' => 'ТипХэша', 'Keys' => [СписокПолей]]]
+
         foreach ($_items as $_key => $_params) {
-            $_hashType = $_params['HashFcn'];
-            $_keys = $_params['Keys'];
+            $_calcHashForEachField = \Rusproj\Uniteller\array_get($_params, 'CalcHashForEachField', true);
+            $_concatSymbol = \Rusproj\Uniteller\array_get($_params, 'ConcatSymbol', '&');
+            $_hashType = \Rusproj\Uniteller\array_get($_params, 'HashFcn', 'md5');
+            $_keys = \Rusproj\Uniteller\array_get($_params, 'Keys', []);
             $_keys[] = $passwd;
 
-            if ($simpleCalculation) {
-                $_signature = join('', $_keys);
-            } else {
-                $_signature = join('&', array_map(function ($item) use($_hashType) {
+            if ($_calcHashForEachField) {
+                $_signature = join($_concatSymbol, array_map(function ($item) use($_hashType) {
                         return hash($_hashType, $item);
                 }, $_keys));
+            } else {
+                $_signature = join($_concatSymbol, $_keys);
             }
 
             $_signature = strtoupper(hash($_hashType, $_signature));
@@ -58,7 +61,7 @@ class SignatureHandler implements SignatureHandlerInterface
      */
     public function sign($fields, $passwd)
     {
-        return $this->updateSignatureFields($fields, $passwd, false)->toArray();
+        return $this->updateSignatureFields($fields, $passwd)->toArray();
     }
 
     /**
@@ -71,7 +74,7 @@ class SignatureHandler implements SignatureHandlerInterface
             return false;
         }
 
-        $_validSignatures = $this->updateSignatureFields($fields, $passwd, true)->getSignatureVals();
+        $_validSignatures = $this->updateSignatureFields($fields, $passwd)->getSignatureVals();
 
         if (count($_validSignatures) !== count($signatures)) {
             return false;

@@ -18,6 +18,8 @@ use Rusproj\Uniteller\Payment\PaymentBuilder;
 use Rusproj\Uniteller\Enum\CurrencyTypes;
 use Rusproj\Uniteller\Callback\CallbackBuilder;
 use Rusproj\Uniteller\Tests\FiscalCheck\ReceiptTest;
+use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmBuilder;
+use Rusproj\Uniteller\Tests\PaymentConfirm\PreauthConfirmBuilderTest;
 
 class SignatureTest extends TestCase
 {
@@ -91,7 +93,8 @@ class SignatureTest extends TestCase
         $this->assertTrue($_keys['IsRecurrentStart'] === '');
     }
 
-    public function testSimpleCallbackSignatureValidation() {
+    public function testSimpleCallbackSignatureValidation()
+    {
         $_fields = [
             'Signature' => '3F728AA479E50F5B10EE6C20258BFF88',
             'Order_ID' => 'FOO',
@@ -110,7 +113,8 @@ class SignatureTest extends TestCase
         $this->assertTrue($_verificationresult);
     }
 
-    public function testSimpleCallbackSignatureValidationWithAdditionalFields() {
+    public function testSimpleCallbackSignatureValidationWithAdditionalFields()
+    {
         $_fields = [
             'AcquirerID'   => 'fOO',
             'ApprovalCode' => 'BaR',
@@ -156,6 +160,19 @@ class SignatureTest extends TestCase
         $_verificationresult = $_signatureHandler->verify($_builder, 'LONG-PWD', $_validSignatures);
 
         $this->assertTrue($_verificationresult);
+    }
+
+    public function testSignatureHandlerForPreauthConfirmBuilder()
+    {
+        $_signatureHandler = new SignatureHandler();
+        $_keys = $_signatureHandler->sign(PreauthConfirmBuilderTest::createPreauthConfirmBuilderTestInstance(), 'Some passwd');
+
+        $this->assertArrayHasKey('Signature', $_keys);
+        $this->assertTrue($_keys['Signature'] === '52DE3A0BE2A4C4F72F09B200593616C0');
+
+        var_dump($_keys['ReceiptSignature']);
+        $this->assertTrue($_keys['Receipt'] === 'eyJjdXN0b21lciI6eyJwaG9uZSI6Iis3MTIzNDU2Nzg5MCIsImVtYWlsIjoidGVzdEB0ZXN0LnR0IiwiaWQiOjEyMzQ1LCJuYW1lIjoiQ2xpZW50IiwiaW5uIjoiMTIzNDU2Nzg5MDEyIn0sImNhc2hpZXIiOnsibmFtZSI6IkNhc2hpZXIiLCJpbm4iOiIxMjM0NTY3ODkwMTIifSwidGF4bW9kZSI6MCwibGluZXMiOlt7Im5hbWUiOiJQcm9kdWN0IE5hbWUiLCJwcmljZSI6IjUwLjA0IiwicXR5IjoiNSIsInN1bSI6IjEyMi40IiwidmF0IjoxMjAsInBheWF0dHIiOjUsImxpbmVhdHRyIjoxMiwicHJvZHVjdCI6eyJrdCI6IlJVIiwiZXhjIjoi0JDQutGG0LjQtyIsImNvYyI6ItCa0L7QtCDRgtC+0LLQsNGA0LAiLCJuY2QiOiIxMjM0NTYifSwiYWdlbnQiOnsiYWdlbnRhdHRyIjoiQUdFTlRfQVRUUiIsImFnZW50cGhvbmUiOiIrNDU2Nzg5MTMyMCIsImFjY29wcGhvbmUiOiIrMTIzNDY1Nzg5MCIsIm9wcGhvbmUiOiJPUF9IT01FIiwib3BuYW1lIjoiT1BfTkFNRSIsIm9waW5uIjoiMTIzNDU2Nzg5MDEiLCJvcGFkZHJlc3MiOiJTb21ld2hlcmUiLCJvcGVyYXRpb24iOiJBYmNkIiwic3VwcGxpZXJuYW1lIjoiU1VQX05BTUUiLCJzdXBwbGllcmlubiI6IjA5ODc2NTQzMjEwOSIsInN1cHBsaWVycGhvbmUiOiIrNjc4OTA0MzE2NSJ9fSx7Im5hbWUiOiJQcm9kdWN0IE5hbWUiLCJwcmljZSI6IjUwLjA0IiwicXR5IjoiNSIsInN1bSI6IjEyMi40IiwidmF0IjoxMjAsInBheWF0dHIiOjUsImxpbmVhdHRyIjoxMiwicHJvZHVjdCI6eyJrdCI6IlJVIiwiZXhjIjoi0JDQutGG0LjQtyIsImNvYyI6ItCa0L7QtCDRgtC+0LLQsNGA0LAiLCJuY2QiOiIxMjM0NTYifSwiYWdlbnQiOnsiYWdlbnRhdHRyIjoiQUdFTlRfQVRUUiIsImFnZW50cGhvbmUiOiIrNDU2Nzg5MTMyMCIsImFjY29wcGhvbmUiOiIrMTIzNDY1Nzg5MCIsIm9wcGhvbmUiOiJPUF9IT01FIiwib3BuYW1lIjoiT1BfTkFNRSIsIm9waW5uIjoiMTIzNDU2Nzg5MDEiLCJvcGFkZHJlc3MiOiJTb21ld2hlcmUiLCJvcGVyYXRpb24iOiJBYmNkIiwic3VwcGxpZXJuYW1lIjoiU1VQX05BTUUiLCJzdXBwbGllcmlubiI6IjA5ODc2NTQzMjEwOSIsInN1cHBsaWVycGhvbmUiOiIrNjc4OTA0MzE2NSJ9fV0sIm9wdGlvbmFsIjp7InZhbCI6IlNvbWUgbWVyY2hhbnQgZGF0YSJ9LCJwYXJhbXMiOnsicGxhY2UiOiJJVkEifSwicGF5bWVudHMiOlt7ImtpbmQiOjEsInR5cGUiOjQsImlkIjoiMDAzNTQ2NCIsImFtb3VudCI6IjE1Mi42NSJ9XSwidG90YWwiOiI5OC4zMiJ9');
+        $this->assertTrue($_keys['ReceiptSignature'] === '7D76010357DB8BCF2171999316F905B6F8A203BC45D5EB3B61CF3AFC02C5FF23');
     }
 
 }

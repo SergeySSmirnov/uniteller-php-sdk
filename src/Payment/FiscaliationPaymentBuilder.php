@@ -96,7 +96,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
         $this->setReceipt(base64_encode($this->getReceipt()->generate()));
 
         $_result = parent::getSignatureFields();
-        $_result['ReceiptSignature'] = ['HashFcn' => 'sha256', 'Keys' => [
+        $_result['ReceiptSignature'] = ['CalcHashForEachField' => true, 'ConcatSymbol' => '&', 'HashFcn' => 'sha256', 'Keys' => [
             $this->getShopIdp(),
             $this->getOrderIdp(),
             $this->getSubtotalP(),
