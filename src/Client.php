@@ -30,6 +30,7 @@ use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization;
 use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentLinkCreator;
 use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentRequest;
+use Rusproj\Uniteller\Callback\CallbackBuilder;
 
 /**
  * Class Client
@@ -423,19 +424,22 @@ class Client implements ClientInterface
     }
 
     /**
-     * Verify signature when Client will be send callback request.
+     * Проверка сигнатуры запроса-уведомления об изменении статуса заказа.
      *
-     * @param array $params
-     * @return bool
+     * @param array $params Параметры запроса.
+     * @return bool|\Rusproj\Uniteller\Callback\CallbackBuilder Вернёт false - если неправильная сигнатура запроса.
      */
     public function verifyCallbackRequest(array $params)
     {
-        return $this->signatureCallback
-            ->setOrderId(array_get($params, 'Order_ID'))
-            ->setStatus(array_get($params, 'Status'))
-            ->setFields(array_except($params, ['Order_ID', 'Status', 'Signature']))
-            ->setPassword($this->getPassword())
-            ->verify(array_get($params, 'Signature'));
+        $_fields = new CallbackBuilder($params);
+        $_signature = [
+            'Signature' => array_get($params, 'Signature'),
+            'ReceiptSignature' => array_get($params, 'ReceiptSignature')
+        ];
+
+        $_result = $this->getSignatureHandler()->verify($_fields, $this->getPassword(), $_signature);
+
+        return $_result ? $_fields : false;
     }
 
 }
