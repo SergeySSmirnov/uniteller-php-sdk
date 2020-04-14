@@ -93,7 +93,7 @@ class HttpManager implements HttpManagerInterface
         $_code = $_xml->Result;
         $_errorMessage = $_xml->ErrorMessage;
 
-        if (empty($_errorMessage)) {
+        if ($_code == 0 && empty($_errorMessage)) {
             return;
         }
 
