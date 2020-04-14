@@ -11,12 +11,13 @@
 
 namespace Rusproj\Uniteller\Tests\Signature;
 
-use Rusproj\Uniteller\Signature\SignatureCallback;
 use Rusproj\Uniteller\Tests\TestCase;
 use Rusproj\Uniteller\Signature\SignatureHandler;
 use Rusproj\Uniteller\Tests\Payment\FiscaliationPaymentBuilderTest;
 use Rusproj\Uniteller\Payment\PaymentBuilder;
 use Rusproj\Uniteller\Enum\CurrencyTypes;
+use Rusproj\Uniteller\Callback\CallbackBuilder;
+use Rusproj\Uniteller\Tests\FiscalCheck\ReceiptTest;
 
 class SignatureTest extends TestCase
 {
@@ -90,31 +91,71 @@ class SignatureTest extends TestCase
         $this->assertTrue($_keys['IsRecurrentStart'] === '');
     }
 
-    public function testCallbackSignatureCreation()
-    {
-        $sig = (new SignatureCallback())
-            ->setOrderId('FOO')
-            ->setStatus('paid')
-            ->setPassword('LONG-PWD')
-            ->create();
+    public function testSimpleCallbackSignatureValidation() {
+        $_fields = [
+            'Signature' => '3F728AA479E50F5B10EE6C20258BFF88',
+            'Order_ID' => 'FOO',
+            'Status' => 'paid'
+        ];
 
-        $this->assertSame('3F728AA479E50F5B10EE6C20258BFF88', $sig);
+        $_validSignatures = [
+            'Signature' => $_fields['Signature']
+        ];
+
+        $_builder = new CallbackBuilder($_fields);
+
+        $_signatureHandler = new SignatureHandler();
+        $_verificationresult = $_signatureHandler->verify($_builder, 'LONG-PWD', $_validSignatures);
+
+        $this->assertTrue($_verificationresult);
     }
 
-    public function testCallbackSignatureCreationWithFields()
-    {
-        $sig = (new SignatureCallback())
-            ->setOrderId('FOO')
-            ->setStatus('paid')
-            ->setFields([
-                'AcquirerID'   => 'fOO',
-                'ApprovalCode' => 'BaR',
-                'BillNumber'   => 'baz',
-            ])
-            ->setPassword('LONG-PWD')
-            ->create();
+    public function testSimpleCallbackSignatureValidationWithAdditionalFields() {
+        $_fields = [
+            'AcquirerID'   => 'fOO',
+            'ApprovalCode' => 'BaR',
+            'BillNumber'   => 'baz',
+            'Signature' => '1F4E3B63AE408D0BE1E33965E6697236',
+            'Order_ID' => 'FOO',
+            'Status' => 'paid'
+        ];
 
-        $this->assertSame('1F4E3B63AE408D0BE1E33965E6697236', $sig);
+        $_validSignatures = [
+            'Signature' => $_fields['Signature']
+        ];
+
+        $_builder = new CallbackBuilder($_fields);
+
+        $_signatureHandler = new SignatureHandler();
+        $_verificationresult = $_signatureHandler->verify($_builder, 'LONG-PWD', $_validSignatures);
+
+        $this->assertTrue($_verificationresult);
+    }
+
+    public function testCallbackSignatureCreation()
+    {
+        $_fields = [
+            'AcquirerID' => 'fOO',
+            'ApprovalCode' => 'BaR',
+            'BillNumber' => 'baz',
+            'Order_ID' => 'FOO',
+            'Status' => 'paid',
+            'Signature' => '1F4E3B63AE408D0BE1E33965E6697236',
+            'Receipt' => 'eyJjdXN0b21lciI6eyJwaG9uZSI6Iis3MTIzNDU2Nzg5MCIsImVtYWlsIjoidGVzdEB0ZXN0LnR0IiwiaWQiOjEyMzQ1LCJuYW1lIjoiQ2xpZW50IiwiaW5uIjoiMTIzNDU2Nzg5MDEyIn0sImNhc2hpZXIiOnsibmFtZSI6IkNhc2hpZXIiLCJpbm4iOiIxMjM0NTY3ODkwMTIifSwidGF4bW9kZSI6MCwibGluZXMiOlt7Im5hbWUiOiJQcm9kdWN0IE5hbWUiLCJwcmljZSI6IjUwLjA0IiwicXR5IjoiNSIsInN1bSI6IjEyMi40IiwidmF0IjoxMjAsInBheWF0dHIiOjUsImxpbmVhdHRyIjoxMiwicHJvZHVjdCI6eyJrdCI6IlJVIiwiZXhjIjoi0JDQutGG0LjQtyIsImNvYyI6ItCa0L7QtCDRgtC+0LLQsNGA0LAiLCJuY2QiOiIxMjM0NTYifSwiYWdlbnQiOnsiYWdlbnRhdHRyIjoiQUdFTlRfQVRUUiIsImFnZW50cGhvbmUiOiIrNDU2Nzg5MTMyMCIsImFjY29wcGhvbmUiOiIrMTIzNDY1Nzg5MCIsIm9wcGhvbmUiOiJPUF9IT01FIiwib3BuYW1lIjoiT1BfTkFNRSIsIm9waW5uIjoiMTIzNDU2Nzg5MDEiLCJvcGFkZHJlc3MiOiJTb21ld2hlcmUiLCJvcGVyYXRpb24iOiJBYmNkIiwic3VwcGxpZXJuYW1lIjoiU1VQX05BTUUiLCJzdXBwbGllcmlubiI6IjA5ODc2NTQzMjEwOSIsInN1cHBsaWVycGhvbmUiOiIrNjc4OTA0MzE2NSJ9fSx7Im5hbWUiOiJQcm9kdWN0IE5hbWUiLCJwcmljZSI6IjUwLjA0IiwicXR5IjoiNSIsInN1bSI6IjEyMi40IiwidmF0IjoxMjAsInBheWF0dHIiOjUsImxpbmVhdHRyIjoxMiwicHJvZHVjdCI6eyJrdCI6IlJVIiwiZXhjIjoi0JDQutGG0LjQtyIsImNvYyI6ItCa0L7QtCDRgtC+0LLQsNGA0LAiLCJuY2QiOiIxMjM0NTYifSwiYWdlbnQiOnsiYWdlbnRhdHRyIjoiQUdFTlRfQVRUUiIsImFnZW50cGhvbmUiOiIrNDU2Nzg5MTMyMCIsImFjY29wcGhvbmUiOiIrMTIzNDY1Nzg5MCIsIm9wcGhvbmUiOiJPUF9IT01FIiwib3BuYW1lIjoiT1BfTkFNRSIsIm9waW5uIjoiMTIzNDU2Nzg5MDEiLCJvcGFkZHJlc3MiOiJTb21ld2hlcmUiLCJvcGVyYXRpb24iOiJBYmNkIiwic3VwcGxpZXJuYW1lIjoiU1VQX05BTUUiLCJzdXBwbGllcmlubiI6IjA5ODc2NTQzMjEwOSIsInN1cHBsaWVycGhvbmUiOiIrNjc4OTA0MzE2NSJ9fV0sIm9wdGlvbmFsIjp7InZhbCI6IlNvbWUgbWVyY2hhbnQgZGF0YSJ9LCJwYXJhbXMiOnsicGxhY2UiOiJJVkEifSwicGF5bWVudHMiOlt7ImtpbmQiOjEsInR5cGUiOjQsImlkIjoiMDAzNTQ2NCIsImFtb3VudCI6IjE1Mi42NSJ9XSwidG90YWwiOiI5OC4zMiJ9',
+            'ReceiptSignature' => '8F9B20567189C1323BEF24F3E5BB886C3231459EE16F20595A16627C1316D2C0'
+        ];
+
+        $_validSignatures = [
+            'Signature' => $_fields['Signature'],
+            'ReceiptSignature' => $_fields['ReceiptSignature']
+        ];
+
+        $_builder = new CallbackBuilder($_fields);
+
+        $_signatureHandler = new SignatureHandler();
+        $_verificationresult = $_signatureHandler->verify($_builder, 'LONG-PWD', $_validSignatures);
+
+        $this->assertTrue($_verificationresult);
     }
 
 }

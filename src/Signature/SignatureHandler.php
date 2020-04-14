@@ -24,9 +24,10 @@ class SignatureHandler implements SignatureHandlerInterface
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
      * @param string $passwd Пароль для расчёта сигнатуры.
+     * @param bool $simpleCalculation Использовать упрощённое вычисление сигнатуры.
      * @return \Rusproj\Uniteller\Signature\SignatureFieldsInterface
      */
-    private function updateSignatureFields($fields, $passwd)
+    private function updateSignatureFields($fields, $passwd, $simpleCalculation)
     {
         $_items = $fields->getSignatureFields();
 
@@ -35,9 +36,13 @@ class SignatureHandler implements SignatureHandlerInterface
             $_keys = $_params['Keys'];
             $_keys[] = $passwd;
 
-            $_signature = join('&', array_map(function ($item) use($_hashType) {
-                    return hash($_hashType, $item);
-            }, $_keys));
+            if ($simpleCalculation) {
+                $_signature = join('', $_keys);
+            } else {
+                $_signature = join('&', array_map(function ($item) use($_hashType) {
+                        return hash($_hashType, $item);
+                }, $_keys));
+            }
 
             $_signature = strtoupper(hash($_hashType, $_signature));
 
@@ -53,16 +58,36 @@ class SignatureHandler implements SignatureHandlerInterface
      */
     public function sign($fields, $passwd)
     {
-        return $this->updateSignatureFields($fields, $passwd)->toArray();
+        return $this->updateSignatureFields($fields, $passwd, false)->toArray();
     }
 
     /**
      * {@inheritDoc}
      * @see \Rusproj\Uniteller\Signature\SignatureHandlerInterface::verify()
      */
-    public function verify($fields, $passwd, $signature)
+    public function verify($fields, $passwd, $signatures)
     {
-        return $this->updateSignatureFields($fields, $passwd)->getSignature() === $signature;
+        if (!is_array($signatures)) {
+            return false;
+        }
+
+        $_validSignatures = $this->updateSignatureFields($fields, $passwd, true)->getSignatureVals();
+
+        if (count($_validSignatures) !== count($signatures)) {
+            return false;
+        }
+
+        foreach ($_validSignatures as $_key => $_val) {
+            if (!array_key_exists($_key, $signatures)) {
+                return false;
+            }
+
+            if ($_val !== $signatures[$_key]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

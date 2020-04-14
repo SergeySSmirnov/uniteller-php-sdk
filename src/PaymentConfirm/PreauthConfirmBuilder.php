@@ -250,6 +250,18 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
 
     /**
      * {@inheritDoc}
+     * @see \Rusproj\Uniteller\Signature\SignatureFieldsInterface::getSignatureVals()
+     */
+    public function getSignatureVals()
+    {
+        return [
+            'Signature' => $this->getSignature(),
+            'ReceiptSignature' => $this->getReceiptSignature()
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
      * @see \Rusproj\Uniteller\Signature\SignatureFieldsInterface::getSignatureFields()
      */
     public function getSignatureFields()

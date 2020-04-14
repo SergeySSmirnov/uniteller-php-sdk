@@ -78,6 +78,18 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
 
     /**
      * {@inheritDoc}
+     * @see \Rusproj\Uniteller\Signature\SignatureFieldsInterface::getSignatureVals()
+     */
+    public function getSignatureVals()
+    {
+        return [
+            'Signature' => $this->getSignature(),
+            'ReceiptSignature' => $this->getReceiptSignature()
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
      * @see \Rusproj\Uniteller\Payment\PaymentBuilder::getSignatureFields()
      */
     public function getSignatureFields() {

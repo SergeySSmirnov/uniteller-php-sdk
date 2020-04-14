@@ -33,8 +33,8 @@ interface SignatureHandlerInterface
      *
      * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $fields Объект, содержащий поля, которые должны участвовать в вычислении сигнатуры.
      * @param string $passwd Пароль для расчёта сигнатуры.
-     * @param string $signature Строка сигнатуры запроса.
+     * @param string[] $signatures Массив ключей и строк с сигнатурами для проверки. Например, ['Key_1' => 'nfuy45fhn5v5g', 'Key_2' => 'f5irv6t436564'].
      * @return bool
      */
-    public function verify($fields, $passwd, $signature);
+    public function verify($fields, $passwd, $signatures);
 }

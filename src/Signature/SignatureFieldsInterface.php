@@ -15,11 +15,12 @@ use Rusproj\Uniteller\ClassConversion\ArraybleInterface;
 interface SignatureFieldsInterface extends ArraybleInterface
 {
     /**
-     * Возвращает основную подпись, гарантирующую неизменность критичных данных оплаты.
+     * Возвращает массив подписей, гарантирующих неизменность критичных данных.
+     * Например, ['Key_1' => 'nfuy45fhn5v5g', 'Key_2' => 'f5irv6t436564'].
      *
-     * @return string
+     * @return string[]
      */
-    public function getSignature();
+    public function getSignatureVals();
 
     /**
      * Возвращает список полей, участвующих в вычислении сигнатуры.
