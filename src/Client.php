@@ -11,18 +11,13 @@
 
 namespace Rusproj\Uniteller;
 
-use Rusproj\Uniteller\Cancel\CancelRequest;
 use Rusproj\Uniteller\Exception\NotImplementedException;
 use Rusproj\Uniteller\Http\HttpManager;
 use Rusproj\Uniteller\Http\HttpManagerInterface;
 use Rusproj\Uniteller\Order\Order;
 use Rusproj\Uniteller\Http\LinkCreatorInterface;
-use Rusproj\Uniteller\Recurrent\RecurrentRequest;
 use Rusproj\Uniteller\Request\RequestInterface;
-use Rusproj\Uniteller\Results\ResultsRequest;
-use Rusproj\Uniteller\Signature\SignatureCallback;
 use Rusproj\Uniteller\Signature\SignatureHandlerInterface;
-use Rusproj\Uniteller\Signature\SignatureRecurrent;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Rusproj\Uniteller\Signature\SignatureHandler;
@@ -432,10 +427,13 @@ class Client implements ClientInterface
     public function verifyCallbackRequest(array $params)
     {
         $_fields = new CallbackBuilder($params);
+
         $_signature = [
-            'Signature' => array_get($params, 'Signature'),
-            'ReceiptSignature' => array_get($params, 'ReceiptSignature')
+            'Signature' => array_get($params, 'Signature')
         ];
+        if (array_key_exists('', $params)) {
+            $_signature['ReceiptSignature'] = array_get($params, 'ReceiptSignature');
+        }
 
         $_result = $this->getSignatureHandler()->verify($_fields, $this->getPassword(), $_signature);
 
