@@ -7,7 +7,6 @@
 
 namespace Rusproj\Uniteller\PaymentConfirm;
 
-use Rusproj\Uniteller\Http\HttpManagerInterface;
 use Rusproj\Uniteller\Request\RequestInterface;
 
 /**
