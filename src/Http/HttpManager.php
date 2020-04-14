@@ -16,9 +16,7 @@ use Http\Client\Exception\RequestException;
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Rusproj\Uniteller\Exception\ExceptionFactory;
 use Rusproj\Uniteller\Exception\UnitellerException;
-use function Rusproj\Uniteller\csv_to_array;
 
 /**
  * Менеджер взаимодействия с шлюзом.
@@ -54,39 +52,17 @@ class HttpManager implements HttpManagerInterface
     }
 
     /**
-     * Возвращает массив заголовков по-умолчанию в зависимости от требуемого формата.
-     *
-     * @param string $format Формат запроса
-     * @return array
-     */
-    protected function getDefaultHeaders($format)
-    {
-        $headers = [
-            'Content-Type' => 'application/x-www-form-urlencoded',
-        ];
-
-        switch ($format) {
-            case 'xml':
-                $headers['Accept'] = 'application/xml';
-                break;
-            case 'csv':
-                $headers['Accept'] = 'text/csv';
-                break;
-            case 'json':
-                $headers['Accept'] = 'application/json';
-                break;
-        }
-
-        return $headers;
-    }
-
-    /**
      * {@inheritDoc}
      * @see \Rusproj\Uniteller\Http\HttpManagerInterface::request()
+     * @throw \Rusproj\Uniteller\Exception\UnitellerException
      */
-    public function request($uri, $method = 'POST', $data = null, array $headers = [], $format='xml')
+    public function request($uri, $method = 'POST', $data = null, array $headers = [])
     {
-        $_request = new Request($method, $uri->getUri(), array_merge($this->getDefaultHeaders($format), $headers), $data);
+        if (!isset($headers['Content-Type'])) {
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        $_request = new Request($method, $uri->getUri(), $headers, $data);
 
         try {
             $_response = $this->httpClient->sendRequest($_request);
@@ -95,51 +71,33 @@ class HttpManager implements HttpManagerInterface
             throw UnitellerException::create($_request, $e->getResponse());
         }
 
-        $this->basicError($_request, $_response);
+        $this->handleRequestError($_request, $_response);
         $body = $_response->getBody()->getContents();
-        $this->providerError($body, $_request, $_response, $format);
+        $this->handleResponseError($body, $_request, $_response);
 
         return $body;
     }
 
     /**
-     * @param $body
-     * @param $request
-     * @param $response
-     * @throws \ErrorException
+     * Осуществляет проверку ответа на наличие сообщения об ошибке.
+     *
+     * @param string $body Тело ответа.
+     * @param \Psr\Http\Message\RequestInterface $request Запрос.
+     * @param \Psr\Http\Message\ResponseInterface $response Ответ.
+     * @throws \Rusproj\Uniteller\Exception\UnitellerException Исключение будет сгенерировано в случае наличие информации об ошибке в теле ответа.
      */
-    protected function providerError($body, RequestInterface $request, ResponseInterface $response, $format='xml')
+    protected function handleResponseError($body, RequestInterface $request, ResponseInterface $response)
     {
-        if ($format === 'csv') {
-            $data = csv_to_array($body, true);
+        $_xml = new \SimpleXMLElement($body);
 
-            if (isset($data['ErrorMessage'])) {
-                throw ExceptionFactory::createFromMessage(
-                    $data['ErrorMessage'], $request, $response
-                );
-            }
+        $_code = $_xml->Result;
+        $_errorMessage = $_xml->ErrorMessage;
 
+        if (empty($_errorMessage)) {
+            return;
         }
-        elseif ($format === 'xml') {
 
-            if (substr($body, 0, 6) === 'ERROR:') {
-                throw ExceptionFactory::createFromMessage(
-                    substr($body, 7), $request, $response
-                );
-            }
-
-            $xml = new \SimpleXMLElement((string)$body);
-            if (($firstCode = (string)$xml->attributes()['firstcode']) == 0) {
-                return;
-            }
-
-            $secondCode = (string)$xml->attributes()['secondcode'];
-
-            throw ExceptionFactory::create(
-                $firstCode, $secondCode, $request, $response
-            );
-
-        }
+        throw UnitellerException::create($request, $response, null, $_code, $_errorMessage);
     }
 
     /**
@@ -149,7 +107,7 @@ class HttpManager implements HttpManagerInterface
      * @param \Psr\Http\Message\ResponseInterface $response Объект ответа.
      * @throws \Rusproj\Uniteller\Exception\UnitellerException Генерируется в случае ошибки выполнения запроса.
      */
-    protected function basicError(RequestInterface $request, ResponseInterface $response)
+    protected function handleRequestError(RequestInterface $request, ResponseInterface $response)
     {
         if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
             return;
