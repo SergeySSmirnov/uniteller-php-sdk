@@ -153,6 +153,8 @@ $_fiscalPaymentBuilder = (new FiscaliationPaymentBuilder())
 ### Генераторы ссылок
 Для генерации ссылок (адресов к которым будут генерироваться запросы) необходимо создать и зарегистрировать в клиенте соответствующий генератор:
 * `\Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization` - [3.2] форма оплаты с фискализацией (версия 2.0);
+* `\Rusproj\Uniteller\PaymentApi\ApiCheckLinkCreator` - [3.4] оплата через API (версия 2.0) - запрос «Предварительный запрос оплаты интернет-эквайринга» при оплате только ДПС;
+* `\Rusproj\Uniteller\PaymentApi\ApiPayLinkCreator` - [3.4] оплата через API (версия 2.0) - запрос «Проведение оплаты» при оплате только ДПС;
 * `\Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator` - [3.10] преавторизация с печатью чека аванса с использованием
 платёжной формы;
 * `\Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentLinkCreator` - [3.13.2] подтверждение платежа с преавторизацией (версия 2.0);
