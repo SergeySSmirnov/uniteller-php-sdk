@@ -10,7 +10,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Свойства для описания чека фискализации.
  */
-trait ReceiptTrait
+trait ReceiptPropertiesTrait
 {
 
     /**

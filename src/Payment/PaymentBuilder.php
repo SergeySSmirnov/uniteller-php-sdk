@@ -31,7 +31,7 @@ class PaymentBuilder implements SignatureFieldsInterface
     /*
      * Импорт свойств с описанием подписи запроса.
      */
-    use \Rusproj\Uniteller\Payment\SignatureTrait;
+    use \Rusproj\Uniteller\Payment\SignaturePropertiesTrait;
 
 
     /**

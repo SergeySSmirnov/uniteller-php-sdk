@@ -10,7 +10,7 @@ namespace Rusproj\Uniteller\Payment;
 /**
  * Свойства для описания подписи запроса.
  */
-trait SignatureTrait
+trait SignaturePropertiesTrait
 {
 
     /**

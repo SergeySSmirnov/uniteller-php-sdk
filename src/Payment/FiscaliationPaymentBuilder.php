@@ -23,7 +23,7 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
     /*
      * Импорт свойств с описанием чека фискализации.
      */
-    use \Rusproj\Uniteller\Payment\ReceiptTrait;
+    use \Rusproj\Uniteller\Payment\ReceiptPropertiesTrait;
 
 
     /**
