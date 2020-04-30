@@ -28,6 +28,11 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
      */
     use \Rusproj\Uniteller\Payment\ReceiptTrait;
 
+    /*
+     * Импорт свойств с описанием подписи запроса.
+     */
+    use \Rusproj\Uniteller\Payment\SignatureTrait;
+
 
     /**
      * Идентификатор точки продажи в системе Uniteller.
@@ -60,13 +65,6 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
      * @var float|string
      */
     private $Subtotal = '';
-
-    /**
-     * Подпись, гарантирующая неизменность критичных данных оплаты (суммы, Order_IDP).
-     *
-     * @var string
-     */
-    private $Signature = '';
 
     /**
      * Задаёт идентификатор точки продажи в системе Uniteller.
@@ -125,21 +123,6 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
     }
 
     /**
-     * Устанавливает подпись, гарантирующую неизменность критичных данных оплаты (суммы, Order_IDP).
-     *
-     * @param string $signature
-     * @return $this
-     */
-    public function setSignature($signature)
-    {
-        $this->Signature = $signature;
-
-        return $this;
-    }
-
-    /* Getters */
-
-    /**
      * Возвращает идентификатор точки продажи в системе Uniteller.
      *
      * В Личном кабинете этот параметр называется Uniteller Point ID и
@@ -184,16 +167,6 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
         return $this->Subtotal;
 
         return $this;
-    }
-
-    /**
-     * Возвращает подпись, гарантирующую неизменность критичных данных оплаты (суммы, Order_IDP).
-     *
-     * @return string
-     */
-    public function getSignature()
-    {
-        return $this->Signature;
     }
 
     /**

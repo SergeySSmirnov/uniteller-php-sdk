@@ -28,6 +28,12 @@ class PaymentBuilder implements SignatureFieldsInterface
      */
     use \Rusproj\Uniteller\ClassConversion\ArraybleTrait;
 
+    /*
+     * Импорт свойств с описанием подписи запроса.
+     */
+    use \Rusproj\Uniteller\Payment\SignatureTrait;
+
+
     /**
      * Идентификатор точки продажи в системе Uniteller.
      *
@@ -69,13 +75,6 @@ class PaymentBuilder implements SignatureFieldsInterface
      * @var float|string
      */
     protected $Subtotal_P = '';
-
-    /**
-     * Подпись, гарантирующая неизменность критичных данных оплаты (суммы, Order_IDP).
-     *
-     * @var string
-     */
-    protected $Signature = '';
 
     /**
      * URL страницы, на которую должен вернуться Покупатель
@@ -412,19 +411,6 @@ class PaymentBuilder implements SignatureFieldsInterface
     public function setSubtotalP($subtotalP)
     {
         $this->Subtotal_P = $subtotalP;
-
-        return $this;
-    }
-
-    /**
-     * Устанавливает подпись, гарантирующую неизменность критичных данных оплаты (суммы, Order_IDP).
-     *
-     * @param string $signature
-     * @return $this
-     */
-    public function setSignature($signature)
-    {
-        $this->Signature = $signature;
 
         return $this;
     }
@@ -1029,16 +1015,6 @@ class PaymentBuilder implements SignatureFieldsInterface
         return $this->Subtotal_P;
 
         return $this;
-    }
-
-    /**
-     * Возвращает подпись, гарантирующую неизменность критичных данных оплаты (суммы, Order_IDP).
-     *
-     * @return string
-     */
-    public function getSignature()
-    {
-        return $this->Signature;
     }
 
     /**
