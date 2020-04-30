@@ -16,7 +16,7 @@ use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 use Rusproj\Uniteller\Enum\CurrencyTypes;
 
 /**
- * Параметры запроса для генерации ссылки для оплаты.
+ * Параметры запроса для генерации ссылки на форму оплаты.
  *
  * @package Rusproj\Client\Payment
  */
