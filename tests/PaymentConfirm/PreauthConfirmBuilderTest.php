@@ -35,26 +35,26 @@ class PreauthConfirmBuilderTest extends TestCase
         $_arraybleResult = $_paymentBuilder->toArray();
 
         $this->assertTrue(is_array($_arraybleResult));
-        $this->assertTrue(count($_arraybleResult) === 6);
+        $this->assertEquals(6, count($_arraybleResult));
 
         $this->assertArrayHasKey('OrderID', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['OrderID'] === '12345');
+        $this->assertEquals('12345', $_arraybleResult['OrderID']);
 
         $this->assertArrayHasKey('ShopID', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['ShopID'] === '012345-67890');
+        $this->assertEquals('012345-67890', $_arraybleResult['ShopID']);
 
         $this->assertArrayHasKey('Subtotal', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Subtotal'] === '98.32');
+        $this->assertEquals('98.32', $_arraybleResult['Subtotal']);
 
         $this->assertArrayHasKey('Signature', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Signature'] === '');
+        $this->assertEquals('', $_arraybleResult['Signature']);
 
         $this->assertArrayHasKey('ReceiptSignature', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['ReceiptSignature'] === '');
+        $this->assertEquals('', $_arraybleResult['ReceiptSignature']);
 
         $this->assertArrayHasKey('Receipt', $_arraybleResult);
         $this->assertInstanceOf(\stdClass::class, $_arraybleResult['Receipt']);
-        $this->assertTrue(count((array)$_arraybleResult['Receipt']) === 8);
+        $this->assertEquals(8, count((array)$_arraybleResult['Receipt']));
     }
 
 }

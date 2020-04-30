@@ -47,35 +47,38 @@ class FiscaliationPaymentBuilderTest extends TestCase
         $_arraybleResult = $_paymentBuilder->toArray();
 
         $this->assertTrue(is_array($_arraybleResult));
-        $this->assertTrue(count($_arraybleResult) === 9);
+        $this->assertEquals(10, count($_arraybleResult));
 
         $this->assertArrayHasKey('Currency', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Currency'] === 'RUB');
+        $this->assertEquals('RUB', $_arraybleResult['Currency']);
 
         $this->assertArrayHasKey('Order_IDP', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Order_IDP'] === '12345');
+        $this->assertEquals('12345', $_arraybleResult['Order_IDP']);
 
         $this->assertArrayHasKey('Shop_IDP', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Shop_IDP'] === '012345-67890');
+        $this->assertEquals('012345-67890', $_arraybleResult['Shop_IDP']);
 
         $this->assertArrayHasKey('Subtotal_P', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Subtotal_P'] === '100.30');
+        $this->assertEquals('100.30', $_arraybleResult['Subtotal_P']);
 
         $this->assertArrayHasKey('URL_RETURN_OK', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['URL_RETURN_OK'] === 'http://mysite.com/success');
+        $this->assertEquals('http://mysite.com/success', $_arraybleResult['URL_RETURN_OK']);
 
         $this->assertArrayHasKey('URL_RETURN_NO', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['URL_RETURN_NO'] === 'http://mysite.com/error');
+        $this->assertEquals('http://mysite.com/error', $_arraybleResult['URL_RETURN_NO']);
 
         $this->assertArrayHasKey('IsRecurrentStart', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['IsRecurrentStart'] === '');
+        $this->assertEquals('', $_arraybleResult['IsRecurrentStart']);
 
         $this->assertArrayHasKey('Signature', $_arraybleResult);
-        $this->assertTrue($_arraybleResult['Signature'] === '');
+        $this->assertEquals('', $_arraybleResult['Signature']);
 
         $this->assertArrayHasKey('Receipt', $_arraybleResult);
         $this->assertInstanceOf(\stdClass::class, $_arraybleResult['Receipt']);
-        $this->assertTrue(count((array)$_arraybleResult['Receipt']) === 8);
+        $this->assertEquals(8, count((array)$_arraybleResult['Receipt']));
+
+        $this->assertArrayHasKey('ReceiptSignature', $_arraybleResult);
+        $this->assertEquals('', $_arraybleResult['ReceiptSignature']);
     }
 
 }
