@@ -23,6 +23,12 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
      */
     use \Rusproj\Uniteller\ClassConversion\ArraybleTrait;
 
+    /*
+     * Импорт свойств с описанием чека фискализации.
+     */
+    use \Rusproj\Uniteller\Payment\ReceiptTrait;
+
+
     /**
      * Идентификатор точки продажи в системе Uniteller.
      *
@@ -45,20 +51,6 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
      * @var string
      */
     private $OrderID = '';
-
-    /**
-     * Описание чека фискализации.
-     *
-     * @var \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
-     */
-    private $Receipt = '';
-
-    /**
-     * Подпись поля Receipt.
-     *
-     * @var string
-     */
-    private $ReceiptSignature = '';
 
     /**
      * Уточненная сумма покупки в валюте, оговорённой в договоре с банкомэквайером.
@@ -113,31 +105,6 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
         }
 
         $this->OrderID = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Описание чека фискализации.
-     *
-     * @param \Rusproj\Uniteller\FiscalCheck\ReceiptInterface $receipt
-     * @return $this
-     */
-    public function setReceipt($receipt) {
-        $this->Receipt = $receipt;
-
-        return $this;
-    }
-
-    /**
-     * Подпись поля Receipt.
-     *
-     * @param string $ReceiptSignature
-     * @return $this
-     */
-    public function setReceiptSignature($ReceiptSignature)
-    {
-        $this->ReceiptSignature = $ReceiptSignature;
 
         return $this;
     }
@@ -203,25 +170,6 @@ class PreauthConfirmBuilder implements SignatureFieldsInterface
         return $this->OrderID;
 
         return $this;
-    }
-
-    /**
-     * Описание чека фискализации.
-     *
-     * @return \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
-     */
-    public function getReceipt() {
-        return $this->Receipt;
-    }
-
-    /**
-     * Подпись поля Receipt.
-     *
-     * @return string
-     */
-    public function getReceiptSignature()
-    {
-        return $this->ReceiptSignature;
     }
 
     /**

@@ -20,61 +20,11 @@ class FiscaliationPaymentBuilder extends PaymentBuilder
      */
     use \Rusproj\Uniteller\ClassConversion\ArraybleTrait;
 
-    /**
-     * Описание чека для фискализации.
-     *
-     * @var \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
+    /*
+     * Импорт свойств с описанием чека фискализации.
      */
-    private $Receipt;
+    use \Rusproj\Uniteller\Payment\ReceiptTrait;
 
-    /**
-     * Подпись поля Receipt.
-     *
-     * @var string
-     */
-    private $ReceiptSignature;
-
-    /**
-     * Описание чека для фискализации.
-     *
-     * @return \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
-     */
-    public function getReceipt() {
-        return $this->Receipt;
-    }
-
-    /**
-     * Описание чека для фискализации.
-     *
-     * @param \Rusproj\Uniteller\FiscalCheck\ReceiptInterface $receipt
-     * @return $this
-     */
-    public function setReceipt($receipt) {
-        $this->Receipt = $receipt;
-        return $this;
-    }
-
-    /**
-     * Подпись поля Receipt.
-     *
-     * @return string
-     */
-    public function getReceiptSignature()
-    {
-        return $this->ReceiptSignature;
-    }
-
-    /**
-     * Подпись поля Receipt.
-     *
-     * @param string $ReceiptSignature
-     * @return $this
-     */
-    public function setReceiptSignature($ReceiptSignature)
-    {
-        $this->ReceiptSignature = $ReceiptSignature;
-        return $this;
-    }
 
     /**
      * {@inheritDoc}
