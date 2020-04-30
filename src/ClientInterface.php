@@ -16,8 +16,6 @@ use Rusproj\Uniteller\Http\UriInterface;
 
 /**
  * Interface ClientInterface
- *
- * @package Rusproj\Uniteller
  */
 interface ClientInterface
 {

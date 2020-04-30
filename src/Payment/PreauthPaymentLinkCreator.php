@@ -11,8 +11,6 @@ use Rusproj\Uniteller\Http\LinkCreatorAbstract;
 
 /**
  * Механизм генерации ссылки для перехода к странице преавторизации оплаты.
- *
- * @package Rusproj\Client\Payment
  */
 class PreauthPaymentLinkCreator extends LinkCreatorAbstract
 {

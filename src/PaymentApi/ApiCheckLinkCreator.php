@@ -11,8 +11,6 @@ use Rusproj\Uniteller\Http\LinkCreatorAbstract;
 
 /**
  * Механизм оплаты через API v. 2.0 (проверка).
- *
- * @package Rusproj\Client\Payment
  */
 class ApiCheckLinkCreator extends LinkCreatorAbstract
 {

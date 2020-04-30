@@ -11,8 +11,6 @@ use Rusproj\Uniteller\Request\RequestInterface;
 
 /**
  * Механизм формирования запроса подтверждения платежа с преавторизацией.
- *
- * @package Rusproj\Uniteller\PaymentConfirm
  */
 class PreauthConfirmPaymentRequest implements RequestInterface
 {

@@ -29,8 +29,6 @@ use Rusproj\Uniteller\Callback\CallbackBuilder;
 
 /**
  * Class Client
- *
- * @package Rusproj\Uniteller
  */
 class Client implements ClientInterface
 {

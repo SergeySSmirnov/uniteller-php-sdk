@@ -11,8 +11,6 @@ use Rusproj\Uniteller\Signature\SignatureFieldsInterface;
 
 /**
  * Параметры запроса подтверждения платежа с преавторизацией.
- *
- * @package Rusproj\Client\PaymentConfirm
  */
 class PreauthConfirmBuilder implements SignatureFieldsInterface
 {

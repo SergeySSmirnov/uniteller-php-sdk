@@ -11,6 +11,9 @@ use Rusproj\Uniteller\Http\UriInterface;
 use Rusproj\Uniteller\Client;
 use Rusproj\Uniteller\Http\LinkCreatorInterface;
 
+/**
+ * Базовый класс для тестирования Uri-генераторов
+ */
 class BaseLinkCreatorTest extends TestCase
 {
     private $client;

@@ -11,8 +11,6 @@ use Rusproj\Uniteller\Http\LinkCreatorAbstract;
 
 /**
  * Механизм генерации ссылки для перехода к странице оплаты с фискализацией API v. 2.
- *
- * @package Rusproj\Client\Payment
  */
 class PaymentLinkCreatorWithFiscalization extends LinkCreatorAbstract
 {
