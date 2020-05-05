@@ -143,11 +143,15 @@ use Rusproj\Uniteller\PaymentApi\ApiBuilder;
 $_apiBuilder = (new ApiBuilder())
     ->setShopID($_client->getShopId()) // Данные о магазине берём из клиента (пока так)
     ->setOrderID('Заказ-123/1')
-    ->setSubtotal(0);
+    ->setSubtotal(0)
+    ->setReceipt($_receipt);
 
-$_client
-    ->
-
+// Могут быть сгенерированы исключения \Rusproj\Uniteller\Exception\UnitellerException
+try {
+    $_queryResult = $_client->dpsPayment(_apiBuilder);
+} catch (UnitellerException $_exc) { 
+    
+}
 ```
 
 ### Переход к оплате [3.10] Преавторизация с печатью чека аванса с использованием платёжной формы

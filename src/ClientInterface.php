@@ -23,7 +23,7 @@ interface ClientInterface
     /**
      * Генерирует URI для перехода на страницу оплаты.
      *
-     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Uniteller\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Http\UriInterface
      */
     public function createPaymentLink($parameters);
@@ -31,10 +31,18 @@ interface ClientInterface
     /**
      * Отправляет запрос на подтверждение платежа с преавторизацией.
      *
-     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Uniteller\Payment\PaymentBuilder}.
      * @return object
      */
     public function confirmPreauthPayment($parameters);
+
+    /**
+     * Отправляет запрос для оплаты ДПС.
+     *
+     * @param \Rusproj\Uniteller\PaymentApi\ApiBuilderInterface $parameters Параметры запроса.
+     * @return object Содержимое поля Receipt.
+     */
+    public function dpsPayment($parameters);
 
     /**
      * @param \Rusproj\Uniteller\Cancel\CancelBuilder|array $parameters

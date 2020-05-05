@@ -26,6 +26,11 @@ use Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization;
 use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentLinkCreator;
 use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentRequest;
 use Rusproj\Uniteller\Callback\CallbackBuilder;
+use Rusproj\Uniteller\PaymentApi\ApiCheckBuilder;
+use Rusproj\Uniteller\PaymentApi\ApiCheckLinkCreator;
+use Rusproj\Uniteller\PaymentConfirm\ApiRequest;
+use Rusproj\Uniteller\PaymentApi\ApiPayLinkCreator;
+use Rusproj\Uniteller\PaymentApi\ApiPayBuilder;
 
 /**
  * Class Client
@@ -135,12 +140,12 @@ class Client implements ClientInterface
     /**
      * Объект, отвечающий за генерацию Uri-адресов.
      *
-     * @param \Rusproj\Uniteller\Http\LinkCreatorInterface $payment
+     * @param \Rusproj\Uniteller\Http\LinkCreatorInterface $link
      * @return $this
      */
-    public function setLinkCreator(LinkCreatorInterface $payment)
+    public function setLinkCreator(LinkCreatorInterface $link)
     {
-        $this->linkCreator = $payment;
+        $this->linkCreator = $link;
 
         return $this;
     }
@@ -148,12 +153,12 @@ class Client implements ClientInterface
     /**
      * Объект, представляющий запрос к шлюзу.
      *
-     * @param RequestInterface $cancel
+     * @param RequestInterface $request
      * @return $this
      */
-    public function setRequest(RequestInterface $cancel)
+    public function setRequest(RequestInterface $request)
     {
-        $this->request = $cancel;
+        $this->request = $request;
 
         return $this;
     }
@@ -285,7 +290,7 @@ class Client implements ClientInterface
      * Если не задано значение свойства SignatureHandler, то будет использован {@see \Rusproj\Uniteller\Signature\SignatureHandler}.
      * Если не задано значение свойства LinkCreator, то будет использован {@see \Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization}.
      *
-     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\Payment\PaymentBuilder}.
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Uniteller\Payment\PaymentBuilder}.
      * @return \Rusproj\Uniteller\Http\UriInterface
      */
     public function createPaymentLink($parameters)
@@ -306,7 +311,7 @@ class Client implements ClientInterface
     /**
      * Отправляет запрос на подтверждение платежа с преавторизацией.
      *
-     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Client\PaymentConfirm\PreauthConfirmBuilder}.
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Uniteller\PaymentConfirm\PreauthConfirmBuilder}.
      * @return object Содержимое поля Receipt.
      */
     public function confirmPreauthPayment($parameters)
@@ -328,6 +333,90 @@ class Client implements ClientInterface
 
         return $_request->execute($this->getHttpManager(), $_uri, $_fields);
     }
+
+    /**
+     * Отправляет предварительный запрос для платежа ДПС.
+     *
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Uniteller\PaymentApi\ApiCheckBuilder}.
+     * @return object Ответ на запрос.
+     */
+    public function apiPaymentCheck($parameters) {
+        $_fields = $this
+            ->getSignatureHandler()
+            ->sign($parameters, $this->getPassword());
+
+        $_linkCreator = $this->getLinkCreator();
+        if (is_null($_linkCreator)) {
+            $_linkCreator = new ApiCheckLinkCreator();
+        }
+        $_uri = $_linkCreator->create($this->getBaseUri());
+
+        $_request = $this->getRequest();
+        if (is_null($_request)) {
+            $_request = new ApiRequest();
+        }
+
+        return $_request->execute($this->getHttpManager(), $_uri, $_fields);
+    }
+
+    /**
+     * Отправляет запрос для платежа ДПС.
+     *
+     * @param \Rusproj\Uniteller\Signature\SignatureFieldsInterface $parameters Параметры запроса. Для формирования параметров используйте {@see \Rusproj\Uniteller\PaymentApi\ApiPayBuilder}.
+     * @return object Ответ на запрос.
+     */
+    public function apiPayment($parameters) {
+        $_fields = $this
+            ->getSignatureHandler()
+            ->sign($parameters, $this->getPassword());
+
+        $_linkCreator = $this->getLinkCreator();
+        if (is_null($_linkCreator)) {
+            $_linkCreator = new ApiPayLinkCreator();
+        }
+        $_uri = $_linkCreator->create($this->getBaseUri());
+
+        $_request = $this->getRequest();
+        if (is_null($_request)) {
+            $_request = new ApiRequest();
+        }
+
+        return $_request->execute($this->getHttpManager(), $_uri, $_fields);
+    }
+
+    /**
+     * Отправляет запрос для оплаты ДПС.
+     *
+     * @param \Rusproj\Uniteller\PaymentApi\ApiBuilderInterface $parameters Параметры запроса.
+     * @return object Содержимое поля Receipt.
+     */
+    public function dpsPayment($parameters)
+    {
+        $this
+            ->setLinkCreator(null)
+            ->setRequest(null);
+
+        $_apiCheckBuilder = new ApiCheckBuilder();
+        $_apiCheckBuilder
+            ->setShopID($parameters->getShopID())
+            ->setOrderID($parameters->getOrderID());
+        $_answer = $this->apiPaymentCheck($_apiCheckBuilder);
+
+
+
+
+        $_apiPayBuilder = new ApiPayBuilder();
+        $_apiPayBuilder
+            ->setPaymentAttemptID('!!!!!!!!!!!')
+            ->setShopID($parameters->getShopID())
+            ->setSubtotal($parameters->getSubtotal());
+        $_answer = $this->apiPayment($_apiPayBuilder);
+
+
+        return $_answer;
+    }
+
+
 
     /**
      * Отмена платежа.
