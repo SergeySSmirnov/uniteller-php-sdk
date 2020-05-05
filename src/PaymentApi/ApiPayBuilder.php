@@ -36,6 +36,11 @@ class ApiPayBuilder implements SignatureFieldsInterface
      */
     use \Rusproj\Uniteller\Payment\SubtotalPropertiesTrait;
 
+    /*
+     * Импорт свойств с описанием чека фискализации.
+     */
+    use \Rusproj\Uniteller\Payment\ReceiptPropertiesTrait;
+
 
     /**
      * Идентификатор попытки оплаты в системе Uniteller.
@@ -85,7 +90,8 @@ class ApiPayBuilder implements SignatureFieldsInterface
     public function getSignatureVals()
     {
         return [
-            'Signature' => $this->getSignature()
+            'Signature' => $this->getSignature(),
+            'ReceiptSignature' => $this->getReceiptSignature()
         ];
     }
 
@@ -95,14 +101,24 @@ class ApiPayBuilder implements SignatureFieldsInterface
      */
     public function getSignatureFields()
     {
+        $this->setReceipt(base64_encode($this->getReceipt()->generate()));
+
         $_result_1 = [
             $this->getShopID(),
             $this->getPaymentAttemptID(),
             $this->getSubtotal()
         ];
 
+        $_result_2 = [
+            $this->getShopID(),
+            $this->getPaymentAttemptID(),
+            $this->getSubtotal(),
+            $this->getReceipt()
+        ];
+
         return [
-            'Signature' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '', 'HashFcn' => 'md5', 'Keys' => $_result_1]
+            'Signature' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '', 'HashFcn' => 'md5', 'Keys' => $_result_1],
+            'ReceiptSignature' => ['CalcHashForEachField' => true, 'ConcatSymbol' => '&', 'HashFcn' => 'sha256', 'Keys' => $_result_2]
         ];
     }
 

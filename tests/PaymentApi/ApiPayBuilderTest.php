@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
 use Rusproj\Uniteller\PaymentApi\ApiPayBuilder;
 use Rusproj\Uniteller\Tests\Payment\PaymentBuilderTest;
+use Rusproj\Uniteller\Tests\FiscalCheck\ReceiptTest;
 
 /**
  * ApiPayBuilder test case.
@@ -24,7 +25,8 @@ class ApiPayBuilderTest extends TestCase
         $_builder
             ->setShopID('012345-67890')
             ->setSubtotal(12.95)
-            ->setPaymentAttemptID('1234567890QAZ');
+            ->setPaymentAttemptID('1234567890QAZ')
+            ->setReceipt(ReceiptTest::createReceiptTestInstance());
         return $_builder;
     }
 
@@ -42,7 +44,7 @@ class ApiPayBuilderTest extends TestCase
         $_arraybleResult = $_builder->toArray();
 
         $this->assertTrue(is_array($_arraybleResult));
-        $this->assertEquals(4, count($_arraybleResult));
+        $this->assertEquals(6, count($_arraybleResult));
 
         $this->assertArrayHasKey('ShopID', $_arraybleResult);
         $this->assertEquals('012345-67890', $_arraybleResult['ShopID']);
@@ -55,6 +57,13 @@ class ApiPayBuilderTest extends TestCase
 
         $this->assertArrayHasKey('Signature', $_arraybleResult);
         $this->assertEquals('', $_arraybleResult['Signature']);
+
+        $this->assertArrayHasKey('Receipt', $_arraybleResult);
+        $this->assertInstanceOf(\stdClass::class, $_arraybleResult['Receipt']);
+        $this->assertEquals(8, count((array)$_arraybleResult['Receipt']));
+
+        $this->assertArrayHasKey('ReceiptSignature', $_arraybleResult);
+        $this->assertEquals('', $_arraybleResult['ReceiptSignature']);
     }
 
 }
