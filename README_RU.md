@@ -138,6 +138,13 @@ $_client
 ### Переход к оплате [3.4] Оплата через API (версия 2.0)
 ```php
 
+use Rusproj\Uniteller\PaymentApi\ApiBuilder;
+
+$_apiBuilder = (new ApiBuilder())
+    ->setShopID($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+    ->setOrderID('Заказ-123/1')
+    ->setSubtotal(0);
+
 $_client
     ->
 
