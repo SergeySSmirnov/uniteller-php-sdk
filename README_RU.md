@@ -114,29 +114,11 @@ $_receipt = (new Receipt())
             ->setTotal(15000);
 ```
 
-### Построители параметров запросов
-Для формирования параметров запросов необходимо использовать следующие построители из пространства имён `\Rusproj\Uniteller\Payment\`:
-* `PaymentBuilder` - общий построитель параметров запросов для оплаты;
-* `FiscaliationPaymentBuilder` - построитель параметров запросов для оплаты с фискализацией.
-
-#### Пример
+### Переход к оплате [3.2] Форма оплаты с фискализацией (версия 2.0)
 ```php
-<?php
-use Rusproj\Uniteller\Payment\PaymentBuilder;
-use Rusproj\Uniteller\Payment\FiscaliationPaymentBuilder;
+
 use Rusproj\Uniteller\Enum\CurrencyTypes;
-
-$_paymentBuilder = (new PaymentBuilder())
-            ->setCallbackFields(['BillNumber', 'Total'])
-            ->setCurrency(CurrencyTypes::RUB)
-            ->setCustomerIdp('1234-5678')
-            ->setOrderIdp('Заказ-123')
-            ->setShopIdp($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
-            ->setSubtotalP($_receipt->getTotal())
-            ->setUrlReturnOk('https://rusproj.space/success')
-            ->setUrlReturnNo('https://rusproj.space/error');
-
-// ИЛИ
+use Rusproj\Uniteller\Payment\FiscaliationPaymentBuilder;
 
 $_fiscalPaymentBuilder = (new FiscaliationPaymentBuilder())
             ->setCallbackFields(['BillNumber', 'Total'])
@@ -148,22 +130,8 @@ $_fiscalPaymentBuilder = (new FiscaliationPaymentBuilder())
             ->setUrlReturnOk('https://rusproj.space/success')
             ->setUrlReturnNo('https://rusproj.space/error')
             ->setReceipt($_receipt); // Отличается от {@see PaymentBuilder} только этим
-```
-
-### Генераторы ссылок
-Для генерации ссылок (адресов к которым будут генерироваться запросы) необходимо создать и зарегистрировать в клиенте соответствующий генератор:
-* `\Rusproj\Uniteller\Payment\PaymentLinkCreatorWithFiscalization` - [3.2] форма оплаты с фискализацией (версия 2.0);
-* `\Rusproj\Uniteller\PaymentApi\ApiCheckLinkCreator` - [3.4] оплата через API (версия 2.0) - запрос «Предварительный запрос оплаты интернет-эквайринга» при оплате только ДПС;
-* `\Rusproj\Uniteller\PaymentApi\ApiPayLinkCreator` - [3.4] оплата через API (версия 2.0) - запрос «Проведение оплаты» при оплате только ДПС;
-* `\Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator` - [3.10] преавторизация с печатью чека аванса с использованием
-платёжной формы;
-* `\Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentLinkCreator` - [3.13.2] подтверждение платежа с преавторизацией (версия 2.0);
-
-### Переход к оплате [3.2] Форма оплаты с фискализацией (версия 2.0)
-```php
 
 $_client
-    ->setLinkCreator(new PaymentLinkCreatorWithFiscalization());
     ->createPymentLink($_fiscalPaymentBuilder); // ->go() или getUri()
 ```
 
@@ -176,20 +144,47 @@ $_client
 ```
 
 ### Переход к оплате [3.10] Преавторизация с печатью чека аванса с использованием платёжной формы
+Для формирования параметров запроса необходимо использовать:
+* `\Rusproj\Uniteller\Payment\PaymentBuilder` - общий построитель параметров запросов для оплаты;
+* `\Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator` - генератор uri-адреса Uniteller-шлюза.
+
+#### Пример
 ```php
 
+use Rusproj\Uniteller\Enum\CurrencyTypes;
+use Rusproj\Uniteller\Payment\PaymentBuilder;
+use Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator
+
+$_paymentBuilder = (new PaymentBuilder())
+            ->setCallbackFields(['BillNumber', 'Total'])
+            ->setCurrency(CurrencyTypes::RUB)
+            ->setCustomerIdp('1234-5678')
+            ->setOrderIdp('Заказ-123')
+            ->setShopIdp($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+            ->setSubtotalP($_receipt->getTotal())
+            ->setUrlReturnOk('https://rusproj.space/success')
+            ->setUrlReturnNo('https://rusproj.space/error');
+            
 $_paymentBuilder->usePreAuth(); // Обязательный признак преавторизации
 $_client
-    ->setLinkCreator(new PreauthPaymentLinkCreator())
+    ->setLinkCreator(new PreauthPaymentLinkCreator()) // Указываем другой URI для преавторизации
     ->createPaymentLink($_paymentBuilder); // ->go() или getUri()
 ```
 
 ### [3.13.2] Подтверждение платежа с преавторизацией (версия 2.0)
 ```php
 
+use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmBuilder; 
+
+$_preauthConfirmBuilder = (new PreauthConfirmBuilder())
+    ->setReceipt($_receipt)
+    ->setShopID($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+    ->setOrderID('Заказ-123')
+    ->setSubtotal($_receipt->getTotal());
+
 // Могут быть сгенерированы исключения \Rusproj\Uniteller\Exception\UnitellerException
 try {
-    $_queryResult = $_client->submitPreauthPayment($_paymentBuilder);
+    $_queryResult = $_client->confirmPreauthPayment($_preauthConfirmBuilder);
 } catch (UnitellerException $_exc) { 
     
 }
