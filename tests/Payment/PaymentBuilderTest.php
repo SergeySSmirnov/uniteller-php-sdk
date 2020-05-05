@@ -37,127 +37,127 @@ class PaymentBuilderTest extends TestCase
     public function testWrongValInOrderIdpSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setOrderIdp($this->generateFieldVal(130));
+        $_builder = new PaymentBuilder();
+        $_builder->setOrderIdp($this->generateFieldVal(130));
     }
 
     public function testWrongValInEmailSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setEmail($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setEmail($this->generateFieldVal(65));
     }
 
     public function testWrongValInOrderLifetimeSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setOrderLifetime(-3);
+        $_builder = new PaymentBuilder();
+        $_builder->setOrderLifetime(-3);
     }
 
     public function testWrongValInCustomerIdpSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setCustomerIdp($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setCustomerIdp($this->generateFieldVal(65));
     }
 
     public function testWrongValCardIdpInSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setCardIdp($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setCardIdp($this->generateFieldVal(65));
     }
 
     public function testWrongValInBillLifetimeSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setBillLifetime(2000);
+        $_builder = new PaymentBuilder();
+        $_builder->setBillLifetime(2000);
     }
 
     public function testWrongValInLanguageSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setLanguage('ABC');
+        $_builder = new PaymentBuilder();
+        $_builder->setLanguage('ABC');
     }
 
     public function testWrongValInCommentSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setComment($this->generateFieldVal(1025));
+        $_builder = new PaymentBuilder();
+        $_builder->setComment($this->generateFieldVal(1025));
     }
 
     public function testWrongValInFirstNameSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setFirstName($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setFirstName($this->generateFieldVal(65));
     }
 
     public function testWrongValInLastNameSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setLastName($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setLastName($this->generateFieldVal(65));
     }
 
     public function testWrongValInMiddleSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setMiddleName($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setMiddleName($this->generateFieldVal(65));
     }
 
     public function testWrongValInPhoneSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setPhone($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setPhone($this->generateFieldVal(65));
     }
 
     public function testWrongValInPhoneVerifiedSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setPhoneVerified($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setPhoneVerified($this->generateFieldVal(65));
     }
 
     public function testWrongValInAddressSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setAddress($this->generateFieldVal(129));
+        $_builder = new PaymentBuilder();
+        $_builder->setAddress($this->generateFieldVal(129));
     }
 
     public function testWrongValInCountrySetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setCountry($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setCountry($this->generateFieldVal(65));
     }
 
     public function testWrongValInStateSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setState('IVAA');
+        $_builder = new PaymentBuilder();
+        $_builder->setState('IVAA');
     }
 
     public function testWrongValInCitySetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setCity($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setCity($this->generateFieldVal(65));
     }
 
     public function testWrongValInZipSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_receipt = new PaymentBuilder();
-        $_receipt->setZip($this->generateFieldVal(65));
+        $_builder = new PaymentBuilder();
+        $_builder->setZip($this->generateFieldVal(65));
     }
 
     public function testPaymentBuilder()
