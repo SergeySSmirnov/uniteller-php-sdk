@@ -8,30 +8,31 @@
 namespace Rusproj\Uniteller\Tests\PaymentApi;
 
 use PHPUnit\Framework\TestCase;
-use Rusproj\Uniteller\PaymentApi\ApiCheckBuilder;
 use Rusproj\Uniteller\Exception\FieldIncorrectValueException;
+use Rusproj\Uniteller\PaymentApi\ApiPayBuilder;
 use Rusproj\Uniteller\Tests\Payment\PaymentBuilderTest;
 
 /**
- * ApiCheckBuilder test case.
+ * ApiPayBuilder test case.
  */
-class ApiCheckBuilderTest extends TestCase
+class ApiPayBuilderTest extends TestCase
 {
 
     public static function createBuilderTestInstance()
     {
-        $_builder = new ApiCheckBuilder();
+        $_builder = new ApiPayBuilder();
         $_builder
             ->setShopID('012345-67890')
-            ->setOrderID('12345');
+            ->setSubtotal(12.95)
+            ->setPaymentAttemptID('1234567890QAZ');
         return $_builder;
     }
 
-    public function testWrongValInOrderIdpSetter()
+    public function testWrongValInPaymentAttemptIDSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
-        $_builder = new ApiCheckBuilder();
-        $_builder->setOrderID(PaymentBuilderTest::generateFieldVal(70));
+        $_builder = new ApiPayBuilder();
+        $_builder->setPaymentAttemptID(PaymentBuilderTest::generateFieldVal(70));
     }
 
     public function testPaymentBuilder()
@@ -41,13 +42,16 @@ class ApiCheckBuilderTest extends TestCase
         $_arraybleResult = $_builder->toArray();
 
         $this->assertTrue(is_array($_arraybleResult));
-        $this->assertEquals(3, count($_arraybleResult));
+        $this->assertEquals(4, count($_arraybleResult));
 
         $this->assertArrayHasKey('ShopID', $_arraybleResult);
         $this->assertEquals('012345-67890', $_arraybleResult['ShopID']);
 
-        $this->assertArrayHasKey('OrderID', $_arraybleResult);
-        $this->assertEquals('12345', $_arraybleResult['OrderID']);
+        $this->assertArrayHasKey('Subtotal', $_arraybleResult);
+        $this->assertEquals(12.95, $_arraybleResult['Subtotal']);
+
+        $this->assertArrayHasKey('PaymentAttemptID', $_arraybleResult);
+        $this->assertEquals('1234567890QAZ', $_arraybleResult['PaymentAttemptID']);
 
         $this->assertArrayHasKey('Signature', $_arraybleResult);
         $this->assertEquals('', $_arraybleResult['Signature']);

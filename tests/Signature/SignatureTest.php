@@ -19,6 +19,7 @@ use Rusproj\Uniteller\Enum\CurrencyTypes;
 use Rusproj\Uniteller\Callback\CallbackBuilder;
 use Rusproj\Uniteller\Tests\PaymentConfirm\PreauthConfirmBuilderTest;
 use Rusproj\Uniteller\Tests\PaymentApi\ApiCheckBuilderTest;
+use Rusproj\Uniteller\Tests\PaymentApi\ApiPayBuilderTest;
 
 class SignatureTest extends TestCase
 {
@@ -206,6 +207,27 @@ class SignatureTest extends TestCase
 
         $this->assertArrayHasKey('OrderID', $_keys);
         $this->assertEquals('12345', $_keys['OrderID']);
+    }
+
+    public function testSignatureHandlerForApiPayBuilder()
+    {
+        $_signatureHandler = new SignatureHandler();
+        $_keys = $_signatureHandler->sign(ApiPayBuilderTest::createBuilderTestInstance(), 'Some passwd');
+
+        $this->assertTrue(is_array($_keys));
+        $this->assertEquals(4, count($_keys));
+
+        $this->assertArrayHasKey('Signature', $_keys);
+        $this->assertEquals('E54A0377B6B2CB343E809E24E51D60DE', $_keys['Signature']);
+
+        $this->assertArrayHasKey('PaymentAttemptID', $_keys);
+        $this->assertEquals('1234567890QAZ', $_keys['PaymentAttemptID']);
+
+        $this->assertArrayHasKey('Subtotal', $_keys);
+        $this->assertEquals(12.95, $_keys['Subtotal']);
+
+        $this->assertArrayHasKey('ShopID', $_keys);
+        $this->assertEquals('012345-67890', $_keys['ShopID']);
     }
 
 }

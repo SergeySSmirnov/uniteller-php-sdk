@@ -38,14 +38,14 @@ class PaymentBuilderTest extends TestCase
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setOrderIdp($this->generateFieldVal(130));
+        $_builder->setOrderIdp(self::generateFieldVal(130));
     }
 
     public function testWrongValInEmailSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setEmail($this->generateFieldVal(65));
+        $_builder->setEmail(self::generateFieldVal(65));
     }
 
     public function testWrongValInOrderLifetimeSetter()
@@ -59,14 +59,14 @@ class PaymentBuilderTest extends TestCase
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setCustomerIdp($this->generateFieldVal(65));
+        $_builder->setCustomerIdp(self::generateFieldVal(65));
     }
 
     public function testWrongValCardIdpInSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setCardIdp($this->generateFieldVal(65));
+        $_builder->setCardIdp(self::generateFieldVal(65));
     }
 
     public function testWrongValInBillLifetimeSetter()
@@ -87,56 +87,56 @@ class PaymentBuilderTest extends TestCase
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setComment($this->generateFieldVal(1025));
+        $_builder->setComment(self::generateFieldVal(1025));
     }
 
     public function testWrongValInFirstNameSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setFirstName($this->generateFieldVal(65));
+        $_builder->setFirstName(self::generateFieldVal(65));
     }
 
     public function testWrongValInLastNameSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setLastName($this->generateFieldVal(65));
+        $_builder->setLastName(self::generateFieldVal(65));
     }
 
     public function testWrongValInMiddleSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setMiddleName($this->generateFieldVal(65));
+        $_builder->setMiddleName(self::generateFieldVal(65));
     }
 
     public function testWrongValInPhoneSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setPhone($this->generateFieldVal(65));
+        $_builder->setPhone(self::generateFieldVal(65));
     }
 
     public function testWrongValInPhoneVerifiedSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setPhoneVerified($this->generateFieldVal(65));
+        $_builder->setPhoneVerified(self::generateFieldVal(65));
     }
 
     public function testWrongValInAddressSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setAddress($this->generateFieldVal(129));
+        $_builder->setAddress(self::generateFieldVal(129));
     }
 
     public function testWrongValInCountrySetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setCountry($this->generateFieldVal(65));
+        $_builder->setCountry(self::generateFieldVal(65));
     }
 
     public function testWrongValInStateSetter()
@@ -150,14 +150,14 @@ class PaymentBuilderTest extends TestCase
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setCity($this->generateFieldVal(65));
+        $_builder->setCity(self::generateFieldVal(65));
     }
 
     public function testWrongValInZipSetter()
     {
         $this->expectException(FieldIncorrectValueException::class);
         $_builder = new PaymentBuilder();
-        $_builder->setZip($this->generateFieldVal(65));
+        $_builder->setZip(self::generateFieldVal(65));
     }
 
     public function testPaymentBuilder()
@@ -201,7 +201,7 @@ class PaymentBuilderTest extends TestCase
         $this->assertTrue($_arraybleResult['Signature'] === '');
     }
 
-    private function generateFieldVal($length)
+    public static function generateFieldVal($length)
     {
         $_result = '';
         for ($_i = 0; $_i < $length; $_i++) {
