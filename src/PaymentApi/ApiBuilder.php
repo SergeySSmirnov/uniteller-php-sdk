@@ -10,7 +10,7 @@ namespace Rusproj\Uniteller\PaymentApi;
 /**
  * Параметры запроса платежа ДПС в системе Uniteller.
  */
-class ApiBuilder
+class ApiBuilder implements ApiBuilderInterface
 {
 
     /*

@@ -125,7 +125,7 @@ $_fiscalPaymentBuilder = (new FiscaliationPaymentBuilder())
             ->setCurrency(CurrencyTypes::RUB)
             ->setCustomerIdp('1234-5678')
             ->setOrderIdp('Заказ-123')
-            ->setShopIdp($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+            ->setShopIdp($_client->getShopId()) // Данные о магазине берём из клиента (пока так)
             ->setSubtotalP($_receipt->getTotal())
             ->setUrlReturnOk('https://rusproj.space/success')
             ->setUrlReturnNo('https://rusproj.space/error')
@@ -141,7 +141,7 @@ $_client
 use Rusproj\Uniteller\PaymentApi\ApiBuilder;
 
 $_apiBuilder = (new ApiBuilder())
-    ->setShopID($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+    ->setShopID($_client->getShopId()) // Данные о магазине берём из клиента (пока так)
     ->setOrderID('Заказ-123/1')
     ->setSubtotal(0);
 
@@ -151,11 +151,6 @@ $_client
 ```
 
 ### Переход к оплате [3.10] Преавторизация с печатью чека аванса с использованием платёжной формы
-Для формирования параметров запроса необходимо использовать:
-* `\Rusproj\Uniteller\Payment\PaymentBuilder` - общий построитель параметров запросов для оплаты;
-* `\Rusproj\Uniteller\Payment\PreauthPaymentLinkCreator` - генератор uri-адреса Uniteller-шлюза.
-
-#### Пример
 ```php
 
 use Rusproj\Uniteller\Enum\CurrencyTypes;
@@ -167,7 +162,7 @@ $_paymentBuilder = (new PaymentBuilder())
             ->setCurrency(CurrencyTypes::RUB)
             ->setCustomerIdp('1234-5678')
             ->setOrderIdp('Заказ-123')
-            ->setShopIdp($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+            ->setShopIdp($_client->getShopId()) // Данные о магазине берём из клиента (пока так)
             ->setSubtotalP($_receipt->getTotal())
             ->setUrlReturnOk('https://rusproj.space/success')
             ->setUrlReturnNo('https://rusproj.space/error');
@@ -185,7 +180,7 @@ use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmBuilder;
 
 $_preauthConfirmBuilder = (new PreauthConfirmBuilder())
     ->setReceipt($_receipt)
-    ->setShopID($_client->getShopId()) // Данные о магазине берем из клиента (пока так)
+    ->setShopID($_client->getShopId()) // Данные о магазине берём из клиента (пока так)
     ->setOrderID('Заказ-123')
     ->setSubtotal($_receipt->getTotal());
 
@@ -207,9 +202,7 @@ if ($_verificationResult === false) {
 ```
 
 ## Как реализовать остальное
-В большинстве случаев достаточно реализовать класс, производный от `\Rusproj\Uniteller\Http\LinkCreatorInterface`.
 Смотрите примеры реализации в соответствующих классах.
-
 Дополнительные возможности в большинстве случаев создаются "по аналогии".
 
 ## TODO
