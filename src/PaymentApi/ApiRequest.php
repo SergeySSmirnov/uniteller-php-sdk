@@ -5,7 +5,7 @@
  * Github: SergeySSmirnov
  */
 
-namespace Rusproj\Uniteller\PaymentConfirm;
+namespace Rusproj\Uniteller\PaymentApi;
 
 use Rusproj\Uniteller\Request\RequestInterface;
 
@@ -23,9 +23,7 @@ class ApiRequest implements RequestInterface
     {
         $_response = $httpManager->request($uri, 'POST', http_build_query($parameters));
 
-        $_xml = new \SimpleXMLElement($_response);
-
-        return json_decode(base64_decode((string)$_xml->Receipt));
+        return new \SimpleXMLElement($_response);
     }
 
 }

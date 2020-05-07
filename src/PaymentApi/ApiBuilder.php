@@ -28,4 +28,8 @@ class ApiBuilder implements ApiBuilderInterface
      */
     use \Rusproj\Uniteller\Payment\SubtotalPropertiesTrait;
 
+    /*
+     * Импорт свойств с описанием чека фискализации.
+     */
+    use \Rusproj\Uniteller\Payment\ReceiptPropertiesTrait;
 }

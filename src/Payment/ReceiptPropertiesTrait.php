@@ -33,7 +33,8 @@ trait ReceiptPropertiesTrait
      * @param \Rusproj\Uniteller\FiscalCheck\ReceiptInterface $receipt
      * @return $this
      */
-    public function setReceipt($receipt) {
+    public function setReceipt($receipt)
+    {
         $this->Receipt = $receipt;
 
         return $this;
@@ -44,7 +45,8 @@ trait ReceiptPropertiesTrait
      *
      * @return \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
      */
-    public function getReceipt() {
+    public function getReceipt()
+    {
         return $this->Receipt;
     }
 

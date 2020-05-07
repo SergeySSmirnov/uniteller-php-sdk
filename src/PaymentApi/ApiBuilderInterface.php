@@ -45,4 +45,11 @@ interface ApiBuilderInterface
      */
     public function getSubtotal();
 
+    /**
+     * Описание чека фискализации.
+     *
+     * @return \Rusproj\Uniteller\FiscalCheck\ReceiptInterface
+     */
+    public function getReceipt();
+
 }

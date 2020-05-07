@@ -28,7 +28,7 @@ use Rusproj\Uniteller\PaymentConfirm\PreauthConfirmPaymentRequest;
 use Rusproj\Uniteller\Callback\CallbackBuilder;
 use Rusproj\Uniteller\PaymentApi\ApiCheckBuilder;
 use Rusproj\Uniteller\PaymentApi\ApiCheckLinkCreator;
-use Rusproj\Uniteller\PaymentConfirm\ApiRequest;
+use Rusproj\Uniteller\PaymentApi\ApiRequest;
 use Rusproj\Uniteller\PaymentApi\ApiPayLinkCreator;
 use Rusproj\Uniteller\PaymentApi\ApiPayBuilder;
 
@@ -392,22 +392,23 @@ class Client implements ClientInterface
      */
     public function dpsPayment($parameters)
     {
-        $this
-            ->setLinkCreator(null)
-            ->setRequest(null);
+        $this->linkCreator = null;
+        $this->request = null;
 
         $_apiCheckBuilder = new ApiCheckBuilder();
         $_apiCheckBuilder
-            ->setShopID($parameters->getShopID())
+            ->setShopID($parameters->getShopId())
             ->setOrderID($parameters->getOrderID());
         $_answer = $this->apiPaymentCheck($_apiCheckBuilder);
 
-
-
+        if (empty($_answer->PaymentAttemptID)) {
+            return false;
+        }
 
         $_apiPayBuilder = new ApiPayBuilder();
         $_apiPayBuilder
-            ->setPaymentAttemptID('!!!!!!!!!!!')
+            ->setReceipt($parameters->getReceipt())
+            ->setPaymentAttemptID($_answer->PaymentAttemptID)
             ->setShopID($parameters->getShopID())
             ->setSubtotal($parameters->getSubtotal());
         $_answer = $this->apiPayment($_apiPayBuilder);
