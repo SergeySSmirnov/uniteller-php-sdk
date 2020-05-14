@@ -408,7 +408,7 @@ class Client implements ClientInterface
         $_apiPayBuilder = new ApiPayBuilder();
         $_apiPayBuilder
             ->setReceipt($parameters->getReceipt())
-            ->setPaymentAttemptID($_answer->PaymentAttemptID)
+            ->setPaymentAttemptID((string)$_answer->PaymentAttemptID)
             ->setShopID($parameters->getShopID())
             ->setSubtotal($parameters->getSubtotal());
         $_answer = $this->apiPayment($_apiPayBuilder);
