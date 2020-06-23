@@ -519,7 +519,7 @@ class Client implements ClientInterface
         $_signature = [
             'Signature' => array_get($params, 'Signature')
         ];
-        if (array_key_exists('', $params)) {
+        if (array_key_exists('ReceiptSignature', $params)) {
             $_signature['ReceiptSignature'] = array_get($params, 'ReceiptSignature');
         }
 

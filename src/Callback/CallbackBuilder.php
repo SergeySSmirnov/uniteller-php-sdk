@@ -146,10 +146,10 @@ class CallbackBuilder implements SignatureFieldsInterface
     public function __construct($fields)
     {
         if (is_array($fields)) {
+            $_exceptAdditionalVerificationFields = ['Order_ID', 'Status', 'Signature', 'Receipt', 'ReceiptSignature'];
+
             foreach ($fields as $_key => $_val) {
                 $this->$_key = $_val;
-
-                $_exceptAdditionalVerificationFields = ['Order_ID', 'Status', 'Signature', 'Receipt', 'ReceiptSignature'];
 
                 if (!in_array($_key, $_exceptAdditionalVerificationFields)) {
                     $this->verificationFieldsList[] = $_val;
